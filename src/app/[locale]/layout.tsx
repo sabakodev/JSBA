@@ -1,14 +1,20 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google"
+import { Geist, Manrope, Geist_Mono, Instrument_Serif } from "next/font/google"
 import "../globals.css"
 import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { routing } from "@/i18n/routing"
 import { notFound } from "next/navigation"
+import FooterCompoonent from "@/components/theme-blocks/global/Footer"
 
 const instrumentSerif = Instrument_Serif({
 	weight: "400",
 	variable: "--font-instrument-serif",
 	subsets: ['latin']
+})
+
+const manropeSans = Manrope({
+	variable: "--font-manrope-sans",
+	subsets: ["latin"],
 })
 
 const geistSans = Geist({
@@ -40,10 +46,13 @@ export default async function RootLayout({
 
 	return (
 		<html
-			className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}
+			className={`${geistSans.variable} ${geistMono.variable} ${manropeSans.variable} ${instrumentSerif.variable} h-full antialiased`}
 		>
 			<body className="min-h-full flex flex-col">
-				<NextIntlClientProvider>{children}</NextIntlClientProvider>
+				<NextIntlClientProvider>
+					{children}
+					<FooterCompoonent />
+				</NextIntlClientProvider>
 			</body>
 		</html>
 	)
