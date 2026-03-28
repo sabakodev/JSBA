@@ -1,12 +1,87 @@
 {
-	"HomePage": {
-		"hero": {
-			"subtitle": "Welcome to the Living Tradition",
-			"heading": "Find Peace and Transcendence in the Ancient Faith"
-		},
-		"title": "Hello world!"
-	},
-	"Metadata": {
-		"title": "St. Basil the Great - Homepage"
-	}
+  "HomePage": {
+    "hero": {
+      "subtitle": "Welcome to the Living Tradition",
+      "heading": "Find Peace and Transcendence in the Ancient Faith",
+      "cta": {
+        "primary": "Visit Us",
+        "learn": "Learn about orthodoxy"
+      },
+      "scroll": "SCROLL TO EXPLORE"
+    },
+    "title": "Hello world!",
+    "about": {
+      "content": "<p>Established with the blessing of the Holy Spirit, Saint Basil the Great is more than a parish; it is a spiritual home where the ancient rhythms of the Byzantine Rite meet the yearning of the modern soul.</p><p>Our community is rooted in the philanthropic legacy of our patron saint, committed to liturgical beauty, theological depth, and the humble service of our neighbors. Here, we strive to live the Gospel in its fullness, preserving the teachings of the Fathers while being a beacon of hope in the present day.</p>",
+      "title": {
+        "top": "A Sanctuary of Timeless",
+        "bottom": "Spiritual History"
+      },
+      "quote": {
+        "content": "The bread you store up belongs to the hungry; the cloak that lies in your chest belongs to the naked.",
+        "saint": "St. Basil the Great"
+      },
+      "historyLabel": "Discover our history"
+    },
+    "virtues": {
+      "sacramento": {
+        "title": "Experience the Liturgy",
+        "description": "Join us for the Divine Liturgy—a sensory experience of chanting, incense, and icons that transcends time and space."
+      },
+      "community": {
+        "description": "Stay for Coffee Hour after service to meet our parishioners. We are a diverse family united in the love of Christ.",
+        "title": "Community & Fellowship"
+      },
+      "struggle": {
+        "description": "Fr. Timothy is always available for a walk and a talk. No question is too small or too complex for the journey of faith.",
+        "title": "Ask Your Questions"
+      },
+      "title": "How Our Parish Welcomes You",
+      "description": "Orthodoxy is a \"come and see\" faith. Whether you are a lifelong believer or a curious seeker, our doors and hearts are open."
+    },
+    "apostolic": {
+      "title": "Apostolic Succession",
+      "label": "Guided by Tradition",
+      "description": "St. Basil the Great is blessed under His Eminence Bishop. We are part of a global lineage that stretches back to the Apostles in an unbroken chain of faith.",
+      "quote": {
+        "content": "Where the Bishop is, there let the people be; as where Jesus Christ is, there is the Catholic Church.",
+        "saint": "St. Ignatius of Antioch"
+      },
+      "bishop": {
+        "name": "His Eminence Bishop Daniel",
+        "title": "Bishop of Nikopolis and All Indonesia"
+      }
+    },
+    "gallery": {
+      "title": "Life in the Parish",
+      "description": "The beauty of worship, the joy of community.",
+      "fullLink": "View Full Gallery"
+    },
+    "cta": {
+      "label": "Reach Out to Us"
+    }
+  },
+  "donation": {
+    "label": "Support Our Mission",
+    "description": "Your stewardship enables the continuation of the Divine Liturgy, the maintenance of our sacred space, and our charitable works within the local community. Every gift is an offering to God.",
+    "actionButton": "Make an Offering",
+    "taxDisclaimer": "ALL DONATIONS ARE TAX DEDUCTIBLE"
+  },
+  "Metadata": {
+    "title": "St. Basil the Great - Homepage"
+  },
+  "global": {
+    "saintName": "St. Basil the Great",
+    "legal": {
+      "copyright": "All Right Reserved."
+    },
+    "page": {
+      "privacy": "Privacy Policy",
+      "calendar": "Liturgical Calendar",
+      "council": "Council",
+      "donate": "Donate"
+    },
+    "generic": {
+      "top": "TOP"
+    }
+  }
 }
