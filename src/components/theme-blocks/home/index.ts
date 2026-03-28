@@ -1,1 +1,6 @@
 export { default as Hero } from './Hero'
+export { default as About } from './About'
+export { default as Virtue } from './Virtue'
+export { default as Apostolic } from './Apostolic'
+export { default as Gallery } from './Gallery'
+export { default as CTA } from './CTA'
