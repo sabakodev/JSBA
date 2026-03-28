@@ -1,24 +1,37 @@
+'use client'
+
 import { useTranslations } from "next-intl"
-import ChurchOutlinedIcon from '@mui/icons-material/ChurchOutlined'
-import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined'
-import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined'
+import dynamic from "next/dynamic"
+
+const ChurchOutlinedIcon = dynamic(
+	() => import('@mui/icons-material/ChurchOutlined'),
+	{ ssr: false },
+)
+const GroupsOutlinedIcon = dynamic(
+	() => import('@mui/icons-material/GroupsOutlined'),
+	{ ssr: false },
+)
+const MenuBookOutlinedIcon = dynamic(
+	() => import('@mui/icons-material/MenuBookOutlined'),
+	{ ssr: false },
+)
 
 export default function Component() {
 	const t = useTranslations('HomePage.virtues')
 
 	const virtues = [
 		{
-			icon: <ChurchOutlinedIcon style={{ fontSize: 24 }} />,
+			icon: ChurchOutlinedIcon,
 			label: t('sacramento.title'),
 			description: t('sacramento.description')
 		},
 		{
-			icon: <GroupsOutlinedIcon style={{ fontSize: 24 }} />,
+			icon: GroupsOutlinedIcon,
 			label: t('community.title'),
 			description: t('community.description')
 		},
 		{
-			icon: <MenuBookOutlinedIcon style={{ fontSize: 24 }} />,
+			icon: MenuBookOutlinedIcon,
 			label: t('struggle.title'),
 			description: t('struggle.description')
 		},
@@ -34,7 +47,7 @@ export default function Component() {
 				{virtues.map((value, index) => (
 					<div key={index} className="rounded-sm bg-white p-10">
 						<div className="h-12 w-12 flex items-center justify-center rounded-lg bg-primary-900 text-primary-400">
-							{value.icon}
+							<value.icon style={{ fontSize: 24 }} />
 						</div>
 						<h2 className="text-2xl my-6">{value.label}</h2>
 						<p className="font-extralight text-lg">{value.description}</p>
