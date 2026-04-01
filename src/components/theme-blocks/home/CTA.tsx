@@ -2,17 +2,19 @@
 
 import { useTranslations } from "next-intl"
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism'
+
 import { cn } from "@/lib/utils"
 import { useState } from "react"
+import { ContactForm } from "../global"
 
 export default function Component() {
 	const t = useTranslations('HomePage.cta')
 
 	return (
 		<div className="grid sm:grid-cols-2 items-center max-w-7xl mx-auto mt-32 mb-36">
-			<div className="px-4 pb-8 sm:pb-0">
+			<div className="px-8 sm:px-24 pb-8 sm:pb-0">
 				<h1 className="mt-4 mb-6 text-4xl">{t('label')}</h1>
-
+				<ContactForm />
 			</div>
 			<div className="flex flex-col items-center relative">
 				<DonationCard />
@@ -60,7 +62,7 @@ export const DonationCard = () => {
 			</div>
 			<h1 className="mt-4 mb-6 text-3xl">{t('label')}</h1>
 			<p className="">{t('description')}</p>
-			<div className="grid grid-cols-3 gap-2 ">
+			<div className="grid sm:grid-cols-3 gap-2 ">
 				{presets.map((preset, index) => (
 					<DonationButton
 						key={index}
