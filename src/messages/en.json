@@ -242,6 +242,18 @@
       "relatedPostLabel": "Continue the Journey",
       "relatedPostDescription": "Further reflections for the faithful soul",
       "relatedPostAllPost": "View All Posts"
+    },
+    "cta": {
+      "title": "Join the Living Scroll",
+      "subtitle": "Receive weekly spiritual reflections, liturgical updates, and writings from the Fathers directly in your sanctuary of inbox.",
+      "placeholder": "Your humble email...",
+      "actionButtonLabel": "Discover the Faith"
+    },
+    "tags": {
+      "title": "Explore Further",
+      "label": "Support our Mission",
+      "subtitle": "Help us continue providing spiritual resources and maintaining this sacred space.",
+      "cta": "Enter In & Donate"
     }
   },
   "indexPage": {
