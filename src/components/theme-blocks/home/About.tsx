@@ -14,7 +14,7 @@ export default function Component() {
 					<div className="text-primary-500 italic">{t('title.bottom')}</div>
 				</h1>
 				<div className="space-y-8 mt-12" dangerouslySetInnerHTML={{ __html: t.raw('content') }} />
-				<Link href="/history" className="text-primary-500 hover:text-primary-400 transition flex uppercase font-medium items-center group py-12">
+				<Link href="/why" className="text-primary-500 hover:text-primary-400 transition flex uppercase font-medium items-center group py-12">
 					{t('historyLabel')}
 					<ArrowRight className="h-4 w-4 group-hover:translate-x-2 transition" />
 				</Link>
@@ -27,7 +27,7 @@ export default function Component() {
 					height={1140 / 2}
 					className="w-full sm:w-114 h-142.5 object-cover rounded-sm shadow-md"
 				/>
-				<div className="bg-white absolute z-1 bottom-0 max-w-80 shadow-lg rounded-sm p-8 hover:shadow-2xl -translate-x-8 hover:-translate-x-4 translate-y-6 hover:translate-y-8 transition duration-1000">
+				<div className="bg-white absolute z-1 bottom-0 max-w-80 shadow-lg rounded-sm p-8 hover:shadow-2xl -translate-x-8 hover:-translate-x-4 translate-y-6 hover:translate-y-8 hover:rotate-3 transition duration-1000">
 					<p className="font-serif italic text-primary-400 mb-4">&quot;{t('quote.content')}&quot;</p>
 					<span className="text-xs text-primary-300">— {t('quote.saint')}</span>
 				</div>
