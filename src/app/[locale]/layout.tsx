@@ -4,7 +4,7 @@ import "../globals.css"
 import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { routing } from "@/i18n/routing"
 import { notFound } from "next/navigation"
-import FooterCompoonent from "@/components/theme-blocks/global/Footer"
+import { Navbar, Footer } from "@/components/theme-blocks/global"
 
 const instrumentSerif = Instrument_Serif({
 	weight: "400",
@@ -51,7 +51,7 @@ export default async function RootLayout({
 			<body className="min-h-full flex flex-col">
 				<NextIntlClientProvider>
 					{children}
-					<FooterCompoonent />
+					<Footer />
 				</NextIntlClientProvider>
 			</body>
 		</html>
