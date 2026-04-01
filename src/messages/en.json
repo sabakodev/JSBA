@@ -186,6 +186,10 @@
       "education": {
         "title": "Education"
       }
+    },
+    "hero": {
+      "title": "Our Parish",
+      "subtitle": "An Ancient Faith for the <i>Modern Soul.</i>"
     }
   },
   "eventPage": {
@@ -421,6 +425,10 @@
         "flamboyant": "Turn Left onto <b>Flamboyan Road</b>. The parish is situated on the right side of the road.",
         "margonda": "From the <b>Margonda Road</b>, enter Dahlia Road and head to South East about 1 km."
       }
+    },
+    "form": {
+      "title": "Send a Message",
+      "subtitle": "Whether you are a seeker, a traveler, or a neighbor, we welcome your inquiry."
     }
   }
 }
