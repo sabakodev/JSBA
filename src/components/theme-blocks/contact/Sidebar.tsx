@@ -34,7 +34,7 @@ export default function Component() {
 					<ul className="space-y-3 text-sm">
 						<li className="flex justify-between border-b border-outline-variant/10 pb-2">
 							<span className="text-secondary">{schedule('wed')}</span>
-							<span className="font-medium">19:00 WIB</span>
+							<span className="font-medium">18:00 WIB</span>
 						</li>
 						<li className="flex justify-between border-b border-outline-variant/10 pb-2">
 							<span className="text-secondary">{schedule('fri')}</span>
