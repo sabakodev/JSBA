@@ -1,0 +1,5 @@
+export { default as Mission } from "./Mission"
+export { default as Timeline } from "./Timeline"
+export { default as Jurisdiction } from "./Jurisdiction"
+export { default as Clergy } from "./Clergy"
+export { default as CTA } from "./CTA"
