@@ -18,7 +18,7 @@ export default function Component() {
 					</div>
 				</Link>
 			</div>
-			<div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-4">
+			<div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-y-4 sm:gap-y-0 sm:gap-x-4">
 				<div className="grid gap-y-4">
 					<Image
 						src="/assets/photos/scenery/monastery/IMG_1575.webp"
@@ -45,7 +45,13 @@ export default function Component() {
 					/>
 				</div>
 				<div className="grid gap-y-4">
-					<div className="rounded-sm bg-primary h-full w-full"></div>
+					<Image
+						src="/assets/photos/scenery/city/IMG_0009.JPEG"
+						width={1536 / 2}
+						height={2048 / 2}
+						alt="City"
+						className="rounded-sm"
+					/>
 				</div>
 			</div>
 		</div>
