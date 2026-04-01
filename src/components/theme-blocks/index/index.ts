@@ -1,0 +1,5 @@
+export { default as Hero } from "./Hero"
+export { default as Introduction } from "./Introduction"
+export { default as CategoryCard } from "./CategoryCard"
+export { default as Featured } from "./Featured"
+export { default as ResourcesFooter } from "./ResourcesFooter"
