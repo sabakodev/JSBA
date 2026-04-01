@@ -85,7 +85,7 @@ export default function FooterCompoonent() {
 		},
 		{
 			label: t('page.calendar'),
-			route: "/calendar",
+			route: "/event",
 		},
 		{
 			label: t('page.council'),
@@ -105,7 +105,7 @@ export default function FooterCompoonent() {
 
 	return (
 		<footer className="bg-accent w-screen">
-			<div className="flex justify-between items-center p-12">
+			<div className="flex flex-col md:flex-row justify-between md:items-center p-12">
 				<div>
 					<h3 className="text-xl">{t('saintName')}</h3>
 					<span className="font-extralight text-xs">
@@ -113,7 +113,7 @@ export default function FooterCompoonent() {
 						&copy; 2020 - {(new Date(Date.now())).getFullYear()} {t('saintName')}. {t('legal.copyright')}.
 					</span>
 				</div>
-				<div className="space-x-8">
+				<div className="flex flex-col md:flex-row my-8 md:my-0 space-y-8 md:space-y-0 md:space-x-8">
 					{sublinks.map((value, index) => (
 						<Link
 							key={index}
@@ -126,7 +126,7 @@ export default function FooterCompoonent() {
 				</div>
 				<button
 					onClick={jump}
-					className="flex items-end justify-end font-extralight space-x-2 uppercase text-primary-100 hover:text-primary-500 transition"
+					className="hidden md:flex items-end justify-end font-extralight space-x-2 uppercase text-primary-100 hover:text-primary-500 transition"
 				>
 					<div className="text-xs">{t('generic.top')}</div>
 					<ArrowUp className="h-3 w-3" />
