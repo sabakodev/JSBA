@@ -5,15 +5,15 @@ export default function Component() {
 	const t = useTranslations('aboutPage.jurisdiction')
 
 	return (
-		<section className="max-w-7xl mx-auto px-8 py-32">
+		<section className="max-w-7xl mx-auto px-8 py-32 group">
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
 				<div className="relative group">
 					<div
-						className="absolute -inset-4 bg-primary-container/5 rounded-lg -rotate-2 group-hover:rotate-0 transition-transform duration-700">
+						className="absolute -inset-4 bg-primary-container/5 rounded-lg -rotate-2 group-hover:rotate-0 transition-transform duration-1000">
 					</div>
 					<Image
 						alt="Dignified portrait of an Orthodox bishop in traditional liturgical vestments, holding a staff."
-						className="relative z-10 w-full aspect-4/5 object-cover rounded-lg parchment-glow sepia-[0.1]"
+						className="relative z-10 w-full aspect-4/5 object-cover rounded-lg parchment-glow sepia-[0.1] group-hover:-rotate-5 transition-transform duration-500"
 						src="/assets/photos/clergy/bishop-daniel-coat.jpeg"
 						width={1024}
 						height={1526}

@@ -5,7 +5,7 @@ export default function Component() {
 	const t = useTranslations('aboutPage.management')
 
 	return (
-		<section className="bg-surface py-32">
+		<section id="clergy" className="bg-surface py-32">
 			<div className="max-w-7xl mx-auto px-8">
 				<div className="mb-16 flex justify-between items-end">
 					<div>

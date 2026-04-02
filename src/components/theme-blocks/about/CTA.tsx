@@ -1,3 +1,4 @@
+import { Link } from "@/i18n/nav"
 import { Clock4, Coffee, Shirt } from "lucide-react"
 import { useTranslations } from "next-intl"
 
@@ -18,14 +19,16 @@ export default function Component() {
 						{t('description')}
 					</p>
 					<div className="flex flex-col md:flex-row items-center justify-center gap-6">
-						<button
+						<Link
+							href="/contact"
 							className="bg-primary text-primary-foreground px-10 py-4 rounded font-label tracking-widest uppercase text-sm hover:scale-[1.02] transition-transform">
 							{t('action.primary')}
-						</button>
-						<button
+						</Link>
+						<Link
+							href="/why"
 							className="bg-transparent border border-border/30 text-primary px-10 py-4 rounded font-label tracking-widest uppercase text-sm hover:bg-primary/5 transition-colors">
 							{t('action.secondary')}
-						</button>
+						</Link>
 					</div>
 					<div
 						className="mt-16 pt-16 border-t border-border/10 grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
