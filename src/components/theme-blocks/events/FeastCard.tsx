@@ -16,34 +16,32 @@ export default function FeastCard({ feast, locale, index, year }: FeastCardProps
 		"July", "August", "September", "October", "November", "December",
 	]
 
-	const yearNumber = feast.gregorianDate.year
-	const day = feast.gregorianDate.day
-	const month = monthNames[feast.gregorianDate.month - 1]
-	const julianDay = feast.julianDate?.day
-	const julianMonth = monthNames[feast.julianDate?.month ?? 1 - 1]
+	// Unified display date: vespers start for fixed, gregorian for moveable
+	const displayDate = feast.source === "fixed"
+		? feast.civilVespersStart
+		: feast.gregorianDate
+
+	const day = displayDate.day
+	const month = monthNames[displayDate.month - 1]
+	const displayYear = displayDate.year
+
+	const julianDay = feast.julianDate.day
+	const julianMonth = monthNames[feast.julianDate.month - 1]
+
 	const isNextUp = index === 0
 
-	const localizedName: Record<string, string> = {
-		default: feast.name,
-		id: feast.nameId,
-		el: feast.nameEl,
-	}
-
-	const name = localizedName[locale] ?? localizedName.default
+	const name = ({ default: feast.name, id: feast.nameId, el: feast.nameEl })[locale] ?? feast.name
 
 	return (
 		<div
 			className={cn(
 				`flex items-start gap-4 group`,
-				(!year && index >= 2) ? "opacity-50" : "",
+				(!year && !isNextUp) ? "opacity-50" : "",
 				year && 'flex-col border rounded-sm p-2 border-secondary-800'
 			)}
 		>
 			<div
-				className={`w-10 h-10 shrink-0 flex items-center justify-center font-serif ${isNextUp
-					? "bg-primary/10 text-primary"
-					: "bg-border/20 text-secondary"
-					}`}
+				className="w-10 h-10 shrink-0 flex items-center justify-center font-serif bg-primary/20 text-primary"
 			>
 				{String(day).padStart(2, "0")}
 			</div>
@@ -52,21 +50,27 @@ export default function FeastCard({ feast, locale, index, year }: FeastCardProps
 					{name}
 				</h4>
 				<p className="text-xs text-secondary/60 uppercase tracking-widest mt-1">
-					{month} {day} {year && yearNumber}
+					{month} {day} {year && displayYear}
 					<span className={cn(
 						"text-secondary/40",
-						year && 'block'
+						year && 'hidden'
 					)}>
 						({julianMonth} {julianDay})
 					</span>
+					<span className={cn(
+						"text-secondary/25 font-extrabold",
+						year ? 'block' : 'hidden'
+					)}>
+						{julianMonth} {julianDay}
+					</span>
 				</p>
 				{isNextUp && (
-					<span className="inline-block mt-2 text-[10px] uppercase tracking-widest text-primary bg-primary/5 px-2 py-0.5 rounded-full">
+					<span className="inline-block mt-2 text-[10px] uppercase tracking-widest text-primary-foreground bg-primary px-2 py-0.5 rounded-full">
 						{t('next')}
 					</span>
 				)}
 				{feast.fasting && (
-					<span className="inline-block mt-2 ml-2 text-[10px] uppercase tracking-widest text-secondary/40 bg-secondary/5 px-2 py-0.5 rounded-full">
+					<span className="inline-block mt-2 ml-2 text-[10px] uppercase tracking-widest text-secondary-foreground bg-tertiary-500 px-2 py-0.5 rounded-full">
 						{t('fastDay')}
 					</span>
 				)}
