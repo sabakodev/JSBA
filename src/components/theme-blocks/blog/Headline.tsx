@@ -1,37 +1,57 @@
-import { Bookmark, Share, Share2 } from "lucide-react"
+import PostActions from "@/components/ui/post-action"
+import PostTitle from "@/components/ui/post-title"
 import { useTranslations } from "next-intl"
+import Image from "next/image"
 
-export default function Component() {
-	const t = useTranslations('blogPage.hero')
+interface HeadlineProps {
+	title: string
+	category?: string
+	date: string
+	author: string
+	avatarUrl?: string
+}
+
+export default function Component({ title, category, date, author, avatarUrl }: HeadlineProps) {
+	const t = useTranslations('blogPage.headline')
+
+	const formattedDate = new Date(date).toLocaleDateString('en-US', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+	})
 
 	return (
 		<header className="mb-16 max-w-4xl mx-auto">
 			<div className="flex items-center gap-4 mb-8">
-				<span className="text-primary text-xs uppercase tracking-[0.2em] font-bold">Spiritual Life</span>
+				{category && (
+					<span className="text-primary text-xs uppercase tracking-[0.2em] font-bold">{category}</span>
+				)}
 				<div className="h-px w-12 bg-border/30"></div>
 				<span className="text-secondary text-xs uppercase tracking-widest opacity-60">8 Min Read</span>
 			</div>
-			<h1 className="text-5xl md:text-7xl text-on-surface leading-[1.1] mb-10 tracking-tight">
-				The Stillness of the Heart: <span className="italic block">Finding Hesychia in a Modern World</span>
-			</h1>
+			<PostTitle
+				title={title}
+				className="text-5xl md:text-7xl leading-[1.1] mb-10 tracking-tight"
+				subtitleClassName="text-primary/80 mt-2"
+			/>
 			<div
 				className="flex flex-col md:flex-row md:items-center justify-between gap-8 py-8 border-y border-border/15">
 				<div className="flex items-center gap-4">
+					{avatarUrl && (
+						<Image
+							width={50}
+							height={50}
+							src={avatarUrl}
+							alt={author}
+							className="w-8 h-8 rounded-full"
+						/>
+					)}
 					<div>
-						<p className="text-sm font-bold text-on-surface">Fr. Thomas More</p>
-						<p className="text-xs text-secondary opacity-70">Published on Oct 24, 2024</p>
+						<p className="text-sm font-bold text-on-surface">{author}</p>
+						<p className="text-xs text-secondary opacity-70">{t('published')} {formattedDate}</p>
 					</div>
 				</div>
-				<div className="flex items-center gap-4">
-					<button
-						className="w-10 h-10 rounded-lg flex items-center justify-center border border-border/20 text-secondary hover:bg-secondary-950 transition-colors">
-						<Share2 size={16} />
-					</button>
-					<button
-						className="w-10 h-10 rounded-lg flex items-center justify-center border border-border/20 text-secondary hover:bg-secondary-950 transition-colors">
-						<Bookmark size={16} />
-					</button>
-				</div>
+				<PostActions title={title} />
 			</div>
 		</header>
 	)
