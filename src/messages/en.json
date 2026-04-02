@@ -87,7 +87,9 @@
     },
     "contact": {
       "title": "St. Basil the Great - Contact Us"
-    }
+    },
+    "search": "Search reflections...",
+    "notFound": "No posts found."
   },
   "global": {
     "saintName": "St. Basil the Great",
@@ -258,6 +260,12 @@
       "label": "Support our Mission",
       "subtitle": "Help us continue providing spiritual resources and maintaining this sacred space.",
       "cta": "Enter In & Donate"
+    },
+    "category": {
+      "all": "All"
+    },
+    "headline": {
+      "published": "Published on"
     }
   },
   "indexPage": {
