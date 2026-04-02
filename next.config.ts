@@ -1,8 +1,10 @@
 import type { NextConfig } from "next"
 
 import createNextIntlPlugin from 'next-intl/plugin'
+import createMDX from '@next/mdx'
 
 const nextConfig: NextConfig = {
+	pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
 	reactCompiler: true,
 	images: {
 		remotePatterns: [
@@ -23,5 +25,9 @@ const nextConfig: NextConfig = {
 	allowedDevOrigins: ['192.168.1.12'],
 }
 
+const withMDX = createMDX({
+	extension: /\.(md|mdx)$/,
+})
+
 const withNextIntl = createNextIntlPlugin()
-export default withNextIntl(nextConfig)
+export default withMDX(withNextIntl(nextConfig))
