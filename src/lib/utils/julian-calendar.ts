@@ -203,18 +203,26 @@ export function formatFeastDate(
 	})
 }
 
+// ──────────────────────────────────────
+// Helper: Get current Liturgical Week
+// ──────────────────────────────────────
+
 interface LiturgicalWeek {
 	name: string
 	nameEl: string
 	nameId: string
-	tone: number // 1-8 Octoechos
-	description: string
+	tone: number    // 1-8 Octoechos
 	fasting: boolean
+	fastingType:
+	| "strict"      // No food or only bread & water (Clean Week, Holy Week weekdays)
+	| "xerophagy"   // Dry eating: bread, fruits, nuts, vegetables (no oil/wine)
+	| "oil-wine"    // Cooked food with oil and wine allowed
+	| "fish"        // Fish, oil, wine allowed
+	| "dairy"       // No meat, but dairy/eggs allowed (Cheesefare)
+	| "regular"     // Wednesday & Friday fast (no meat, dairy, fish)
+	| "none"        // No fasting
+	description: string
 }
-
-// ──────────────────────────────────────
-// Helper: Get current Liturgical Week
-// ──────────────────────────────────────
 
 export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 	const today = new Date()
@@ -234,25 +242,53 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 		prevPaschaData.gregorian.day
 	)
 
-	// ✅ FIX: Calculate diff from UPCOMING Pascha (this year)
-	// and diff from PREVIOUS Pascha (last year)
 	const daysUntilPascha = Math.floor((pascha.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
-	const daysSincePrevPascha = Math.floor((today.getTime() - prevPascha.getTime()) / (1000 * 60 * 60 * 24))
 
-	// If we're before this year's Pascha and within ~70 days (Triodion range),
-	// use upcoming Pascha for pre-Paschal calculations
 	const isPrePaschal = daysUntilPascha > 0 && daysUntilPascha <= 70
 
-	// Determine which Pascha to reference for post-Paschal weeks
 	const referencePascha = today >= pascha ? pascha : prevPascha
 	const diffMs = today.getTime() - referencePascha.getTime()
 	const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
 	const weeksSincePascha = Math.floor(diffDays / 7)
 
 	const tone = ((weeksSincePascha % 8) + 8) % 8 || 8
-	const dayOfWeek = today.getDay()
+	const dayOfWeek = today.getDay() // 0=Sun 1=Mon ... 6=Sat
 
-	// ── Pre-Paschal periods (use upcoming Pascha) ──
+	// ── Helper: Lenten fasting type by day ──
+	function getLentFastingType(weeksBeforePascha: number): LiturgicalWeek["fastingType"] {
+		// Holy Week
+		if (weeksBeforePascha === 1) {
+			if (dayOfWeek === 6) return "strict"      // Holy Saturday — strict
+			if (dayOfWeek === 5) return "strict"      // Holy Friday — no food ideally
+			if (dayOfWeek === 4) return "strict"      // Holy Thursday — some allow oil/wine
+			return "strict"                            // Mon-Wed of Holy Week
+		}
+
+		// Clean Week (1st week) — strictest
+		if (weeksBeforePascha === 7) {
+			if (dayOfWeek === 0) return "oil-wine"    // Sunday — relaxed
+			if (dayOfWeek === 6) return "oil-wine"    // Saturday — relaxed
+			return "strict"                            // Mon-Fri: bread & water or xerophagy
+		}
+
+		// Regular Great Lent weeks (2-6)
+		if (dayOfWeek === 0) return "oil-wine"         // Sundays — oil & wine allowed
+		if (dayOfWeek === 6) return "oil-wine"         // Saturdays — oil & wine allowed
+		if (dayOfWeek === 1) return "xerophagy"        // Monday — dry eating
+		if (dayOfWeek === 2) return "xerophagy"        // Tuesday — dry eating
+		if (dayOfWeek === 3) return "xerophagy"        // Wednesday — dry eating
+		if (dayOfWeek === 4) return "xerophagy"        // Thursday — dry eating
+		if (dayOfWeek === 5) return "xerophagy"        // Friday — dry eating
+		return "xerophagy"
+	}
+
+	// ── Helper: Regular fast day type ──
+	function getRegularFastType(): LiturgicalWeek["fastingType"] {
+		if (dayOfWeek === 3 || dayOfWeek === 5) return "regular" // Wed & Fri
+		return "none"
+	}
+
+	// ── Pre-Paschal periods ──
 	if (isPrePaschal) {
 		const weeksBeforePascha = Math.ceil(daysUntilPascha / 7)
 
@@ -264,6 +300,7 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 				nameId: LENT_WEEKS[idx].nameId,
 				tone,
 				fasting: true,
+				fastingType: getLentFastingType(weeksBeforePascha),
 				description: LENT_WEEKS[idx].desc,
 			}
 		}
@@ -275,6 +312,7 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 				nameId: "Minggu ke-1 Prapaskah (Pekan Bersih)",
 				tone,
 				fasting: true,
+				fastingType: getLentFastingType(7),
 				description: "The beginning of the Great Fast. Strict fasting and repentance.",
 			}
 		}
@@ -286,6 +324,7 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 				nameId: "Minggu Pengampunan / Pekan Keju",
 				tone,
 				fasting: true,
+				fastingType: "dairy", // No meat, but dairy & eggs allowed all week
 				description: "Last week before Great Lent. Forgiveness Vespers. No meat, dairy permitted.",
 			}
 		}
@@ -297,6 +336,7 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 				nameId: "Pekan Pantang Daging",
 				tone,
 				fasting: dayOfWeek === 3 || dayOfWeek === 5,
+				fastingType: getRegularFastType(),
 				description: "Last week of meat consumption before Pascha.",
 			}
 		}
@@ -308,6 +348,7 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 				nameId: "Pekan Anak yang Hilang",
 				tone,
 				fasting: dayOfWeek === 3 || dayOfWeek === 5,
+				fastingType: getRegularFastType(),
 				description: "Parable of the Prodigal Son. Call to repentance.",
 			}
 		}
@@ -319,12 +360,13 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 				nameId: "Pekan Pemungut Cukai dan Farisi",
 				tone,
 				fasting: false,
+				fastingType: "none", // Fast-free week
 				description: "Beginning of the Triodion. Fast-free week.",
 			}
 		}
 	}
 
-	// ── Post-Pascha periods (use previous/current Pascha) ──
+	// ── Post-Pascha periods ──
 
 	if (weeksSincePascha === 0) {
 		return {
@@ -333,6 +375,7 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 			nameId: "Pekan Terang (Pekan Paskah)",
 			tone: 1,
 			fasting: false,
+			fastingType: "none",
 			description: "The radiant celebration of Christ's Resurrection. Fast-free week.",
 		}
 	}
@@ -345,6 +388,7 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 			nameId: PASCHAL_WEEKS[idx].nameId,
 			tone,
 			fasting: dayOfWeek === 3 || dayOfWeek === 5,
+			fastingType: getRegularFastType(),
 			description: PASCHAL_WEEKS[idx].desc,
 		}
 	}
@@ -356,6 +400,7 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 			nameId: "Pekan Pentakosta",
 			tone: 8,
 			fasting: false,
+			fastingType: "none", // Fast-free week
 			description: "Descent of the Holy Spirit. Birthday of the Church. Fast-free week.",
 		}
 	}
@@ -383,6 +428,53 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 	const isRegularFastDay = dayOfWeek === 3 || dayOfWeek === 5
 	const fasting = isSpecialFast || isRegularFastDay
 
+	// Determine fasting type for special fast periods
+	function getSpecialFastType(): LiturgicalWeek["fastingType"] {
+		if (isApostlesFast) {
+			// Apostles' Fast — relatively mild
+			if (dayOfWeek === 0) return "fish"           // Sunday — fish allowed
+			if (dayOfWeek === 6) return "fish"           // Saturday — fish allowed
+			if (dayOfWeek === 2) return "oil-wine"       // Tuesday — oil & wine
+			if (dayOfWeek === 4) return "oil-wine"       // Thursday — oil & wine
+			return "xerophagy"                           // Mon, Wed, Fri — strict
+		}
+
+		if (isDormitionFast) {
+			// Dormition Fast — stricter, similar to Great Lent
+			if (dayOfWeek === 0) return "oil-wine"       // Sunday
+			if (dayOfWeek === 6) return "oil-wine"       // Saturday
+			return "xerophagy"                           // Weekdays — dry eating
+		}
+
+		if (isNativityFast) {
+			// Nativity Fast — starts mild, gets stricter
+			const dec20 = new Date(today.getFullYear(), 11, 20) // Dec 20 — stricter period
+			if (today >= dec20) {
+				// Dec 20 - Jan 6: strict like Great Lent
+				if (dayOfWeek === 0) return "oil-wine"
+				if (dayOfWeek === 6) return "oil-wine"
+				return "xerophagy"
+			}
+			// Nov 28 - Dec 19: milder
+			if (dayOfWeek === 0) return "fish"
+			if (dayOfWeek === 6) return "fish"
+			if (dayOfWeek === 2) return "fish"           // Tue — fish
+			if (dayOfWeek === 4) return "fish"           // Thu — fish
+			return "xerophagy"                           // Mon, Wed, Fri
+		}
+
+		return "none"
+	}
+
+	let fastingType: LiturgicalWeek["fastingType"]
+	if (isSpecialFast) {
+		fastingType = getSpecialFastType()
+	} else if (isRegularFastDay) {
+		fastingType = "regular"
+	} else {
+		fastingType = "none"
+	}
+
 	let fastNote = ""
 	if (isApostlesFast) fastNote = " Apostles' Fast period."
 	else if (isDormitionFast) fastNote = " Dormition Fast period."
@@ -394,6 +486,7 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 		nameId: `Minggu ke-${weekAfterPentecost} setelah Pentakosta`,
 		tone,
 		fasting,
+		fastingType,
 		description: `Ordinary time. Octoechos Tone ${tone}.${fastNote}${!isSpecialFast ? " Regular fasting on Wednesday and Friday." : ""}`,
 	}
 }
