@@ -1,445 +1,457 @@
 {
-	"HomePage": {
-		"hero": {
-			"subtitle": "Welcome to the Living Tradition",
-			"heading": "Find Peace and Transcendence in the Ancient Faith",
-			"cta": {
-				"primary": "Visit Us",
-				"learn": "Learn about orthodoxy"
-			},
-			"scroll": "SCROLL TO EXPLORE"
-		},
-		"title": "Hello world!",
-		"about": {
-			"content": "<p>Established with the blessing of the Holy Spirit, Saint Basil the Great is more than a parish; it is a spiritual home where the ancient rhythms of the Byzantine Rite meet the yearning of the modern soul.</p><p>Our community is rooted in the philanthropic legacy of our patron saint, committed to liturgical beauty, theological depth, and the humble service of our neighbors. Here, we strive to live the Gospel in its fullness, preserving the teachings of the Fathers while being a beacon of hope in the present day.</p>",
-			"title": {
-				"top": "A Sanctuary of Timeless",
-				"bottom": "Spiritual History"
-			},
-			"quote": {
-				"content": "The bread you store up belongs to the hungry; the cloak that lies in your chest belongs to the naked.",
-				"saint": "St. Basil the Great"
-			},
-			"historyLabel": "Discover our history"
-		},
-		"virtues": {
-			"sacramento": {
-				"title": "Experience the Liturgy",
-				"description": "Join us for the Divine Liturgy—a sensory experience of chanting, incense, and icons that transcends time and space."
-			},
-			"community": {
-				"description": "Stay for Potluck after service to meet our parishioners. We are a diverse family united in the love of Christ.",
-				"title": "Community & Fellowship"
-			},
-			"struggle": {
-				"description": "Fr. Timothy is always available for a walk and a talk. No question is too small or too complex for the journey of faith.",
-				"title": "Ask Your Questions"
-			},
-			"title": "How Our Parish Welcomes You",
-			"description": "Orthodoxy is a \"come and see\" faith. Whether you are a lifelong believer or a curious seeker, our doors and hearts are open."
-		},
-		"apostolic": {
-			"title": "Apostolic Succession",
-			"label": "Guided by Tradition",
-			"description": "St. Basil the Great is blessed under His Eminence Bishop. We are part of a global lineage that stretches back to the Apostles in an unbroken chain of faith.",
-			"quote": {
-				"content": "Where the Bishop is, there let the people be; as where Jesus Christ is, there is the Catholic Church.",
-				"saint": "St. Ignatius of Antioch"
-			},
-			"bishop": {
-				"name": "His Eminence Bishop Daniel",
-				"title": "Bishop of Nikopolis and All Indonesia"
-			}
-		},
-		"gallery": {
-			"title": "Life in the Parish",
-			"description": "The beauty of worship, the joy of community.",
-			"fullLink": "View Full Gallery"
-		},
-		"cta": {
-			"label": "Reach Out to Us"
-		}
-	},
-	"donation": {
-		"label": "Support Our Mission",
-		"description": "Your stewardship enables the continuation of the Divine Liturgy, the maintenance of our sacred space, and our charitable works within the local community. Every gift is an offering to God.",
-		"actionButton": "Make an Offering",
-		"taxDisclaimer": "ALL DONATIONS ARE TAX DEDUCTIBLE"
-	},
-	"Metadata": {
-		"home": {
-			"title": "St. Basil the Great - Homepage"
-		},
-		"about": {
-			"title": "St. Basil the Great - About"
-		},
-		"event": {
-			"title": "St. Basil the Great - Events"
-		},
-		"blog": {
-			"title": "St. Basil the Great - Blogs"
-		},
-		"why": {
-			"title": "St. Basil the Great - Why Orthodox?"
-		},
-		"index": {
-			"title": "St. Basil the Great - Resources"
-		},
-		"contact": {
-			"title": "St. Basil the Great - Contact Us"
-		},
-		"search": "Search reflections...",
-		"notFound": "No posts found."
-	},
-	"global": {
-		"saintName": "St. Basil the Great",
-		"legal": {
-			"copyright": "All Right Reserved."
-		},
-		"page": {
-			"privacy": "Privacy Policy",
-			"calendar": "Liturgical Calendar",
-			"council": "Council",
-			"donate": "Donate",
-			"about": "About",
-			"events": "Events",
-			"blog": "Blog",
-			"index": "Resources",
-			"why": "Why Orthodox"
-		},
-		"generic": {
-			"top": "TOP",
-			"contact": "Contact",
-			"search": "Search resources..."
-		}
-	},
-	"aboutPage": {
-		"mission": {
-			"title": "Our Sacred Purpose",
-			"content": "St. Basil the Great is a community dedicated to the preservation of the Apostolic tradition. We \t\t\t\t\t\tseek to cultivate a space where the divine meets the temporal, guiding each soul toward Theosis \t\t\t\t\t\tthrough the beauty of the Liturgy, the wisdom of the Fathers, and the fellowship of the faithful.",
-			"mission": {
-				"label": "Mission",
-				"content": "To witness the Gospel of Christ through the transformative power of Orthodox worship and service."
-			},
-			"vision": {
-				"content": "To be a sanctuary of peace and a beacon of Truth in the heart of our city.",
-				"label": "Vision"
-			},
-			"ctaLabel": "Discover our roots"
-		},
-		"jurisdiction": {
-			"hierarchLabel": "Our Hierarch",
-			"bishop": {
-				"name": "His Eminence, Bishop Daniel"
-			},
-			"quote": "The Church is not a museum of saints, but a hospital for sinners. We are called to be the light of the world, reflecting the uncreated light of Christ.",
-			"label": "Canonical Jurisdiction",
-			"hierarchScope": "Orthodox Church of Indonesia, True Orthodox, under the hierarch of the Church of the Genuine Orthodox Christians of Greece."
-		},
-		"cta": {
-			"label": "New to our Parish?",
-			"description": "Whether you are a lifelong Orthodox Christian or simply seeking to discover the ancient faith, we welcome you to &quot;enter in&quot; and experience the Divine Liturgy.",
-			"action": {
-				"primary": "Enter In",
-				"secondary": "Visitor's Guide"
-			},
-			"when": {
-				"label": "When to arrive",
-				"description": "Divine Liturgy begins at 10:00 AM on Sundays. Orthros starts at 8:45 AM."
-			},
-			"what": {
-				"label": "What to wear",
-				"description": "Modest, respectful attire is customary in our tradition."
-			},
-			"fellowship": {
-				"label": "Fellowship",
-				"description": "Join us for coffee and discussion after the service."
-			}
-		},
-		"timeline": {
-			"label": "The Living Scroll",
-			"description": "Tracing the hand of Providence through the history of our community."
-		},
-		"management": {
-			"title": "Leadership & Service",
-			"description": "Those who shepherd and steward our community.",
-			"shepherd": {
-				"name": "Deacon Timothy",
-				"title": "Parish Rector",
-				"description": "Serving our parish with a focus on catechesis and youth ministry."
-			},
-			"lead": {
-				"description": "Overseeing parish operations and community outreach programs.",
-				"title": "Council President"
-			},
-			"secretary": {
-				"title": "Parish Secretary",
-				"description": "Managing communications and liturgical coordination."
-			},
-			"treasurer": {
-				"title": "Treasurer"
-			},
-			"equpment": {
-				"title": "Equipment"
-			},
-			"choir": {
-				"title": "Choir Director"
-			},
-			"education": {
-				"title": "Education"
-			}
-		},
-		"hero": {
-			"title": "Our Parish",
-			"subtitle": "An Ancient Faith for the <i>Modern Soul.</i>"
-		}
-	},
-	"eventPage": {
-		"hero": {
-			"label": "Upcoming Parish Events & Feast Days",
-			"description": "Enter into the rhythm of the liturgical year and join our community in prayer, learning, and fellowship."
-		},
-		"filter": {
-			"sortLabel": "Sort By"
-		},
-		"sidebar": {
-			"feast": {
-				"major": {
-					"label": "Major Feast Days",
-					"cta": "View Liturgical Calendar"
-				},
-				"weekLabel": "Current Week",
-				"next": "Next Feast",
-				"fastDay": "Fast Day"
-			},
-			"services": {
-				"label": "Weekly Cycle",
-				"wed": "Wednesday Vespers",
-				"fri": "Friday Paraklesis",
-				"sat": "Saturday Vespers",
-				"sun": "Sunday Typika"
-			},
-			"cta": {
-				"label": "Stay Connected",
-				"description": "Receive weekly parish announcements and liturgical updates directly in your inbox.",
-				"button": "Subscribe",
-				"placeholder": "Your email address"
-			}
-		},
-		"services": {
-			"contact": {
-				"label": "Reach Out"
-			}
-		}
-	},
-	"blogPage": {
-		"hero": {
-			"headline": {
-				"primary": "Parish Reflections",
-				"announcement": "Announcements"
-			},
-			"description": "Exploring the depths of the Orthodox faith through the teachings of the Holy Fathers, liturgical life, \t\t\t\tand the vibrant community of Saint Basil the Great."
-		},
-		"featured": {
-			"label": "Featured Reflection",
-			"ctaLabel": "Enter In"
-		},
-		"feed": {
-			"readMore": "Read More"
-		},
-		"post": {
-			"relatedPostLabel": "Continue the Journey",
-			"relatedPostDescription": "Further reflections for the faithful soul",
-			"relatedPostAllPost": "View All Posts"
-		},
-		"cta": {
-			"title": "Join the Living Scroll",
-			"subtitle": "Receive weekly spiritual reflections, liturgical updates, and writings from the Fathers directly in your sanctuary of inbox.",
-			"placeholder": "Your humble email...",
-			"actionButtonLabel": "Discover the Faith"
-		},
-		"tags": {
-			"title": "Explore Further",
-			"label": "Support our Mission",
-			"subtitle": "Help us continue providing spiritual resources and maintaining this sacred space.",
-			"cta": "Enter In & Donate"
-		},
-		"category": {
-			"all": "All"
-		},
-		"headline": {
-			"published": "Published on"
-		}
-	},
-	"indexPage": {
-		"hero": {
-			"label": {
-				"first": "Spiritual Library",
-				"secondary": "Resources"
-			},
-			"description": "\"The reading of the Scriptures is a great safeguard against sin; ignorance of the Scriptures is a precipice and a deep abyss.\" — Saint John Chrysostom. Explore our curated collection of liturgical texts, patristic writings, and parish resources.",
-			"cta": {
-				"primary": "Enter the Archive",
-				"secondary": "Request a Loan"
-			}
-		},
-		"featured": {
-			"label": "Patristic Spotlight",
-			"title": "The Works of Saint Basil the Great",
-			"quote": "A good deed is never lost; he who sows courtesy reaps friendship, and he who plants kindness \t\t\t\t\tgathers love.",
-			"cta": "Explore the"
-		},
-		"introduction": {
-			"label": "The Breath of the Spirit",
-			"description": "Within these digital shelves, we offer a bridge between the ancient wisdom of the Holy Fathers and the seeking hearts of the modern world. Every resource is selected to nourish the soul, clarify the mind, and deepen the liturgical experience of our community."
-		}
-	},
-	"whyPage": {
-		"pastor": {
-			"dressCode": "There is a dress code to be mindful of: it is appreciated if men wear long pants and women consider a veil or scarf and a skirt. Most importantly, bring an open heart.",
-			"potluck": {
-				"description": "After the Divine Liturgy, we gather for Potluck. This is the best time to meet our priest and ask any questions you may have.",
-				"title": "Potluck & Community"
-			},
-			"liturgy": {
-				"description": "Orthodox worship is liturgical, following a pattern that dates back centuries. It may feel strange at first, but we encourage you to just let the beauty wash over you.",
-				"title": "The Flow of Liturgy"
-			},
-			"experience": {
-				"description": "Our worship involves all the senses. You will see icons, smell incense, hear beautiful a cappella chanting, and feel the presence of the community standing in prayer.",
-				"title": "The Sensory Experience"
-			},
-			"label": "Visiting Us",
-			"title": "What to Expect"
-		},
-		"foundation": {
-			"universal": {
-				"description": "This faith transcends culture, language, and history, offering the same hope in every age.",
-				"title": "Universal"
-			},
-			"unbroken": {
-				"description": "A direct, unbroken line of ordained bishops traces back to the Apostles, preserving and transmitting the same faith through each generation.",
-				"title": "Unbroken"
-			},
-			"label": "Foundations",
-			"title": "Let us explore what makes Orthodoxy unique and enduring.",
-			"definition": "Orthodoxy is the original Christian Church, founded by Jesus Christ and the Apostles. For two thousand years, it has kept the faith \"once for all delivered to the saints\" unchanged.",
-			"purpose": "It is a hospital for the soul, a place of healing where the human person is restored to their original beauty through communion with the Triune God."
-		},
-		"hero": {
-			"title": "An Invitation to the <br></br><highlight>Ancient Path</highlight>",
-			"description": "In a world of constant change, find the unchanging Faith. Orthodox Christianity is not a religion of the past, but the living presence of the Apostolic Church in the modern world.",
-			"cta": {
-				"primary": "Enter In",
-				"secondary": "Watch the Liturgy"
-			}
-		},
-		"scripture": {
-			"notSola": {
-				"description": "We view the Bible not as a book to be read in isolation, but as the heart of the Church’s life. It is the inspired record of God's revelation, understood through the lens of the community that produced it and history that shaped the teaching as we know it today.",
-				"title": "The Living Word"
-			},
-			"bible": {
-				"quote": "Therefore, brethren, stand fast and hold the traditions which you were taught, whether by word or our epistle.",
-				"source": "2 Thessalonians 2:15"
-			},
-			"title": "Scripture & Holy Tradition",
-			"orthopraxia": {
-				"description": "Tradition is the \"living memory of the Church.\" It is the Holy Spirit dwelling in the body of believers, guiding us into all truth through the Liturgy, the Fathers, and the Councils. Proving faith is not enough if you don’t practice in daily life.",
-				"title": "The Sacred Memory"
-			}
-		},
-		"sacrament": {
-			"label": "Mysteries",
-			"title": "The Sacramental Life",
-			"description": "In Orthodoxy, the spiritual and the physical are never separated. Through the Sacraments (Mysteries), God meets us in the elements of the world—bread, wine, water, and oil.",
-			"allSacraments": "All Sacraments",
-			"eucharist": {
-				"description": "The \"Medicine of Immortality.\" We believe the bread and wine truly become the Body and Blood of Christ, uniting us to Him and to each other.",
-				"title": "The Holy Eucharist",
-				"secondary": "The Center of Worship"
-			},
-			"baptism": {
-				"title": "Baptism",
-				"description": "A total immersion into the life of the Trinity, dying to the old self and rising into the newness of Christ.",
-				"secondary": "A Hospital for the Soul"
-			},
-			"confession": {
-				"title": "Confession",
-				"description": "The \"Second Baptism,\" where we lay down our burdens and receive God's healing forgiveness."
-			},
-			"schedule": {
-				"title": "Experience the Mysteries",
-				"description": "The sacramental life is not an idea to be understood, but a life to be lived. Join us for a service to witness these ancient rites.",
-				"cta": "View Schedule"
-			}
-		},
-		"faq": {
-			"title": "Common Inquiries",
-			"description": "With gentleness and respect, we welcome your questions.",
-			"duration": {
-				"question": "How long are the services?",
-				"answer": "The Sunday Divine Liturgy usually lasts about 120 minutes, often preceded by the Orthros (Matins) service. We encourage visitors to arrive early to experience the peaceful transition from the morning prayers into the Liturgy."
-			},
-			"childcare": {
-				"question": "Is there childcare available?",
-				"answer": "We believe children are an integral part of the worshipping community and encourage them to be present in the nave."
-			},
-			"eucharist": {
-				"question": "Can non-Orthodox visitors receive Holy Communion?",
-				"answer": "In the Orthodox Tradition, Holy Communion is reserved for baptized and chrismated Orthodox Christians who have prepared themselves through prayer and fasting. However, we invite all visitors to receive the \"Antidoron\" (blessed bread) distributed at the end of the service."
-			},
-			"dresscode": {
-				"question": "What should I wear to an Orthodox service?",
-				"answer": "There is a dress code to be mindful of: it is appreciated if men wear long pants and women consider a veil or scarf and a skirt. Most importantly, bring an open heart."
-			},
-			"canonical": {
-				"question": "Is your church canonical?",
-				"answer": "The Orthodox Church of Indonesia (Gereja Orthodox Indonesia) is under the jurisdiction of Genuine Greece of Orthodox Church. Our bishops maintain unbroken apostolic succession, preserving the faith handed down from the Apostles."
-			},
-			"faith": {
-				"question": "Does orthodox believe in christ?",
-				"answer": "The Orthodox Church is the original Christian Church, founded by Christ and His Apostles at Pentecost. We hold to the unchanged faith of the early Church — professing the Nicene Creed, celebrating the seven Sacraments, and following the teachings of the Holy Fathers and the Seven Ecumenical Councils."
-			},
-			"icons": {
-				"question": "Do you worship icons?",
-				"answer": "No. We venerate icons, but we worship God alone. An icon is a \\\"window to heaven\\\" that directs our minds and hearts to the person depicted, much like one might kiss a photograph of a loved one. This teaching was affirmed by the Seventh Ecumenical Council in 787 AD."
-			},
-			"cathecumen": {
-				"question": "Are non-Orthodox welcome?",
-				"answer": "Absolutely. Everyone is welcome to attend our services. While Holy Communion is reserved for baptized Orthodox Christians, we invite you to participate in all other aspects of the Liturgy and to receive blessed bread (antidoron) at the end of the service."
-			}
-		}
-	},
-	"contactPage": {
-		"hero": {
-			"title": "Connect with Our Parish",
-			"subtitle": "Where two or three are gathered together in My name, I am there in the midst of them."
-		},
-		"faq": {
-			"title": "Common Questions",
-			"subtitle": "Preparing for your visit to the parish"
-		},
-		"sidebar": {
-			"title": "Our Sanctuary",
-			"location": {
-				"label": "Location"
-			},
-			"contact": {
-				"label": "Reach Out"
-			}
-		},
-		"map": {
-			"title": "How to reach us",
-			"step": {
-				"parking": "Parking is available in side of the <b>St. Basil the Great</b> for all visitors.",
-				"flamboyant": "Turn Left onto <b>Flamboyan Road</b>. The parish is situated on the right side of the road.",
-				"margonda": "From the <b>Margonda Road</b>, enter Dahlia Road and head to South East about 1 km."
-			}
-		},
-		"form": {
-			"title": "Send a Message",
-			"subtitle": "Whether you are a seeker, a traveler, or a neighbor, we welcome your inquiry."
-		}
-	}
+  "HomePage": {
+    "hero": {
+      "subtitle": "Welcome to the Living Tradition",
+      "heading": "Find Peace and Transcendence in the Ancient Faith",
+      "cta": {
+        "primary": "Visit Us",
+        "learn": "Learn about orthodoxy"
+      },
+      "scroll": "SCROLL TO EXPLORE"
+    },
+    "title": "Hello world!",
+    "about": {
+      "content": "<p>Established with the blessing of the Holy Spirit, Saint Basil the Great is more than a parish; it is a spiritual home where the ancient rhythms of the Byzantine Rite meet the yearning of the modern soul.</p><p>Our community is rooted in the philanthropic legacy of our patron saint, committed to liturgical beauty, theological depth, and the humble service of our neighbors. Here, we strive to live the Gospel in its fullness, preserving the teachings of the Fathers while being a beacon of hope in the present day.</p>",
+      "title": {
+        "top": "A Sanctuary of Timeless",
+        "bottom": "Spiritual History"
+      },
+      "quote": {
+        "content": "The bread you store up belongs to the hungry; the cloak that lies in your chest belongs to the naked.",
+        "saint": "St. Basil the Great"
+      },
+      "historyLabel": "Discover our history"
+    },
+    "virtues": {
+      "sacramento": {
+        "title": "Experience the Liturgy",
+        "description": "Join us for the Divine Liturgy—a sensory experience of chanting, incense, and icons that transcends time and space."
+      },
+      "community": {
+        "description": "Stay for Potluck after service to meet our parishioners. We are a diverse family united in the love of Christ.",
+        "title": "Community & Fellowship"
+      },
+      "struggle": {
+        "description": "Fr. Timothy is always available for a walk and a talk. No question is too small or too complex for the journey of faith.",
+        "title": "Ask Your Questions"
+      },
+      "title": "How Our Parish Welcomes You",
+      "description": "Orthodoxy is a \"come and see\" faith. Whether you are a lifelong believer or a curious seeker, our doors and hearts are open."
+    },
+    "apostolic": {
+      "title": "Apostolic Succession",
+      "label": "Guided by Tradition",
+      "description": "St. Basil the Great is blessed under His Eminence Bishop. We are part of a global lineage that stretches back to the Apostles in an unbroken chain of faith.",
+      "quote": {
+        "content": "Where the Bishop is, there let the people be; as where Jesus Christ is, there is the Catholic Church.",
+        "saint": "St. Ignatius of Antioch"
+      },
+      "bishop": {
+        "name": "His Eminence Bishop Daniel",
+        "title": "Bishop of Nikopolis and All Indonesia"
+      }
+    },
+    "gallery": {
+      "title": "Life in the Parish",
+      "description": "The beauty of worship, the joy of community.",
+      "fullLink": "View Full Gallery"
+    },
+    "cta": {
+      "label": "Reach Out to Us"
+    }
+  },
+  "donation": {
+    "label": "Support Our Mission",
+    "description": "Your stewardship enables the continuation of the Divine Liturgy, the maintenance of our sacred space, and our charitable works within the local community. Every gift is an offering to God.",
+    "actionButton": "Make an Offering",
+    "taxDisclaimer": "ALL DONATIONS ARE TAX DEDUCTIBLE"
+  },
+  "Metadata": {
+    "home": {
+      "title": "St. Basil the Great - Homepage"
+    },
+    "about": {
+      "title": "St. Basil the Great - About"
+    },
+    "event": {
+      "title": "St. Basil the Great - Events"
+    },
+    "blog": {
+      "title": "St. Basil the Great - Blogs"
+    },
+    "why": {
+      "title": "St. Basil the Great - Why Orthodox?"
+    },
+    "index": {
+      "title": "St. Basil the Great - Resources"
+    },
+    "contact": {
+      "title": "St. Basil the Great - Contact Us"
+    },
+    "search": "Search reflections...",
+    "notFound": "No posts found."
+  },
+  "global": {
+    "saintName": "St. Basil the Great",
+    "legal": {
+      "copyright": "All Right Reserved."
+    },
+    "page": {
+      "privacy": "Privacy Policy",
+      "calendar": "Liturgical Calendar",
+      "council": "Council",
+      "donate": "Donate",
+      "about": "About",
+      "events": "Events",
+      "blog": "Blog",
+      "index": "Resources",
+      "why": "Why Orthodox"
+    },
+    "generic": {
+      "top": "TOP",
+      "contact": "Contact",
+      "search": "Search resources..."
+    }
+  },
+  "aboutPage": {
+    "mission": {
+      "title": "Our Sacred Purpose",
+      "content": "St. Basil the Great is a community dedicated to the preservation of the Apostolic tradition. We \t\t\t\t\t\tseek to cultivate a space where the divine meets the temporal, guiding each soul toward Theosis \t\t\t\t\t\tthrough the beauty of the Liturgy, the wisdom of the Fathers, and the fellowship of the faithful.",
+      "mission": {
+        "label": "Mission",
+        "content": "To witness the Gospel of Christ through the transformative power of Orthodox worship and service."
+      },
+      "vision": {
+        "content": "To be a sanctuary of peace and a beacon of Truth in the heart of our city.",
+        "label": "Vision"
+      },
+      "ctaLabel": "Discover our roots"
+    },
+    "jurisdiction": {
+      "hierarchLabel": "Our Hierarch",
+      "bishop": {
+        "name": "His Eminence, Bishop Daniel"
+      },
+      "quote": "The Church is not a museum of saints, but a hospital for sinners. We are called to be the light of the world, reflecting the uncreated light of Christ.",
+      "label": "Canonical Jurisdiction",
+      "hierarchScope": "Orthodox Church of Indonesia, True Orthodox, under the hierarch of the Church of the Genuine Orthodox Christians of Greece."
+    },
+    "cta": {
+      "label": "New to our Parish?",
+      "description": "Whether you are a lifelong Orthodox Christian or simply seeking to discover the ancient faith, we welcome you to &quot;enter in&quot; and experience the Divine Liturgy.",
+      "action": {
+        "primary": "Enter In",
+        "secondary": "Visitor's Guide"
+      },
+      "when": {
+        "label": "When to arrive",
+        "description": "Divine Liturgy begins at 10:00 AM on Sundays. Orthros starts at 8:45 AM."
+      },
+      "what": {
+        "label": "What to wear",
+        "description": "Modest, respectful attire is customary in our tradition."
+      },
+      "fellowship": {
+        "label": "Fellowship",
+        "description": "Join us for coffee and discussion after the service."
+      }
+    },
+    "timeline": {
+      "label": "The Living Scroll",
+      "description": "Tracing the hand of Providence through the history of our community.",
+      "community": {
+        "title": "Orthodox Community",
+        "description": "A small gathering of families celebrated the acceptance of Orthodox Faith in a humble rented house, planting the seeds of what would become our parish today."
+      },
+      "deacon": {
+        "title": "Deacon Timothy Ordained",
+        "description": "A faithful laymen are growing, then the chosen one come ordained as deacon."
+      },
+      "reform": {
+        "title": "The Great Reformation Project",
+        "description": "Led by the new selected leader & accompanied by the deacon to built what we call \"Home\"."
+      }
+    },
+    "management": {
+      "title": "Leadership & Service",
+      "description": "Those who shepherd and steward our community.",
+      "shepherd": {
+        "name": "Deacon Timothy",
+        "title": "Parish Rector",
+        "description": "Serving our parish with a focus on catechesis and youth ministry."
+      },
+      "lead": {
+        "description": "Overseeing parish operations and community outreach programs.",
+        "title": "Council President"
+      },
+      "secretary": {
+        "title": "Parish Secretary",
+        "description": "Managing communications and liturgical coordination."
+      },
+      "treasurer": {
+        "title": "Treasurer"
+      },
+      "equpment": {
+        "title": "Equipment"
+      },
+      "choir": {
+        "title": "Choir Director"
+      },
+      "education": {
+        "title": "Education"
+      }
+    },
+    "hero": {
+      "title": "Our Parish",
+      "subtitle": "An Ancient Faith for the <i>Modern Soul.</i>"
+    }
+  },
+  "eventPage": {
+    "hero": {
+      "label": "Upcoming Parish Events & Feast Days",
+      "description": "Enter into the rhythm of the liturgical year and join our community in prayer, learning, and fellowship."
+    },
+    "filter": {
+      "sortLabel": "Sort By"
+    },
+    "sidebar": {
+      "feast": {
+        "major": {
+          "label": "Major Feast Days",
+          "cta": "View Liturgical Calendar"
+        },
+        "weekLabel": "Current Week",
+        "next": "Next Feast",
+        "fastDay": "Fast Day"
+      },
+      "services": {
+        "label": "Weekly Cycle",
+        "wed": "Wednesday Vespers",
+        "fri": "Friday Paraklesis",
+        "sat": "Saturday Vespers",
+        "sun": "Sunday Typika"
+      },
+      "cta": {
+        "label": "Stay Connected",
+        "description": "Receive weekly parish announcements and liturgical updates directly in your inbox.",
+        "button": "Subscribe",
+        "placeholder": "Your email address"
+      }
+    },
+    "services": {
+      "contact": {
+        "label": "Reach Out"
+      }
+    }
+  },
+  "blogPage": {
+    "hero": {
+      "headline": {
+        "primary": "Parish Reflections",
+        "announcement": "Announcements"
+      },
+      "description": "Exploring the depths of the Orthodox faith through the teachings of the Holy Fathers, liturgical life, \t\t\t\tand the vibrant community of Saint Basil the Great."
+    },
+    "featured": {
+      "label": "Featured Reflection",
+      "ctaLabel": "Enter In"
+    },
+    "feed": {
+      "readMore": "Read More"
+    },
+    "post": {
+      "relatedPostLabel": "Continue the Journey",
+      "relatedPostDescription": "Further reflections for the faithful soul",
+      "relatedPostAllPost": "View All Posts"
+    },
+    "cta": {
+      "title": "Join the Living Scroll",
+      "subtitle": "Receive weekly spiritual reflections, liturgical updates, and writings from the Fathers directly in your sanctuary of inbox.",
+      "placeholder": "Your humble email...",
+      "actionButtonLabel": "Discover the Faith"
+    },
+    "tags": {
+      "title": "Explore Further",
+      "label": "Support our Mission",
+      "subtitle": "Help us continue providing spiritual resources and maintaining this sacred space.",
+      "cta": "Enter In & Donate"
+    },
+    "category": {
+      "all": "All"
+    },
+    "headline": {
+      "published": "Published on"
+    }
+  },
+  "indexPage": {
+    "hero": {
+      "label": {
+        "first": "Spiritual Library",
+        "secondary": "Resources"
+      },
+      "description": "\"The reading of the Scriptures is a great safeguard against sin; ignorance of the Scriptures is a precipice and a deep abyss.\" — Saint John Chrysostom. Explore our curated collection of liturgical texts, patristic writings, and parish resources.",
+      "cta": {
+        "primary": "Enter the Archive",
+        "secondary": "Request a Loan"
+      }
+    },
+    "featured": {
+      "label": "Patristic Spotlight",
+      "title": "The Works of Saint Basil the Great",
+      "quote": "A good deed is never lost; he who sows courtesy reaps friendship, and he who plants kindness \t\t\t\t\tgathers love.",
+      "cta": "Explore the"
+    },
+    "introduction": {
+      "label": "The Breath of the Spirit",
+      "description": "Within these digital shelves, we offer a bridge between the ancient wisdom of the Holy Fathers and the seeking hearts of the modern world. Every resource is selected to nourish the soul, clarify the mind, and deepen the liturgical experience of our community."
+    }
+  },
+  "whyPage": {
+    "pastor": {
+      "dressCode": "There is a dress code to be mindful of: it is appreciated if men wear long pants and women consider a veil or scarf and a skirt. Most importantly, bring an open heart.",
+      "potluck": {
+        "description": "After the Divine Liturgy, we gather for Potluck. This is the best time to meet our priest and ask any questions you may have.",
+        "title": "Potluck & Community"
+      },
+      "liturgy": {
+        "description": "Orthodox worship is liturgical, following a pattern that dates back centuries. It may feel strange at first, but we encourage you to just let the beauty wash over you.",
+        "title": "The Flow of Liturgy"
+      },
+      "experience": {
+        "description": "Our worship involves all the senses. You will see icons, smell incense, hear beautiful a cappella chanting, and feel the presence of the community standing in prayer.",
+        "title": "The Sensory Experience"
+      },
+      "label": "Visiting Us",
+      "title": "What to Expect"
+    },
+    "foundation": {
+      "universal": {
+        "description": "This faith transcends culture, language, and history, offering the same hope in every age.",
+        "title": "Universal"
+      },
+      "unbroken": {
+        "description": "A direct, unbroken line of ordained bishops traces back to the Apostles, preserving and transmitting the same faith through each generation.",
+        "title": "Unbroken"
+      },
+      "label": "Foundations",
+      "title": "Let us explore what makes Orthodoxy unique and enduring.",
+      "definition": "Orthodoxy is the original Christian Church, founded by Jesus Christ and the Apostles. For two thousand years, it has kept the faith \"once for all delivered to the saints\" unchanged.",
+      "purpose": "It is a hospital for the soul, a place of healing where the human person is restored to their original beauty through communion with the Triune God."
+    },
+    "hero": {
+      "title": "An Invitation to the <br></br><highlight>Ancient Path</highlight>",
+      "description": "In a world of constant change, find the unchanging Faith. Orthodox Christianity is not a religion of the past, but the living presence of the Apostolic Church in the modern world.",
+      "cta": {
+        "primary": "Enter In",
+        "secondary": "Watch the Liturgy"
+      }
+    },
+    "scripture": {
+      "notSola": {
+        "description": "We view the Bible not as a book to be read in isolation, but as the heart of the Church’s life. It is the inspired record of God's revelation, understood through the lens of the community that produced it and history that shaped the teaching as we know it today.",
+        "title": "The Living Word"
+      },
+      "bible": {
+        "quote": "Therefore, brethren, stand fast and hold the traditions which you were taught, whether by word or our epistle.",
+        "source": "2 Thessalonians 2:15"
+      },
+      "title": "Scripture & Holy Tradition",
+      "orthopraxia": {
+        "description": "Tradition is the \"living memory of the Church.\" It is the Holy Spirit dwelling in the body of believers, guiding us into all truth through the Liturgy, the Fathers, and the Councils. Proving faith is not enough if you don’t practice in daily life.",
+        "title": "The Sacred Memory"
+      }
+    },
+    "sacrament": {
+      "label": "Mysteries",
+      "title": "The Sacramental Life",
+      "description": "In Orthodoxy, the spiritual and the physical are never separated. Through the Sacraments (Mysteries), God meets us in the elements of the world—bread, wine, water, and oil.",
+      "allSacraments": "All Sacraments",
+      "eucharist": {
+        "description": "The \"Medicine of Immortality.\" We believe the bread and wine truly become the Body and Blood of Christ, uniting us to Him and to each other.",
+        "title": "The Holy Eucharist",
+        "secondary": "The Center of Worship"
+      },
+      "baptism": {
+        "title": "Baptism",
+        "description": "A total immersion into the life of the Trinity, dying to the old self and rising into the newness of Christ.",
+        "secondary": "A Hospital for the Soul"
+      },
+      "confession": {
+        "title": "Confession",
+        "description": "The \"Second Baptism,\" where we lay down our burdens and receive God's healing forgiveness."
+      },
+      "schedule": {
+        "title": "Experience the Mysteries",
+        "description": "The sacramental life is not an idea to be understood, but a life to be lived. Join us for a service to witness these ancient rites.",
+        "cta": "View Schedule"
+      }
+    },
+    "faq": {
+      "title": "Common Inquiries",
+      "description": "With gentleness and respect, we welcome your questions.",
+      "duration": {
+        "question": "How long are the services?",
+        "answer": "The Sunday Divine Liturgy usually lasts about 120 minutes, often preceded by the Orthros (Matins) service. We encourage visitors to arrive early to experience the peaceful transition from the morning prayers into the Liturgy."
+      },
+      "childcare": {
+        "question": "Is there childcare available?",
+        "answer": "We believe children are an integral part of the worshipping community and encourage them to be present in the nave."
+      },
+      "eucharist": {
+        "question": "Can non-Orthodox visitors receive Holy Communion?",
+        "answer": "In the Orthodox Tradition, Holy Communion is reserved for baptized and chrismated Orthodox Christians who have prepared themselves through prayer and fasting. However, we invite all visitors to receive the \"Antidoron\" (blessed bread) distributed at the end of the service."
+      },
+      "dresscode": {
+        "question": "What should I wear to an Orthodox service?",
+        "answer": "There is a dress code to be mindful of: it is appreciated if men wear long pants and women consider a veil or scarf and a skirt. Most importantly, bring an open heart."
+      },
+      "canonical": {
+        "question": "Is your church canonical?",
+        "answer": "The Orthodox Church of Indonesia (Gereja Orthodox Indonesia) is under the jurisdiction of Genuine Greece of Orthodox Church. Our bishops maintain unbroken apostolic succession, preserving the faith handed down from the Apostles."
+      },
+      "faith": {
+        "question": "Does orthodox believe in christ?",
+        "answer": "The Orthodox Church is the original Christian Church, founded by Christ and His Apostles at Pentecost. We hold to the unchanged faith of the early Church — professing the Nicene Creed, celebrating the seven Sacraments, and following the teachings of the Holy Fathers and the Seven Ecumenical Councils."
+      },
+      "icons": {
+        "question": "Do you worship icons?",
+        "answer": "No. We venerate icons, but we worship God alone. An icon is a \\\"window to heaven\\\" that directs our minds and hearts to the person depicted, much like one might kiss a photograph of a loved one. This teaching was affirmed by the Seventh Ecumenical Council in 787 AD."
+      },
+      "cathecumen": {
+        "question": "Are non-Orthodox welcome?",
+        "answer": "Absolutely. Everyone is welcome to attend our services. While Holy Communion is reserved for baptized Orthodox Christians, we invite you to participate in all other aspects of the Liturgy and to receive blessed bread (antidoron) at the end of the service."
+      }
+    }
+  },
+  "contactPage": {
+    "hero": {
+      "title": "Connect with Our Parish",
+      "subtitle": "Where two or three are gathered together in My name, I am there in the midst of them."
+    },
+    "faq": {
+      "title": "Common Questions",
+      "subtitle": "Preparing for your visit to the parish"
+    },
+    "sidebar": {
+      "title": "Our Sanctuary",
+      "location": {
+        "label": "Location"
+      },
+      "contact": {
+        "label": "Reach Out"
+      }
+    },
+    "map": {
+      "title": "How to reach us",
+      "step": {
+        "parking": "Parking is available in side of the <b>St. Basil the Great</b> for all visitors.",
+        "flamboyant": "Turn Left onto <b>Flamboyan Road</b>. The parish is situated on the right side of the road.",
+        "margonda": "From the <b>Margonda Road</b>, enter Dahlia Road and head to South East about 1 km."
+      }
+    },
+    "form": {
+      "title": "Send a Message",
+      "subtitle": "Whether you are a seeker, a traveler, or a neighbor, we welcome your inquiry."
+    }
+  }
 }
