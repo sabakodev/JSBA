@@ -287,7 +287,7 @@ export const LENT_WEEKS: LentWeek[] = [
 	{
 		name: "Holy Week",
 		nameEl: "Μεγάλη Εβδομάδα",
-		nameId: "Pekan Suci",
+		nameId: "Pekan Kudus",
 		desc: "The week of Christ's Passion, Crucifixion, and Burial.",
 	},
 	{
