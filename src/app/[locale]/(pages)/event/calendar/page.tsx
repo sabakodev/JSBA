@@ -20,7 +20,7 @@ export default async function Page({
 
 	// const t = useTranslations("eventPage.sidebar")
 
-	const upcomingFeasts = getUpcomingFeasts(365)
+	const upcomingFeasts = getUpcomingFeasts(900)
 	const currentWeek = getCurrentLiturgicalWeek()
 
 	const localizedCurrentName: Record<string, string> = {
