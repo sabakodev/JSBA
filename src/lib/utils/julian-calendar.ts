@@ -396,7 +396,7 @@ export function formatFeastDate(
 // Current Liturgical Week (sunset-aware)
 // ──────────────────────────────────────
 
-interface LiturgicalWeek {
+export interface LiturgicalWeek {
 	name: string
 	nameEl: string
 	nameId: string
