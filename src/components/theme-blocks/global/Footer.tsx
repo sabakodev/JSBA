@@ -14,11 +14,11 @@ export default function FooterCompoonent() {
 		},
 		{
 			label: t('page.calendar'),
-			route: "/event",
+			route: "/event/calendar",
 		},
 		{
 			label: t('page.council'),
-			route: "/council",
+			route: "/about#clergy",
 		},
 		{
 			label: t('page.donate'),
