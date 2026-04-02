@@ -162,6 +162,8 @@ export interface ResolvedFeast {
 	type: "great" | "major" | "minor" | "fast"
 	julianDate: { year: number, month: number; day: number }
 	gregorianDate: { year: number; month: number; day: number }
+	// The civil evening when the feast BEGINS (vespers)
+	civilVespersStart: { year: number; month: number; day: number; hour: 18 }
 	fasting?: boolean
 	source: "fixed" | "moveable"
 }
@@ -178,6 +180,8 @@ export function resolveMovableFeasts(year: number): ResolvedFeast[] {
 	return MOVEABLE_FEASTS.map((feast) => {
 		const greg = addDaysToDate(pg.year, pg.month, pg.day, feast.daysFromPascha)
 		const julian = gregorianToJulian(greg.year, greg.month, greg.day)
+		const vespersDate = new Date(greg.year, greg.month - 1, greg.day)
+		vespersDate.setDate(vespersDate.getDate() - 1)
 
 		return {
 			name: feast.name,
@@ -186,6 +190,12 @@ export function resolveMovableFeasts(year: number): ResolvedFeast[] {
 			type: feast.type,
 			julianDate: { year: julian.year, month: julian.month, day: julian.day },
 			gregorianDate: greg,
+			civilVespersStart: {
+				year: vespersDate.getFullYear(),
+				month: vespersDate.getMonth() + 1,
+				day: vespersDate.getDate(),
+				hour: 18,
+			},
 			source: "moveable" as const,
 		}
 	})
@@ -198,6 +208,10 @@ export function resolveFixedFeasts(year: number): ResolvedFeast[] {
 	return FIXED_FEASTS.map((feast) => {
 		const greg = julianToGregorian(year, feast.julianMonth, feast.julianDay)
 
+		// Vespers begins the evening BEFORE the Gregorian date
+		const vespersDate = new Date(greg.year, greg.month - 1, greg.day)
+		vespersDate.setDate(vespersDate.getDate() - 1)
+
 		return {
 			name: feast.name,
 			nameEl: feast.nameEl,
@@ -205,6 +219,12 @@ export function resolveFixedFeasts(year: number): ResolvedFeast[] {
 			type: feast.type,
 			julianDate: { year: year, month: feast.julianMonth, day: feast.julianDay },
 			gregorianDate: greg,
+			civilVespersStart: {
+				year: vespersDate.getFullYear(),
+				month: vespersDate.getMonth() + 1,
+				day: vespersDate.getDate(),
+				hour: 18,
+			},
 			fasting: feast.fasting,
 			source: "fixed" as const,
 		}
@@ -257,26 +277,50 @@ export function getTodaysFeasts(now?: Date): ResolvedFeast[] {
 // Upcoming Feasts
 // ──────────────────────────────────────
 
-export function getUpcomingFeasts(count: number = 5, now?: Date): ResolvedFeast[] {
-	const litDate = getLiturgicalDate(now)
-	const year = litDate.gregorian.year
+export function getUpcomingFeasts(count: number = 5, now?: Date, filters?: string[]): ResolvedFeast[] {
+	const actualNow = now ?? new Date()
+	const year = actualNow.getFullYear()
 
-	const feasts = [...getAllFeasts(year), ...getAllFeasts(year + 1)]
+	const feasts = [
+		...getAllFeasts(year - 1),
+		...getAllFeasts(year),
+		...getAllFeasts(year + 1),
+	]
 
-	const litGreg = new Date(
-		litDate.gregorian.year,
-		litDate.gregorian.month - 1,
-		litDate.gregorian.day
-	)
+	const nowMs = actualNow.getTime()
 
 	return feasts
 		.filter((feast) => {
-			const feastDate = new Date(
-				feast.gregorianDate.year,
-				feast.gregorianDate.month - 1,
-				feast.gregorianDate.day
-			)
-			return feastDate > litGreg // strictly after today
+			if (filters) {
+				return filters.includes(feast.type)
+			} else {
+				return true
+			}
+		})
+		.filter((feast) => {
+			// Feast is "upcoming" if vespers hasn't started yet
+			const vespersMs = new Date(
+				feast.civilVespersStart.year,
+				feast.civilVespersStart.month - 1,
+				feast.civilVespersStart.day,
+				feast.civilVespersStart.hour,
+			).getTime()
+			return vespersMs > nowMs
+		})
+		.sort((a, b) => {
+			const aMs = new Date(
+				a.civilVespersStart.year,
+				a.civilVespersStart.month - 1,
+				a.civilVespersStart.day,
+				a.civilVespersStart.hour,
+			).getTime()
+			const bMs = new Date(
+				b.civilVespersStart.year,
+				b.civilVespersStart.month - 1,
+				b.civilVespersStart.day,
+				b.civilVespersStart.hour,
+			).getTime()
+			return aMs - bMs
 		})
 		.slice(0, count)
 }
