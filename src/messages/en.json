@@ -207,7 +207,10 @@
         "major": {
           "label": "Major Feast Days",
           "cta": "View Liturgical Calendar"
-        }
+        },
+        "weekLabel": "Current Week",
+        "next": "Next Feast",
+        "fastDay": "Fast Day"
       },
       "services": {
         "label": "Weekly Cycle",
