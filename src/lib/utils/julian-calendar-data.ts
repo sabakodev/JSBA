@@ -89,7 +89,7 @@ export const FIXED_FEASTS: FeastDay[] = [
 	{
 		name: "St. Basil the Great",
 		nameEl: "Άγιος Βασίλειος ο Μέγας",
-		nameId: "Janasuci Basilius Agung",
+		nameId: "Js. Basilius Agung",
 		julianMonth: 1,
 		julianDay: 1,
 		type: "major",
@@ -97,7 +97,7 @@ export const FIXED_FEASTS: FeastDay[] = [
 	{
 		name: "St. John Chrysostom",
 		nameEl: "Άγιος Ιωάννης ο Χρυσόστομος",
-		nameId: "Janasuci Yohanes Krisostomus",
+		nameId: "Js. Yohanes Krisostomus",
 		julianMonth: 11,
 		julianDay: 13,
 		type: "major",
@@ -105,7 +105,7 @@ export const FIXED_FEASTS: FeastDay[] = [
 	{
 		name: "St. Nicholas the Wonderworker",
 		nameEl: "Άγιος Νικόλαος",
-		nameId: "Janasuci Nikolaus Sang Pekerja Mukjizat",
+		nameId: "Js. Nikolaus Sang Pekerja Mukjizat",
 		julianMonth: 12,
 		julianDay: 6,
 		type: "major",
@@ -113,7 +113,7 @@ export const FIXED_FEASTS: FeastDay[] = [
 	{
 		name: "Ss. Peter and Paul",
 		nameEl: "Άγιοι Πέτρος και Παύλος",
-		nameId: "Janasuci Petrus dan Paulus",
+		nameId: "Js. Petrus dan Paulus",
 		julianMonth: 6,
 		julianDay: 29,
 		type: "major",
@@ -228,6 +228,141 @@ export const MOVEABLE_FEASTS: MoveableFeast[] = [
 		daysFromPascha: 57,
 		type: "fast",
 	},
+
+	// Add to MOVEABLE_FEASTS:
+	{
+		name: "Sunday of the Publican & Pharisee",
+		nameEl: "Κυριακή Τελώνου και Φαρισαίου",
+		nameId: "Minggu Orang Farisi dan Pemungut Cukai",
+		daysFromPascha: -70,
+		type: "minor"
+	},
+	{
+		name: "Sunday of the Prodigal Son",
+		nameEl: "Κυριακή του Ασώτου",
+		nameId: "Minggu Anak Hilang yang Bertobat",
+		daysFromPascha: -63,
+		type: "minor"
+	},
+	{
+		name: "Saturday of the Souls (1st)",
+		nameEl: "Ψυχοσάββατο Α'",
+		nameId: "Sabtu Para Jiwa (ke-1)",
+		daysFromPascha: -57,
+		type: "minor"
+	},
+	{
+		name: "Meatfare Sunday (Last Judgment)",
+		nameEl: "Κυριακή Απόκρεω",
+		nameId: "Minggu Penghakiman Akhir",
+		daysFromPascha: -56,
+		type: "minor"
+	},
+	{
+		name: "Forgiveness Sunday (Cheesefare)",
+		nameEl: "Κυριακή τής Τυροφάγου",
+		nameId: "Minggu Pengampunan Dosa",
+		daysFromPascha: -49,
+		type: "minor"
+	},
+	{
+		name: "Sunday of Orthodoxy",
+		nameEl: "Κυριακή τής Ορθοδοξίας",
+		nameId: "Minggu Kemenangan Orthodoxia",
+		daysFromPascha: -42,
+		type: "major"
+	},
+	{
+		name: "Saturday of the Souls (2nd)",
+		nameEl: "Ψυχοσάββατο Β'",
+		nameId: "Sabtu Para Jiwa (ke-2)",
+		daysFromPascha: -36,
+		type: "minor"
+	},
+	{
+		name: "Sunday of Gregory Palamas",
+		nameEl: "Κυριακή Γρηγορίου Παλαμά",
+		nameId: "Minggu Gregorius Palamas",
+		daysFromPascha: -35,
+		type: "major"
+	},
+	{
+		name: "Saturday of the Souls (3rd)",
+		nameEl: "Ψυχοσάββατο Γ'",
+		nameId: "Sabtu Para Jiwa (ke-3)",
+		daysFromPascha: -29,
+		type: "minor"
+	},
+	{
+		name: "Sunday of the Holy Cross",
+		nameEl: "Κυριακή τής Σταυροπροσκυνήσεως",
+		nameId: "Minggu Pemuliaan Salib Kudus",
+		daysFromPascha: -28,
+		type: "major"
+	},
+	{
+		name: "Saturday of the Souls (4th)",
+		nameEl: "Ψυχοσάββατο Δ'",
+		nameId: "Sabtu Para Jiwa (ke-4)",
+		daysFromPascha: -22,
+		type: "minor"
+	},
+	{
+		name: "Sunday of John Climacus",
+		nameEl: "Κυριακή Ιωάννου τής Κλίμακος",
+		nameId: "Minggu Yohanes Klimakus",
+		daysFromPascha: -21,
+		type: "major"
+	},
+	{
+		name: "Sunday of Mary of Egypt",
+		nameEl: "Κυριακή Μαρίας τής Αιγυπτίας",
+		nameId: "Minggu Maria dari Mesir",
+		daysFromPascha: -14,
+		type: "major"
+	},
+	{
+		name: "Lazarus Saturday",
+		nameEl: "Σάββατο τού Λαζάρου",
+		nameId: "Sabtu Lazarus",
+		daysFromPascha: -8,
+		type: "major"
+	},
+	{
+		name: "Holy Monday",
+		nameEl: "Μεγάλη Δευτέρα",
+		nameId: "Senin Kudus",
+		daysFromPascha: -6,
+		type: "major"
+	},
+	{
+		name: "Holy Tuesday",
+		nameEl: "Μεγάλη Τρίτη",
+		nameId: "Selasa Kudus",
+		daysFromPascha: -5,
+		type: "major"
+	},
+	{
+		name: "Holy Wednesday (Anointing)",
+		nameEl: "Μεγάλη Τετάρτη",
+		nameId: "Rabu Kudus (Pengurapan Minyak Kudus)",
+		daysFromPascha: -4,
+		type: "major"
+	},
+	{
+		name: "Holy Thursday",
+		nameEl: "Μεγάλη Πέμπτη",
+		nameId: "Kamis Kudus (Pembasuhan kaki ke-12 Murid)",
+		daysFromPascha: -3,
+		type: "great"
+	},
+	{
+		name: "Thomas Sunday",
+		nameEl: "Κυριακή τού Θωμά",
+		nameId: "Minggu Thomas",
+		daysFromPascha: 7,
+		type: "major"
+	},
 ]
 
 interface PaschalWeek {
@@ -302,6 +437,8 @@ export const LENT_WEEKS: LentWeek[] = [
 		nameId: "Minggu ke-5 Prapaskah",
 		desc: "Commemoration of St. Mary of Egypt.",
 	},
+	// Also fix in LENT_WEEKS — update the 4th week:
+	// name: "4th Week of Great Lent" → desc should be "St. John Climacus. The Ladder of Divine Ascent."
 	{
 		name: "4th Week of Great Lent",
 		nameEl: "Δ' Εβδομάδα Νηστειών",
