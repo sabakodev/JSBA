@@ -12,6 +12,10 @@ import { FIXED_FEASTS, LENT_WEEKS, MOVEABLE_FEASTS, PASCHAL_WEEKS } from "./juli
 
 const JULIAN_OFFSET = 13 // Valid 2000–2099
 
+export function convertToDate(date: { year: number, month: number, day: number }) {
+	return new Date(date.year, date.month, date.day)
+}
+
 export function julianToGregorian(year: number, month: number, day: number) {
 	const date = new Date(year, month - 1, day + JULIAN_OFFSET)
 	return {
@@ -141,10 +145,10 @@ export function addDaysToDate(year: number, month: number, day: number, days: nu
 }
 
 function julianDatesEqual(
-	a: { month: number; day: number },
-	b: { month: number; day: number }
+	a: { year: number; month: number; day: number },
+	b: { year: number; month: number; day: number }
 ): boolean {
-	return a.month === b.month && a.day === b.day
+	return a.year === b.year && a.month === b.month && a.day === b.day
 }
 
 // ──────────────────────────────────────
@@ -156,7 +160,7 @@ export interface ResolvedFeast {
 	nameEl: string
 	nameId: string
 	type: "great" | "major" | "minor" | "fast"
-	julianDate: { month: number; day: number }
+	julianDate: { year: number, month: number; day: number }
 	gregorianDate: { year: number; month: number; day: number }
 	fasting?: boolean
 	source: "fixed" | "moveable"
@@ -180,7 +184,7 @@ export function resolveMovableFeasts(year: number): ResolvedFeast[] {
 			nameEl: feast.nameEl,
 			nameId: feast.nameId,
 			type: feast.type,
-			julianDate: { month: julian.month, day: julian.day },
+			julianDate: { year: julian.year, month: julian.month, day: julian.day },
 			gregorianDate: greg,
 			source: "moveable" as const,
 		}
@@ -199,7 +203,7 @@ export function resolveFixedFeasts(year: number): ResolvedFeast[] {
 			nameEl: feast.nameEl,
 			nameId: feast.nameId,
 			type: feast.type,
-			julianDate: { month: feast.julianMonth, day: feast.julianDay },
+			julianDate: { year: year, month: feast.julianMonth, day: feast.julianDay },
 			gregorianDate: greg,
 			fasting: feast.fasting,
 			source: "fixed" as const,
@@ -243,8 +247,8 @@ export function getTodaysFeasts(now?: Date): ResolvedFeast[] {
 
 	return feasts.filter((feast) =>
 		julianDatesEqual(
-			{ month: feast.julianDate.month, day: feast.julianDate.day },
-			{ month: litDate.julian.month, day: litDate.julian.day }
+			{ year: feast.julianDate.year, month: feast.julianDate.month, day: feast.julianDate.day },
+			{ year: litDate.julian.year, month: litDate.julian.month, day: litDate.julian.day }
 		)
 	)
 }
@@ -422,8 +426,10 @@ export function getCurrentLiturgicalWeek(now?: Date): LiturgicalWeek {
 
 		// Palm Week (week 2 = 6th week of Lent) — Saturday Lazarus: fish
 		if (weeksBeforePascha === 2) {
-			if (dayOfWeek === 6) return "fish" // Lazarus Saturday
-			if (dayOfWeek === 0) return "fish" // Palm Sunday
+			if (dayOfWeek === 6) return "fish"    // Lazarus Saturday
+			if (dayOfWeek === 0) return "fish"    // Palm Sunday
+			if (dayOfWeek === 0 || dayOfWeek === 6) return "oil-wine"
+			return "xerophagy"                     // ← add explicit fallthrough
 		}
 
 		// Regular Lent weeks
@@ -561,22 +567,20 @@ export function getCurrentLiturgicalWeek(now?: Date): LiturgicalWeek {
 
 	const allSaintsMonday = new Date(referencePascha)
 	allSaintsMonday.setDate(allSaintsMonday.getDate() + 57)
-	const apostlesFastEnd = new Date(litDate.gregorian.year, 6, 11)
+	const apostlesEnd = julianToGregorian(year, 6, 28)
+	const apostlesFastEnd = new Date(apostlesEnd.year, apostlesEnd.month - 1, apostlesEnd.day)
 	const isApostlesFast = litToday >= allSaintsMonday && litToday <= apostlesFastEnd
 
-	const dormitionFastStart = new Date(litDate.gregorian.year, 7, 14)
-	const dormitionFastEnd = new Date(litDate.gregorian.year, 7, 27)
+	const dormitionFastStart = convertToDate(julianToGregorian(year, 8, 1))  // Aug 1 Julian
+	const dormitionFastEnd = convertToDate(julianToGregorian(year, 8, 14))   // Aug 14 Julian (Dormition itself)
 	const isDormitionFast = litToday >= dormitionFastStart && litToday <= dormitionFastEnd
 
-	const nativityFastStart = new Date(litDate.gregorian.year, 10, 28)
-	const nativityFastEnd = new Date(
-		litDate.gregorian.month === 1
-			? litDate.gregorian.year
-			: litDate.gregorian.year + 1,
-		0,
-		6
-	)
-	const isNativityFast = litToday >= nativityFastStart || litToday <= nativityFastEnd
+	const natFastStartGreg = julianToGregorian(year, 11, 15)
+	const natFastEndGreg = julianToGregorian(year, 12, 24) // Christmas Eve Julian
+
+	const natFastStartDate = new Date(natFastStartGreg.year, natFastStartGreg.month - 1, natFastStartGreg.day)
+	const natFastEndDate = new Date(natFastEndGreg.year, natFastEndGreg.month - 1, natFastEndGreg.day)
+	const isNativityFast = litToday >= natFastStartDate && litToday <= natFastEndDate
 
 	const isSpecialFast = isApostlesFast || isDormitionFast || isNativityFast
 	const isRegularFastDay = dayOfWeek === 3 || dayOfWeek === 5
@@ -593,7 +597,8 @@ export function getCurrentLiturgicalWeek(now?: Date): LiturgicalWeek {
 			return "xerophagy"
 		}
 		if (isNativityFast) {
-			const dec20Greg = new Date(litDate.gregorian.year, 0, 2) // Jan 2 Greg ≈ Dec 20 Julian
+			const dec20Greg = convertToDate(julianToGregorian(year, 12, 20))
+
 			// Stricter after Dec 20 Julian (≈ Jan 2 Gregorian)
 			const isStrictPeriod = litToday >= dec20Greg
 			if (isStrictPeriod) {
