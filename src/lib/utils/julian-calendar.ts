@@ -6,48 +6,100 @@
 
 import { FIXED_FEASTS, LENT_WEEKS, MOVEABLE_FEASTS, PASCHAL_WEEKS } from "./julian-calendar-data"
 
-// Julian to Gregorian offset (valid 2000-2099)
-const JULIAN_OFFSET = 13
-
 // ──────────────────────────────────────
-// Pascha (Easter) Calculation
-// Using the Meeus Julian algorithm
+// Core: Calendar Conversion
 // ──────────────────────────────────────
-export function calculatePascha(year: number) {
-	// Step 1: Compute Pascha in Julian calendar
-	const a = year % 4
-	const b = year % 7
-	const c = year % 19
-	const d = (19 * c + 15) % 30
-	const e = (2 * a + 4 * b - d + 34) % 7
-	const month = Math.floor((d + e + 114) / 31) // 3 = March, 4 = April (Julian)
-	const day = ((d + e + 114) % 31) + 1
 
-	// Julian date of Pascha
-	const julianDate = { month, day }
+const JULIAN_OFFSET = 13 // Valid 2000–2099
 
-	// Step 2: Convert Julian to Gregorian
-	const gregorianDate = julianToGregorian(year, month, day)
-
-	return {
-		julian: julianDate,
-		gregorian: gregorianDate,
-		year,
-	}
-}
-
-// ──────────────────────────────────────
-// Conversion Helpers
-// ──────────────────────────────────────
 export function julianToGregorian(year: number, month: number, day: number) {
-	const gregorianDay = day + JULIAN_OFFSET
-	const date = new Date(year, month - 1, gregorianDay)
+	const date = new Date(year, month - 1, day + JULIAN_OFFSET)
 	return {
 		year: date.getFullYear(),
 		month: date.getMonth() + 1,
 		day: date.getDate(),
 	}
 }
+
+export function gregorianToJulian(year: number, month: number, day: number) {
+	const date = new Date(year, month - 1, day - JULIAN_OFFSET)
+	return {
+		year: date.getFullYear(),
+		month: date.getMonth() + 1,
+		day: date.getDate(),
+	}
+}
+
+// ──────────────────────────────────────
+// Core: Liturgical Date (Sunset Boundary)
+// ──────────────────────────────────────
+
+export interface LiturgicalDate {
+	// The civil datetime used as input
+	civil: { year: number; month: number; day: number; hour: number }
+	// After sunset shift, the Gregorian liturgical date
+	gregorian: { year: number; month: number; day: number }
+	// Converted to Julian
+	julian: { year: number; month: number; day: number }
+	// Day of week of the LITURGICAL day (0=Sun ... 6=Sat)
+	dayOfWeek: number
+	// Whether we've crossed sunset
+	isAfterSunset: boolean
+}
+
+export function getLiturgicalDate(now: Date = new Date()): LiturgicalDate {
+	const hour = now.getHours()
+	const isAfterSunset = hour >= 18
+
+	// If after 18:00, liturgically we're in the next day
+	const liturgicalGregorian = new Date(now)
+	if (isAfterSunset) {
+		liturgicalGregorian.setDate(liturgicalGregorian.getDate() + 1)
+	}
+
+	const gregYear = liturgicalGregorian.getFullYear()
+	const gregMonth = liturgicalGregorian.getMonth() + 1
+	const gregDay = liturgicalGregorian.getDate()
+	const dayOfWeek = liturgicalGregorian.getDay()
+
+	const julian = gregorianToJulian(gregYear, gregMonth, gregDay)
+
+	return {
+		civil: {
+			year: now.getFullYear(),
+			month: now.getMonth() + 1,
+			day: now.getDate(),
+			hour,
+		},
+		gregorian: { year: gregYear, month: gregMonth, day: gregDay },
+		julian,
+		dayOfWeek,
+		isAfterSunset,
+	}
+}
+
+// ──────────────────────────────────────
+// Core: Pascha Calculation (unchanged)
+// ──────────────────────────────────────
+
+export function calculatePascha(year: number) {
+	const a = year % 4
+	const b = year % 7
+	const c = year % 19
+	const d = (19 * c + 15) % 30
+	const e = (2 * a + 4 * b - d + 34) % 7
+	const month = Math.floor((d + e + 114) / 31)
+	const day = ((d + e + 114) % 31) + 1
+
+	const julianDate = { month, day }
+	const gregorianDate = julianToGregorian(year, month, day)
+
+	return { julian: julianDate, gregorian: gregorianDate, year }
+}
+
+// ──────────────────────────────────────
+// Helper: Date arithmetic
+// ──────────────────────────────────────
 
 export function addDaysToDate(year: number, month: number, day: number, days: number) {
 	const date = new Date(year, month - 1, day)
@@ -59,79 +111,130 @@ export function addDaysToDate(year: number, month: number, day: number, days: nu
 	}
 }
 
+function julianDatesEqual(
+	a: { month: number; day: number },
+	b: { month: number; day: number }
+): boolean {
+	return a.month === b.month && a.day === b.day
+}
+
 // ──────────────────────────────────────
-// Get All Feasts for a Given Year
+// Feast Resolution: All in Julian Space
 // ──────────────────────────────────────
-export interface CalendarFeast {
+
+export interface ResolvedFeast {
 	name: string
 	nameEl: string
 	nameId: string
 	type: "great" | "major" | "minor" | "fast"
-	julianDate?: { month: number; day: number }
+	julianDate: { month: number; day: number }
 	gregorianDate: { year: number; month: number; day: number }
 	fasting?: boolean
+	source: "fixed" | "moveable"
 }
 
-export function getAllFeasts(year: number): CalendarFeast[] {
-	const feasts: CalendarFeast[] = []
+/**
+ * Resolve all moveable feasts for a given year into Julian dates.
+ * Pascha is computed, then each offset is applied in Gregorian,
+ * then converted back to Julian for canonical comparison.
+ */
+export function resolveMovableFeasts(year: number): ResolvedFeast[] {
+	const pascha = calculatePascha(year)
+	const pg = pascha.gregorian
 
-	// 1. Fixed feasts
-	for (const feast of FIXED_FEASTS) {
-		const gregorian = julianToGregorian(year, feast.julianMonth, feast.julianDay)
-		feasts.push({
+	return MOVEABLE_FEASTS.map((feast) => {
+		const greg = addDaysToDate(pg.year, pg.month, pg.day, feast.daysFromPascha)
+		const julian = gregorianToJulian(greg.year, greg.month, greg.day)
+
+		return {
+			name: feast.name,
+			nameEl: feast.nameEl,
+			nameId: feast.nameId,
+			type: feast.type,
+			julianDate: { month: julian.month, day: julian.day },
+			gregorianDate: greg,
+			source: "moveable" as const,
+		}
+	})
+}
+
+/**
+ * Resolve all fixed feasts for a given year into both calendars.
+ */
+export function resolveFixedFeasts(year: number): ResolvedFeast[] {
+	return FIXED_FEASTS.map((feast) => {
+		const greg = julianToGregorian(year, feast.julianMonth, feast.julianDay)
+
+		return {
 			name: feast.name,
 			nameEl: feast.nameEl,
 			nameId: feast.nameId,
 			type: feast.type,
 			julianDate: { month: feast.julianMonth, day: feast.julianDay },
-			gregorianDate: gregorian,
+			gregorianDate: greg,
 			fasting: feast.fasting,
-		})
-	}
-
-	// 2. Moveable feasts (based on Pascha)
-	const pascha = calculatePascha(year)
-	const paschaGregorian = pascha.gregorian
-
-	for (const feast of MOVEABLE_FEASTS) {
-		const gregorian = addDaysToDate(
-			paschaGregorian.year,
-			paschaGregorian.month,
-			paschaGregorian.day,
-			feast.daysFromPascha
-		)
-		feasts.push({
-			name: feast.name,
-			nameEl: feast.nameEl,
-			nameId: feast.nameId,
-			type: feast.type,
-			gregorianDate: gregorian,
-			julianDate: {
-				month: pascha.julian.month,
-				day: pascha.julian.day,
-			}
-		})
-	}
-
-	// Sort by Gregorian date
-	feasts.sort((a, b) => {
-		const dateA = new Date(a.gregorianDate.year, a.gregorianDate.month - 1, a.gregorianDate.day)
-		const dateB = new Date(b.gregorianDate.year, b.gregorianDate.month - 1, b.gregorianDate.day)
-		return dateA.getTime() - dateB.getTime()
+			source: "fixed" as const,
+		}
 	})
+}
 
-	return feasts
+/**
+ * Get ALL feasts for a year, sorted by Gregorian date.
+ */
+export function getAllFeasts(year: number): ResolvedFeast[] {
+	const fixed = resolveFixedFeasts(year)
+	const moveable = resolveMovableFeasts(year)
+
+	return [...fixed, ...moveable].sort((a, b) => {
+		const dA = new Date(a.gregorianDate.year, a.gregorianDate.month - 1, a.gregorianDate.day)
+		const dB = new Date(b.gregorianDate.year, b.gregorianDate.month - 1, b.gregorianDate.day)
+		return dA.getTime() - dB.getTime()
+	})
 }
 
 // ──────────────────────────────────────
-// Helper: Get upcoming feasts
+// Today's Feasts (plural — handles collisions)
 // ──────────────────────────────────────
-export function getUpcomingFeasts(count: number = 5): CalendarFeast[] {
-	const today = new Date()
-	const year = today.getFullYear()
 
-	// Get feasts for this year and next (in case we're near year end)
+/**
+ * Returns ALL feasts for the current liturgical day.
+ * Comparison happens in Julian space.
+ * After 18:00, returns tomorrow's feasts.
+ */
+export function getTodaysFeasts(now?: Date): ResolvedFeast[] {
+	const litDate = getLiturgicalDate(now)
+	const year = litDate.gregorian.year
+
+	// Get feasts for this year and adjacent years (edge cases near Jan/Dec)
+	const feasts = [
+		...getAllFeasts(year - 1),
+		...getAllFeasts(year),
+		...getAllFeasts(year + 1),
+	]
+
+	return feasts.filter((feast) =>
+		julianDatesEqual(
+			{ month: feast.julianDate.month, day: feast.julianDate.day },
+			{ month: litDate.julian.month, day: litDate.julian.day }
+		)
+	)
+}
+
+// ──────────────────────────────────────
+// Upcoming Feasts
+// ──────────────────────────────────────
+
+export function getUpcomingFeasts(count: number = 5, now?: Date): ResolvedFeast[] {
+	const litDate = getLiturgicalDate(now)
+	const year = litDate.gregorian.year
+
 	const feasts = [...getAllFeasts(year), ...getAllFeasts(year + 1)]
+
+	const litGreg = new Date(
+		litDate.gregorian.year,
+		litDate.gregorian.month - 1,
+		litDate.gregorian.day
+	)
 
 	return feasts
 		.filter((feast) => {
@@ -140,54 +243,63 @@ export function getUpcomingFeasts(count: number = 5): CalendarFeast[] {
 				feast.gregorianDate.month - 1,
 				feast.gregorianDate.day
 			)
-			return feastDate >= today
+			return feastDate > litGreg // strictly after today
 		})
 		.slice(0, count)
 }
 
 // ──────────────────────────────────────
-// Helper: Get today's feast (if any)
+// Fasting Day Check (sunset-aware)
 // ──────────────────────────────────────
-export function getTodaysFeast(): CalendarFeast | null {
-	const today = new Date()
-	const year = today.getFullYear()
-	const feasts = getAllFeasts(year)
 
-	return (
-		feasts.find(
-			(feast) =>
-				feast.gregorianDate.month === today.getMonth() + 1 &&
-				feast.gregorianDate.day === today.getDate()
-		) || null
-	)
+export function isFastingDay(now?: Date): {
+	fasting: boolean
+	fastingType: LiturgicalWeek["fastingType"]
+	reasons: string[]
+} {
+	const litDate = getLiturgicalDate(now)
+	const dayOfWeek = litDate.dayOfWeek
+	const reasons: string[] = []
+
+	// Check feast-based fasting
+	const todaysFeasts = getTodaysFeasts(now)
+	for (const feast of todaysFeasts) {
+		if (feast.fasting) {
+			reasons.push(feast.name)
+		}
+	}
+
+	// Wednesday and Friday
+	if (dayOfWeek === 3) reasons.push("Wednesday fast (Betrayal of Christ)")
+	if (dayOfWeek === 5) reasons.push("Friday fast (Crucifixion of Christ)")
+
+	// Get liturgical week for fasting type context
+	const week = getCurrentLiturgicalWeek(now)
+
+	if (reasons.length > 0 || week.fasting) {
+		return {
+			fasting: true,
+			fastingType: week.fastingType,
+			reasons: reasons.length > 0 ? reasons : [week.description],
+		}
+	}
+
+	return { fasting: false, fastingType: "none", reasons: [] }
 }
 
 // ──────────────────────────────────────
-// Helper: Check if today is a fasting day
+// Format date for display
 // ──────────────────────────────────────
-export function isFastingDay(): { fasting: boolean; reason?: string } {
-	const today = new Date()
-	const dayOfWeek = today.getDay()
 
-	// Wednesday and Friday are always fasting days
-	if (dayOfWeek === 3) return { fasting: true, reason: "Wednesday fast (Betrayal of Christ)" }
-	if (dayOfWeek === 5) return { fasting: true, reason: "Friday fast (Crucifixion of Christ)" }
-
-	// Check if within a fasting period
-	const todaysFeast = getTodaysFeast()
-	if (todaysFeast?.fasting) return { fasting: true, reason: todaysFeast.name }
-
-	return { fasting: false }
-}
-
-// ──────────────────────────────────────
-// Helper: Format date for display
-// ──────────────────────────────────────
 export function formatFeastDate(
 	gregorianDate: { year: number; month: number; day: number },
 	locale: string = "en"
 ): string {
-	const date = new Date(gregorianDate.year, gregorianDate.month - 1, gregorianDate.day)
+	const date = new Date(
+		gregorianDate.year,
+		gregorianDate.month - 1,
+		gregorianDate.day
+	)
 
 	const localeMap: Record<string, string> = {
 		en: "en-US",
@@ -204,7 +316,7 @@ export function formatFeastDate(
 }
 
 // ──────────────────────────────────────
-// Helper: Get current Liturgical Week
+// Current Liturgical Week (sunset-aware)
 // ──────────────────────────────────────
 
 interface LiturgicalWeek {
@@ -224,9 +336,11 @@ interface LiturgicalWeek {
 	description: string
 }
 
-export function getCurrentLiturgicalWeek(): LiturgicalWeek {
-	const today = new Date()
-	const year = today.getFullYear()
+export function getCurrentLiturgicalWeek(now?: Date): LiturgicalWeek {
+	const litDate = getLiturgicalDate(now)
+	const dayOfWeek = litDate.dayOfWeek
+
+	const year = litDate.gregorian.year
 
 	const currentPascha = calculatePascha(year)
 	const pascha = new Date(
@@ -242,53 +356,58 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 		prevPaschaData.gregorian.day
 	)
 
-	const daysUntilPascha = Math.floor((pascha.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
+	// Use liturgical Gregorian date for all calculations
+	const litToday = new Date(
+		litDate.gregorian.year,
+		litDate.gregorian.month - 1,
+		litDate.gregorian.day
+	)
 
+	const daysUntilPascha = Math.floor(
+		(pascha.getTime() - litToday.getTime()) / (1000 * 60 * 60 * 24)
+	)
 	const isPrePaschal = daysUntilPascha > 0 && daysUntilPascha <= 70
 
-	const referencePascha = today >= pascha ? pascha : prevPascha
-	const diffMs = today.getTime() - referencePascha.getTime()
+	const referencePascha = litToday >= pascha ? pascha : prevPascha
+	const diffMs = litToday.getTime() - referencePascha.getTime()
 	const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
 	const weeksSincePascha = Math.floor(diffDays / 7)
 
 	const tone = ((weeksSincePascha % 8) + 8) % 8 || 8
-	const dayOfWeek = today.getDay() // 0=Sun 1=Mon ... 6=Sat
 
-	// ── Helper: Lenten fasting type by day ──
+	// ── Lenten fasting type by day ──
 	function getLentFastingType(weeksBeforePascha: number): LiturgicalWeek["fastingType"] {
-		// Holy Week
 		if (weeksBeforePascha === 1) {
-			if (dayOfWeek === 6) return "strict"      // Holy Saturday — strict
-			if (dayOfWeek === 5) return "strict"      // Holy Friday — no food ideally
-			if (dayOfWeek === 4) return "strict"      // Holy Thursday — some allow oil/wine
-			return "strict"                            // Mon-Wed of Holy Week
+			// Holy Week — strict throughout
+			if (dayOfWeek === 6) return "strict"
+			if (dayOfWeek === 5) return "strict"
+			if (dayOfWeek === 4) return "strict"
+			return "strict"
 		}
 
-		// Clean Week (1st week) — strictest
 		if (weeksBeforePascha === 7) {
-			if (dayOfWeek === 0) return "oil-wine"    // Sunday — relaxed
-			if (dayOfWeek === 6) return "oil-wine"    // Saturday — relaxed
-			return "strict"                            // Mon-Fri: bread & water or xerophagy
+			// Clean Week
+			if (dayOfWeek === 0 || dayOfWeek === 6) return "oil-wine"
+			return "strict"
 		}
 
-		// Regular Great Lent weeks (2-6)
-		if (dayOfWeek === 0) return "oil-wine"         // Sundays — oil & wine allowed
-		if (dayOfWeek === 6) return "oil-wine"         // Saturdays — oil & wine allowed
-		if (dayOfWeek === 1) return "xerophagy"        // Monday — dry eating
-		if (dayOfWeek === 2) return "xerophagy"        // Tuesday — dry eating
-		if (dayOfWeek === 3) return "xerophagy"        // Wednesday — dry eating
-		if (dayOfWeek === 4) return "xerophagy"        // Thursday — dry eating
-		if (dayOfWeek === 5) return "xerophagy"        // Friday — dry eating
+		// Palm Week (week 2 = 6th week of Lent) — Saturday Lazarus: fish
+		if (weeksBeforePascha === 2) {
+			if (dayOfWeek === 6) return "fish" // Lazarus Saturday
+			if (dayOfWeek === 0) return "fish" // Palm Sunday
+		}
+
+		// Regular Lent weeks
+		if (dayOfWeek === 0 || dayOfWeek === 6) return "oil-wine"
 		return "xerophagy"
 	}
 
-	// ── Helper: Regular fast day type ──
 	function getRegularFastType(): LiturgicalWeek["fastingType"] {
-		if (dayOfWeek === 3 || dayOfWeek === 5) return "regular" // Wed & Fri
+		if (dayOfWeek === 3 || dayOfWeek === 5) return "regular"
 		return "none"
 	}
 
-	// ── Pre-Paschal periods ──
+	// ── Pre-Paschal ──
 	if (isPrePaschal) {
 		const weeksBeforePascha = Math.ceil(daysUntilPascha / 7)
 
@@ -324,8 +443,9 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 				nameId: "Minggu Pengampunan / Pekan Keju",
 				tone,
 				fasting: true,
-				fastingType: "dairy", // No meat, but dairy & eggs allowed all week
-				description: "Last week before Great Lent. Forgiveness Vespers. No meat, dairy permitted.",
+				fastingType: "dairy",
+				description:
+					"Last week before Great Lent. Forgiveness Vespers. No meat, dairy permitted.",
 			}
 		}
 
@@ -360,13 +480,13 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 				nameId: "Pekan Pemungut Cukai dan Farisi",
 				tone,
 				fasting: false,
-				fastingType: "none", // Fast-free week
+				fastingType: "none",
 				description: "Beginning of the Triodion. Fast-free week.",
 			}
 		}
 	}
 
-	// ── Post-Pascha periods ──
+	// ── Post-Pascha ──
 
 	if (weeksSincePascha === 0) {
 		return {
@@ -376,7 +496,8 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 			tone: 1,
 			fasting: false,
 			fastingType: "none",
-			description: "The radiant celebration of Christ's Resurrection. Fast-free week.",
+			description:
+				"The radiant celebration of Christ's Resurrection. Fast-free week.",
 		}
 	}
 
@@ -400,8 +521,9 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 			nameId: "Pekan Pentakosta",
 			tone: 8,
 			fasting: false,
-			fastingType: "none", // Fast-free week
-			description: "Descent of the Holy Spirit. Birthday of the Church. Fast-free week.",
+			fastingType: "none",
+			description:
+				"Descent of the Holy Spirit. Birthday of the Church. Fast-free week.",
 		}
 	}
 
@@ -410,59 +532,49 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 
 	const allSaintsMonday = new Date(referencePascha)
 	allSaintsMonday.setDate(allSaintsMonday.getDate() + 57)
-	const apostlesFastEnd = new Date(today.getFullYear(), 6, 11)
-	const isApostlesFast = today >= allSaintsMonday && today <= apostlesFastEnd
+	const apostlesFastEnd = new Date(litDate.gregorian.year, 6, 11)
+	const isApostlesFast = litToday >= allSaintsMonday && litToday <= apostlesFastEnd
 
-	const dormitionFastStart = new Date(today.getFullYear(), 7, 14)
-	const dormitionFastEnd = new Date(today.getFullYear(), 7, 27)
-	const isDormitionFast = today >= dormitionFastStart && today <= dormitionFastEnd
+	const dormitionFastStart = new Date(litDate.gregorian.year, 7, 14)
+	const dormitionFastEnd = new Date(litDate.gregorian.year, 7, 27)
+	const isDormitionFast = litToday >= dormitionFastStart && litToday <= dormitionFastEnd
 
-	const nativityFastStart = new Date(today.getFullYear(), 10, 28)
+	const nativityFastStart = new Date(litDate.gregorian.year, 10, 28)
 	const nativityFastEnd = new Date(
-		today.getMonth() === 0 ? today.getFullYear() : today.getFullYear() + 1,
-		0, 6
+		litDate.gregorian.month === 1
+			? litDate.gregorian.year
+			: litDate.gregorian.year + 1,
+		0,
+		6
 	)
-	const isNativityFast = today >= nativityFastStart && today <= nativityFastEnd
+	const isNativityFast = litToday >= nativityFastStart || litToday <= nativityFastEnd
 
 	const isSpecialFast = isApostlesFast || isDormitionFast || isNativityFast
 	const isRegularFastDay = dayOfWeek === 3 || dayOfWeek === 5
 	const fasting = isSpecialFast || isRegularFastDay
 
-	// Determine fasting type for special fast periods
 	function getSpecialFastType(): LiturgicalWeek["fastingType"] {
 		if (isApostlesFast) {
-			// Apostles' Fast — relatively mild
-			if (dayOfWeek === 0) return "fish"           // Sunday — fish allowed
-			if (dayOfWeek === 6) return "fish"           // Saturday — fish allowed
-			if (dayOfWeek === 2) return "oil-wine"       // Tuesday — oil & wine
-			if (dayOfWeek === 4) return "oil-wine"       // Thursday — oil & wine
-			return "xerophagy"                           // Mon, Wed, Fri — strict
+			if (dayOfWeek === 0 || dayOfWeek === 6) return "fish"
+			if (dayOfWeek === 2 || dayOfWeek === 4) return "oil-wine"
+			return "xerophagy"
 		}
-
 		if (isDormitionFast) {
-			// Dormition Fast — stricter, similar to Great Lent
-			if (dayOfWeek === 0) return "oil-wine"       // Sunday
-			if (dayOfWeek === 6) return "oil-wine"       // Saturday
-			return "xerophagy"                           // Weekdays — dry eating
+			if (dayOfWeek === 0 || dayOfWeek === 6) return "oil-wine"
+			return "xerophagy"
 		}
-
 		if (isNativityFast) {
-			// Nativity Fast — starts mild, gets stricter
-			const dec20 = new Date(today.getFullYear(), 11, 20) // Dec 20 — stricter period
-			if (today >= dec20) {
-				// Dec 20 - Jan 6: strict like Great Lent
-				if (dayOfWeek === 0) return "oil-wine"
-				if (dayOfWeek === 6) return "oil-wine"
+			const dec20Greg = new Date(litDate.gregorian.year, 0, 2) // Jan 2 Greg ≈ Dec 20 Julian
+			// Stricter after Dec 20 Julian (≈ Jan 2 Gregorian)
+			const isStrictPeriod = litToday >= dec20Greg
+			if (isStrictPeriod) {
+				if (dayOfWeek === 0 || dayOfWeek === 6) return "oil-wine"
 				return "xerophagy"
 			}
-			// Nov 28 - Dec 19: milder
-			if (dayOfWeek === 0) return "fish"
-			if (dayOfWeek === 6) return "fish"
-			if (dayOfWeek === 2) return "fish"           // Tue — fish
-			if (dayOfWeek === 4) return "fish"           // Thu — fish
-			return "xerophagy"                           // Mon, Wed, Fri
+			if (dayOfWeek === 0 || dayOfWeek === 6) return "fish"
+			if (dayOfWeek === 2 || dayOfWeek === 4) return "fish"
+			return "xerophagy"
 		}
-
 		return "none"
 	}
 
@@ -487,7 +599,8 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 		tone,
 		fasting,
 		fastingType,
-		description: `Ordinary time. Octoechos Tone ${tone}.${fastNote}${!isSpecialFast ? " Regular fasting on Wednesday and Friday." : ""}`,
+		description: `Ordinary time. Octoechos Tone ${tone}.${fastNote}${!isSpecialFast ? " Regular fasting on Wednesday and Friday." : ""
+			}`,
 	}
 }
 
