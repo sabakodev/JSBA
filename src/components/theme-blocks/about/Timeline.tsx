@@ -7,18 +7,18 @@ export default function Component() {
 	const timeline = [
 		{
 			year: 2020,
-			title: 'Orthodox Community',
-			description: 'A small gathering of families celebrated the acceptance of Orthodox Faith in a humble rented house, planting the seeds of what would become our parish today.',
+			title: t('community.title'),
+			description: t('community.description'),
 		},
 		{
 			year: 2024,
-			title: 'Deacon Timothy Ordained',
-			description: 'A faithful laymen are growing, then the chosen one come ordained as deacon.',
+			title: t('deacon.title'),
+			description: t('deacon.description'),
 		},
 		{
 			year: 2026,
-			title: 'The Great Reformation Project',
-			description: 'Led by the new selected leader & accompanied by the deacon to built what we call "Home".',
+			title: t('reform.title'),
+			description: t('reform.description'),
 		},
 	]
 
