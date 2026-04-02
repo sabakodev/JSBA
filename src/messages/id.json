@@ -1,8 +1,457 @@
 {
-	"Metadata": {
-		"title": "Js. Basilius Agung - Homepage"
-	},
 	"HomePage": {
-		"title": "Hello world!"
+		"hero": {
+			"subtitle": "Selamat Datang di Jalan yang Benar",
+			"heading": "Temukan Kedamaian Hidup dalam Penyangkalan Diri",
+			"cta": {
+				"primary": "Kunjungi Kami",
+				"learn": "Pelajari tentang Orthodoxia"
+			},
+			"scroll": "SCROLL UNTUK MELANJUTKAN"
+		},
+		"title": "Halo dunia!",
+		"about": {
+			"content": "<p>Didirikan dengan berkat Roh Kudus, Js. Basilius Agung lebih dari sekadar paroki; ia adalah rumah rohani tempat tradisi kuno Ritus Bizantin bertemu dengan kerinduan jiwa modern.</p><p>Komunitas kami berakar pada warisan filantropis janasuci pelindung kami, berkomitmen pada keindahan liturgi, pemaknaan teologis, dan pelayanan rendah hati kepada sesama. Di sini, kami berusaha menghidupi Injil secara penuh, melestarikan ajaran para Bapa Gereja sambil mencoba mempraktikan orthopraxia di masa kini.</p>",
+			"title": {
+				"top": "Iman dengan Sejarah",
+				"bottom": "Sepanjang Segala Abad"
+			},
+			"quote": {
+				"content": "Roti yang kau simpan adalah milik orang lapar; jubah yang tersimpan di lemarimu adalah milik orang telanjang.",
+				"saint": "Js. Basilius Agung"
+			},
+			"historyLabel": "Temukan sejarah kami"
+		},
+		"virtues": {
+			"sacramento": {
+				"title": "Jalani Tradisi Sakramen",
+				"description": "Bergabunglah dalam Liturgi Ilahi—pengalaman yang merangsang semua indra, baik suara kidungan, aroma dupa, dan ikon yang melampaui ruang dan waktu."
+			},
+			"community": {
+				"description": "Tetaplah untuk sesi potluck setelah ibadah untuk bertemu dengan jemaat kami. Kami adalah keluarga yang beragam, dipersatukan dalam kasih Kristus.",
+				"title": "Komunitas & Persekutuan"
+			},
+			"struggle": {
+				"description": "Rm. Timothy selalu ada untuk diskusi dan berbincang. Tidak ada pertanyaan yang terlalu kecil atau terlalu rumit dalam perjalanan iman.",
+				"title": "Ajukan Pertanyaanmu"
+			},
+			"title": "Bagaimana Kami Menyambut Anda",
+			"description": "Ortholatria adalah iman yang mengajak \"datang dan lihatlah.\" Baik Anda orang beriman maupun pencari kebenaran, pintu dan hati kami terbuka menerima anda."
+		},
+		"apostolic": {
+			"title": "Suksesi Apostolik",
+			"label": "Dibimbing oleh Tradisi",
+			"description": "Js. Basilius Agung diberkati di bawah Yang Mulia Episkop. Kami bagian dari garis suksesi apostolik yang membentang hingga para Rasul dalam rantai iman yang tak terputus.",
+			"quote": {
+				"content": "Di mana Episkop berada, di sanalah umat berada; sebagaimana di mana Yesus Kristus berada, di sanalah Gereja Katolik.",
+				"saint": "Js. Ignasius dari Antiokhia"
+			},
+			"bishop": {
+				"name": "Yang Mulia Episkop Daniel",
+				"title": "Episkop Nikopolis dan Seluruh Indonesia"
+			}
+		},
+		"gallery": {
+			"title": "Kehidupan di Paroki",
+			"description": "Keindahan ibadah, sukacita komunitas.",
+			"fullLink": "Lihat Galeri Lengkap"
+		},
+		"cta": {
+			"label": "Hubungi Kami"
+		}
+	},
+	"donation": {
+		"label": "Dukung Misi Kami",
+		"description": "Hasil Kebaikan Anda memungkinkan keberlangsungan Pelayanan Ilahi, pemeliharaan bangunan suci kita, dan pemakmuran di komunitas lokal. Setiap pemberian adalah persembahan kepada Tuhan.",
+		"actionButton": "Berikan Persembahan",
+		"taxDisclaimer": "SEMUA DONASI AKAN DIKURANGI PAJAK"
+	},
+	"Metadata": {
+		"home": {
+			"title": "Js. Basilius Agung - Homepage"
+		},
+		"about": {
+			"title": "Js. Basilius Agung - Tentang"
+		},
+		"event": {
+			"title": "Js. Basilius Agung - Kegiatan"
+		},
+		"blog": {
+			"title": "Js. Basilius Agung - Blog"
+		},
+		"why": {
+			"title": "Js. Basilius Agung - Mengapa Ortodoks?"
+		},
+		"index": {
+			"title": "Js. Basilius Agung - Sumber Daya"
+		},
+		"contact": {
+			"title": "Js. Basilius Agung - Hubungi Kami"
+		},
+		"search": "Cari renungan...",
+		"notFound": "Tidak ada tulisan ditemukan."
+	},
+	"global": {
+		"saintName": "Js. Basilius Agung",
+		"legal": {
+			"copyright": "Hak Cipta Dilindungi."
+		},
+		"page": {
+			"privacy": "Kebijakan Privasi",
+			"calendar": "Kalender Liturgi",
+			"council": "Dewan Paroki",
+			"donate": "Donasi",
+			"about": "Tentang",
+			"events": "Kegiatan",
+			"blog": "Blog",
+			"index": "Sumber Daya",
+			"why": "Mengapa Ortodoks"
+		},
+		"generic": {
+			"top": "ATAS",
+			"contact": "Kontak",
+			"search": "Cari sumber daya..."
+		}
+	},
+	"aboutPage": {
+		"mission": {
+			"title": "Tujuan Suci Kami",
+			"content": "Js. Basilius Agung adalah komunitas yang didedikasikan untuk pelestarian tradisi Apostolik. Kami berusaha membangun ruang di mana yang ilahi bertemu dengan yang fana, membimbing setiap jiwa menuju Theosis melalui keindahan Liturgi, kebijaksanaan para Bapa Gereja, dan persekutuan umat beriman.",
+			"mission": {
+				"label": "Misi",
+				"content": "Menyaksikan Injil Kristus melalui kuasa transformatif ibadah dan pelayanan Ortodoks."
+			},
+			"vision": {
+				"content": "Menjadi pembimbing kedamaian dan Kebenaran di kota kami.",
+				"label": "Visi"
+			},
+			"ctaLabel": "Pelajari sejarah kami"
+		},
+		"jurisdiction": {
+			"hierarchLabel": "Hierarki Kami",
+			"bishop": {
+				"name": "Yang Mulia, Uskup Daniel"
+			},
+			"quote": "Gereja bukanlah museum orang-orang suci, melainkan rumah sakit bagi orang-orang berdosa. Kita dipanggil untuk menjadi terang dunia, memantulkan cahaya tak tercipta dari Kristus.",
+			"label": "Yurisdiksi Kanonik",
+			"hierarchScope": "Gereja Ortodoks Indonesia, Ortodoks Sejati, di bawah hierarki Gereja Kristen Ortodoks Sejati Yunani."
+		},
+		"cta": {
+			"label": "Baru mengenal Kami?",
+			"description": "Baik Anda Orang Percaya maupun ingin menemukan iman benar, kami menyambut Anda untuk \"bergabung\" dan merasakan Misteri Ilahi.",
+			"action": {
+				"primary": "Berkunjung",
+				"secondary": "Panduan Pengunjung"
+			},
+			"when": {
+				"label": "Kapan harus tiba",
+				"description": "Typika dimulai pukul 10:00 pada hari Minggu."
+			},
+			"what": {
+				"label": "Apa yang dikenakan",
+				"description": "Pakaian yang sopan dan pantas adalah kebiasaan dalam tradisi kami."
+			},
+			"fellowship": {
+				"label": "Persekutuan",
+				"description": "Bergabunglah untuk minum kopi dan berdiskusi setelah ibadah."
+			}
+		},
+		"timeline": {
+			"label": "Sejarah yang Hidup",
+			"description": "Menelusuri makna tangan Pelayanan Kudus melalui sejarah komunitas kami.",
+			"community": {
+				"title": "Komunitas Orthodox",
+				"description": "A small gathering of families celebrated the acceptance of Orthodox Faith in a humble rented house, planting the seeds of what would become our parish today."
+			},
+			"deacon": {
+				"title": "Diakon Timothy Ditahbiskan",
+				"description": "Jumlah Orang Percaya bertumbuh, seorang terpilih ditahbiskan sebagai Diakon menjadi perpanjangan tangan Presbyter untuk membimbing umat."
+			},
+			"reform": {
+				"title": "Project Reformasi",
+				"description": "Dengan arahan ketua baru kami & didampingi diakon untuk membangun sebuah \"Bahtera Kudus\"."
+			}
+		},
+		"management": {
+			"title": "Kepemimpinan & Pelayanan",
+			"description": "Mereka yang melayani dan mambangun komunitas kami.",
+			"shepherd": {
+				"name": "Diakon Timothy",
+				"title": "Pelayan Paroki",
+				"description": "Melayani paroki kami dengan fokus pada katekisasi dan pelayanan kaum muda."
+			},
+			"lead": {
+				"description": "Mengawasi operasional paroki dan program penjangkauan komunitas.",
+				"title": "Ketua Dewan Paroki"
+			},
+			"secretary": {
+				"title": "Sekretaris Paroki",
+				"description": "Mengelola komunikasi dan koordinasi liturgi."
+			},
+			"treasurer": {
+				"title": "Bendahara"
+			},
+			"equpment": {
+				"title": "Perlengkapan"
+			},
+			"choir": {
+				"title": "Pengidung & Komunitas"
+			},
+			"education": {
+				"title": "Pengajaran"
+			}
+		},
+		"hero": {
+			"title": "Paroki Kami",
+			"subtitle": "Cahaya Kebenaran untuk <i>Jiwa Modern.</i>"
+		}
+	},
+	"eventPage": {
+		"hero": {
+			"label": "Acara & Perayaan yang segera datang",
+			"description": "Masuklah ke dalam irama tahun liturgi dan bergabung dengan komunitas kami dalam doa, pembelajaran, dan persekutuan."
+		},
+		"filter": {
+			"sortLabel": "Urutkan"
+		},
+		"sidebar": {
+			"feast": {
+				"major": {
+					"label": "Perayaan Besar",
+					"cta": "Lihat Kalender Liturgi"
+				},
+				"weekLabel": "Minggu Ini",
+				"next": "Selanjutnya",
+				"fastDay": "Masa Puasa"
+			},
+			"services": {
+				"label": "Ibadah Mingguan",
+				"wed": "Rabu Akathis",
+				"fri": "Jumat Paraklesis",
+				"sat": "Sabtu Senja Agung",
+				"sun": "Minggu Typika"
+			},
+			"cta": {
+				"label": "Terhubung Dengan Kami",
+				"description": "Terima pengumuman rutin dan pembaruan liturgi langsung di email Anda.",
+				"button": "Berlangganan",
+				"placeholder": "Alamat email Anda"
+			}
+		},
+		"services": {
+			"contact": {
+				"label": "Hubungi Kami"
+			}
+		}
+	},
+	"blogPage": {
+		"hero": {
+			"headline": {
+				"primary": "Renungan",
+				"announcement": "Pengumuman"
+			},
+			"description": "Mendalami keimanan Ortodoks melalui ajaran para Bapa Suci, kehidupan liturgi, dan komunitas Js. Basilius Agung yang penuh semangat."
+		},
+		"featured": {
+			"label": "Renungan Pilihan",
+			"ctaLabel": "Resapi"
+		},
+		"feed": {
+			"readMore": "Baca Selengkapnya"
+		},
+		"post": {
+			"relatedPostLabel": "Lanjutkan Perjalanan",
+			"relatedPostDescription": "Renungan lanjutan bagi jiwa yang beriman",
+			"relatedPostAllPost": "Lihat Semua Tulisan"
+		},
+		"cta": {
+			"title": "Bergabunglah dengan Gulungan yang Hidup",
+			"subtitle": "Terima renungan rohani mingguan, pembaruan liturgi, dan tulisan dari para Bapa Gereja langsung di kotak masuk Anda.",
+			"placeholder": "Email Anda yang rendah hati...",
+			"actionButtonLabel": "Temukan Iman"
+		},
+		"tags": {
+			"title": "Jelajahi Lebih Lanjut",
+			"label": "Dukung Misi Kami",
+			"subtitle": "Bantu kami melanjutkan penyediaan sumber daya rohani dan pemeliharaan ruang suci ini.",
+			"cta": "Masuklah & Berdonasi"
+		},
+		"category": {
+			"all": "Semua"
+		},
+		"headline": {
+			"published": "Diterbitkan pada"
+		}
+	},
+	"indexPage": {
+		"hero": {
+			"label": {
+				"first": "Perpustakaan Rohani",
+				"secondary": "Sumber Daya"
+			},
+			"description": "\"Membaca Kitab Suci adalah perlindungan besar terhadap dosa; ketidaktahuan akan Kitab Suci adalah jurang dan lubang yang dalam.\" — Janasuci Yohanes Krisostomus. Jelajahi koleksi pilihan kami berupa teks liturgi, tulisan patristik, dan sumber daya paroki.",
+			"cta": {
+				"primary": "Masuk ke Arsip",
+				"secondary": "Ajukan Peminjaman"
+			}
+		},
+		"featured": {
+			"label": "Sorotan Patristik",
+			"title": "Karya-karya Janasuci Basilius Agung",
+			"quote": "Perbuatan baik tidak pernah sia-sia; siapa yang menabur keramahan menuai persahabatan, dan siapa yang menanam kebaikan mengumpulkan kasih.",
+			"cta": "Jelajahi"
+		},
+		"introduction": {
+			"label": "Nafas Roh Kudus",
+			"description": "Di dalam rak-rak digital ini, kami menawarkan jembatan antara kebijaksanaan kuno para Bapa Suci dan hati-hati yang mencari di dunia modern. Setiap sumber daya dipilih untuk menutrisi jiwa, menjernihkan pikiran, dan memperdalam pengalaman liturgi komunitas kami."
+		}
+	},
+	"whyPage": {
+		"pastor": {
+			"dressCode": "Ada aturan berpakaian yang perlu diperhatikan: diharapkan pria mengenakan celana panjang dan wanita dianjurkan berkerudung dan mengenakan rok. Yang terpenting, bawalah hati yang terbuka.",
+			"potluck": {
+				"description": "Setelah Liturgi Ilahi, kami berkumpul biasanya kita mengadakan potluck. Ini adalah waktu terbaik untuk bertemu dengan imam kami dan ajukan pertanyaan apa pun.",
+				"title": "Makan Bersama & Komunitas"
+			},
+			"liturgy": {
+				"description": "Ibadah Ortodoks bersifat liturgis, mengikuti pola yang berasal dari berabad-abad lalu. Mungkin terasa asing pada awalnya, tetapi kami mengajak Anda untuk membiarkan keindahannya meresap dalam diri Anda.",
+				"title": "Alur Liturgi"
+			},
+			"experience": {
+				"description": "Ibadah kami melibatkan seluruh indra. Anda akan melihat ikon, mencium dupa, mendengar kidungan a cappella yang indah, serta merasakan kehadiran jemaat yang berdiri dalam doa.",
+				"title": "Pengalaman Panca Indra"
+			},
+			"label": "Kunjungan",
+			"title": "Apa yang akan Didapatkan"
+		},
+		"foundation": {
+			"universal": {
+				"description": "Misteri Iman yang melampaui budaya, bahasa, dan sejarah, memberitakan kebenaran yang sama dari zaman ke zaman.",
+				"title": "Universal"
+			},
+			"unbroken": {
+				"description": "Garis langsung dan tak terputus dari uskup-uskup yang ditahbiskan membentang hingga para Rasul, melestarikan dan meneruskan iman yang sama sepanjang segala abad.",
+				"title": "Rantai Masa Lalu"
+			},
+			"label": "Dasar Iman",
+			"title": "Pahami apa yang membuat Orthodoxia unik dan abadi.",
+			"definition": "Orthodox adalah Gereja Kristen yang asli, didirikan oleh Yesus Kristus dan para Rasul. Selama ribuan tahun, ia telah menjaga iman yang \"sekali untuk selamanya disampaikan kepada orang-orang kudus\" tanpa perubahan.",
+			"purpose": "Ia adalah rumah sakit bagi jiwa, tempat penyembuhan di mana pribadi manusia dipulihkan kepada keindahan aslinya melalui persekutuan dengan Allah Tritunggal."
+		},
+		"hero": {
+			"title": "Jalan menuju <br></br><highlight>Kebenaran</highlight>",
+			"description": "Di dunia yang terus berubah, temukan Iman yang kekal sepanjang segala zaman. Kekristenan Ortodoks bukanlah agama masa lalu, melainkan kehadiran yang hidup dari Gereja Apostolik di dunia modern.",
+			"cta": {
+				"primary": "Masuklah",
+				"secondary": "Tonton Liturgi"
+			}
+		},
+		"scripture": {
+			"notSola": {
+				"description": "Kami memandang Alkitab bukan sebagai buku yang dibaca secara terpisah, melainkan sebagai jantung kehidupan Gereja. dilengkapi dengan Synaxarion & catatan sejarah para bapa-bapa gereja membentuk ajaran sebagaimana kita kenal hari ini.",
+				"title": "Iman dengan Sejarah"
+			},
+			"bible": {
+				"quote": "Sebab itu, saudara-saudara, berdirilah teguh dan berpeganglah pada ajaran-ajaran yang kamu terima dari kami, baik secara lisan maupun secara tertulis.",
+				"source": "2 Tesalonika 2:15"
+			},
+			"title": "Kitab Suci & Tradisi Suci",
+			"orthopraxia": {
+				"description": "Tradisi adalah \"memori hidup Gereja.\" Ia adalah Roh Kudus yang berdiam dalam tubuh orang-orang beriman, membimbing kita ke dalam seluruh kebenaran melalui Liturgi, para Bapa Gereja, dan Konsili-Konsili. Membuktikan iman saja tidak cukup jika tidak dipraktikkan dalam kehidupan sehari-hari.",
+				"title": "Memori yang Suci"
+			}
+		},
+		"sacrament": {
+			"label": "Misterion",
+			"title": "Kehidupan & Sakramen Kudus",
+			"description": "Dalam Orthodoxia, roh dan jasad tidak bisa dipisahkan. Melalui Sakramen-sakramen (Misteri-misteri), Allah menemui kita dalam unsur-unsur dunia—roti, anggur, air, dan minyak.",
+			"allSacraments": "Semua Sakramen",
+			"eucharist": {
+				"description": "\"Obat Keabadian.\" Kami percaya roti dan anggur sungguh-sungguh menjadi Tubuh dan Darah Kristus, menyatukan kita kepada-Nya dan satu sama lain.",
+				"title": "Ekaristi Kudus",
+				"secondary": "Pusat Ibadah"
+			},
+			"baptism": {
+				"title": "Baptisan",
+				"description": "Partisipasi nyata bersatu dengan Allah, kematian bagi diri yang lama dan lahir kembali dalam penghidupan Kristus.",
+				"secondary": "Rumah Sakit bagi Jiwa"
+			},
+			"confession": {
+				"title": "Pengakuan Dosa",
+				"description": "\"Baptisan Kedua,\" di mana kita meletakkan beban kita dan menerima pengampunan penyembuhan dari Allah."
+			},
+			"schedule": {
+				"title": "Alami Misteri-Misteri",
+				"description": "Kehidupan sakramen bukanlah sesuatu untuk dipahami, melainkan kehidupan untuk dihidupi. Bergabunglah dalam ibadah untuk menyaksikan misteri ilahi lainnya.",
+				"cta": "Lihat Jadwal"
+			}
+		},
+		"faq": {
+			"title": "Pertanyaan Umum",
+			"description": "Dengan kelembutan dan rasa hormat, kami menyambut pertanyaan Anda.",
+			"duration": {
+				"question": "Berapa lama ibadahnya?",
+				"answer": "Liturgi Ilahi hari Minggu biasanya berlangsung sekitar 120 menit, sering didahului oleh ibadah Sing-Sing Fajar. Kami menganjurkan pengunjung untuk tiba lebih awal untuk mengikuti transisi yang damai dari doa pagi menuju Liturgi."
+			},
+			"childcare": {
+				"question": "Apakah tersedia penitipan anak?",
+				"answer": "Kami percaya anak-anak adalah bagian dari jemaat yang beribadah dan menganjurkan mereka untuk hadir di dalam nave."
+			},
+			"eucharist": {
+				"question": "Bisakah pengunjung non-Ortodoks menerima Perjamuan Kudus?",
+				"answer": "Dalam Tradisi Ortodoks, Perjamuan Kudus hanya diperuntukkan bagi orang Percaya yang telah dibaptis dan dikrisma yang telah mempersiapkan diri melalui doa dan puasa. Namun, kami mengundang semua pengunjung untuk menerima \"Antidoron\" (roti yang diberkati) yang dibagikan di akhir ibadah."
+			},
+			"dresscode": {
+				"question": "Apa yang harus saya kenakan ke ibadah Ortodoks?",
+				"answer": "Ada aturan berpakaian yang perlu diperhatikan: diharapkan pria mengenakan celana panjang dan wanita dianjurkan berkerudung dan mengenakan rok. Yang terpenting, bawalah hati yang terbuka."
+			},
+			"canonical": {
+				"question": "Apakah gereja Anda kanonik?",
+				"answer": "Gereja Ortodoks Indonesia (GOI) berada di bawah yurisdiksi Gereja Ortodoks Sejati Yunani. Uskup-uskup kami mempertahankan suksesi apostolik yang tak terputus, melestarikan iman yang diturunkan dari para Rasul."
+			},
+			"faith": {
+				"question": "Apakah Ortodoks percaya kepada Kristus?",
+				"answer": "Gereja Ortodoks adalah Gereja Kristen yang asli, didirikan oleh Kristus dan para Rasul-Nya pada hari Pentakosta. Kami berpegang pada iman Gereja purba yang tak berubah — mengaku Iman Nikea, merayakan tujuh Sakramen, dan mengikuti ajaran para Bapa Suci dan Tujuh Konsili."
+			},
+			"icons": {
+				"question": "Apakah kalian menyembah ikon?",
+				"answer": "Tidak. Kami menghormati ikon, tetapi kami menyembah Allah saja. Ikon adalah \"jendela ke surga\" yang mengarahkan pikiran dan hati kita kepada pribadi yang digambarkan, seperti seseorang yang mencium foto orang yang dikasihi. Ajaran ini ditegaskan oleh Konsili Ketujuh pada tahun 787 M."
+			},
+			"cathecumen": {
+				"question": "Apakah non-Ortodoks disambut?",
+				"answer": "Tentu saja. Semua orang disambut untuk menghadiri ibadah kami. Meskipun Komuni Kudus diperuntukkan bagi orang Kristen Ortodoks yang telah dibaptis, kami mengundang Anda untuk berpartisipasi dalam semua aspek lain dari Liturgi dan menerima roti yang diberkati (antidoron) di akhir ibadah."
+			}
+		}
+	},
+	"contactPage": {
+		"hero": {
+			"title": "Terhubung dengan Kami",
+			"subtitle": "Sebab di mana dua atau tiga orang berkumpul dalam nama-Ku, di situ Aku ada di tengah-tengah mereka."
+		},
+		"faq": {
+			"title": "Pertanyaan Umum",
+			"subtitle": "Mempersiapkan kunjungan Anda ke paroki"
+		},
+		"sidebar": {
+			"title": "Tempat Kudus Kami",
+			"location": {
+				"label": "Lokasi"
+			},
+			"contact": {
+				"label": "Hubungi Kami"
+			}
+		},
+		"map": {
+			"title": "Cara menuju kami",
+			"step": {
+				"parking": "Parkir tersedia di samping <b>Js. Basilius Agung</b> untuk semua pengunjung.",
+				"flamboyant": "Belok kiri ke <b>Jalan Flamboyan</b>. Paroki terletak di sisi kanan jalan.",
+				"margonda": "Dari <b>Jalan Margonda</b>, masuk ke Jalan Dahlia dan menuju arah Tenggara sekitar 1 km."
+			}
+		},
+		"form": {
+			"title": "Kirim Pesan",
+			"subtitle": "Baik Anda seorang pencari, perantau, atau tetangga, kami menyambut pertanyaan Anda."
+		}
 	}
 }
