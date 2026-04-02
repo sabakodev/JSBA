@@ -1,0 +1,129 @@
+import { Fish, Droplets, Milk, Wine, Wheat, Cross } from "lucide-react"
+import { ResolvedFeast, LiturgicalWeek, getAllFeasts, gregorianToJulian, getCurrentLiturgicalWeek } from "./julian-calendar"
+
+interface DayCell {
+	date: Date
+	gregorian: { year: number; month: number; day: number }
+	julian: { year: number; month: number; day: number }
+	feasts: ResolvedFeast[]
+	fasting: {
+		active: boolean
+		type: LiturgicalWeek["fastingType"]
+		label: string
+	}
+	isToday: boolean
+	isCurrentMonth: boolean
+}
+
+// ──────────────────────────────────────
+// Fasting Config
+// ──────────────────────────────────────
+
+export const FASTING_CONFIG: Record<
+	LiturgicalWeek["fastingType"],
+	{ label: string; icon: typeof Fish; color: string; bg: string }
+> = {
+	strict: { label: "Strict Fast", icon: Cross, color: "text-red-700", bg: "bg-red-50" },
+	xerophagy: { label: "Dry Eating", icon: Wheat, color: "text-amber-700", bg: "bg-amber-50" },
+	"oil-wine": { label: "Oil & Wine", icon: Wine, color: "text-purple-700", bg: "bg-purple-50" },
+	fish: { label: "Fish Allowed", icon: Fish, color: "text-blue-700", bg: "bg-blue-50" },
+	dairy: { label: "Dairy Allowed", icon: Milk, color: "text-emerald-700", bg: "bg-emerald-50" },
+	regular: { label: "Wed/Fri Fast", icon: Droplets, color: "text-slate-600", bg: "bg-slate-50" },
+	none: { label: "", icon: Cross, color: "", bg: "" },
+}
+
+export const FEAST_TYPE_CONFIG = {
+	great: { label: "Great Feast", color: "bg-red-600 text-white", border: "border-l-red-600" },
+	major: { label: "Major Feast", color: "bg-amber-500 text-white", border: "border-l-amber-500" },
+	minor: { label: "Minor Feast", color: "bg-sky-500 text-white", border: "border-l-sky-500" },
+	fast: { label: "Fast Day", color: "bg-purple-600 text-white", border: "border-l-purple-600" },
+}
+
+export const JULIAN_MONTHS = [
+	"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+	"Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+]
+
+// ──────────────────────────────────────
+// Build Calendar Grid
+// ──────────────────────────────────────
+
+export function buildMonthGrid(year: number, month: number): DayCell[][] {
+	const feasts = [
+		...getAllFeasts(year - 1),
+		...getAllFeasts(year),
+		...getAllFeasts(year + 1),
+	]
+
+	const firstDay = new Date(year, month, 1)
+	const startDay = firstDay.getDay() // 0=Sun
+
+	// Start from the Sunday before (or on) the 1st
+	const gridStart = new Date(year, month, 1 - startDay)
+
+	const weeks: DayCell[][] = []
+	const current = new Date(gridStart)
+
+	for (let week = 0; week < 6; week++) {
+		const row: DayCell[] = []
+
+		for (let dow = 0; dow < 7; dow++) {
+			const date = new Date(current)
+			const greg = {
+				year: date.getFullYear(),
+				month: date.getMonth() + 1,
+				day: date.getDate(),
+			}
+			const julian = gregorianToJulian(greg.year, greg.month, greg.day)
+
+			// Find feasts for this day (compare in Julian space)
+			const dayFeasts = feasts.filter((f) => {
+				if (f.source === 'fixed') {
+					return f.civilVespersStart.month === greg.month && f.civilVespersStart.day === greg.day && f.civilVespersStart.year === greg.year
+				}
+
+				return f.julianDate.month === julian.month && f.julianDate.day === julian.day && f.julianDate.year === julian.year
+			})
+
+			// Get fasting info
+			const litWeek = getCurrentLiturgicalWeek(date)
+			const dayOfWeek = date.getDay()
+			const isFastDay =
+				litWeek.fasting ||
+				dayOfWeek === 3 ||
+				dayOfWeek === 5
+
+			const today = new Date()
+			const isToday =
+				date.getFullYear() === today.getFullYear() &&
+				date.getMonth() === today.getMonth() &&
+				date.getDate() === today.getDate()
+
+			row.push({
+				date,
+				gregorian: greg,
+				julian,
+				feasts: dayFeasts,
+				fasting: {
+					active: isFastDay && litWeek.fastingType !== "none",
+					type: litWeek.fastingType,
+					label: FASTING_CONFIG[litWeek.fastingType]?.label || "",
+				},
+				isToday,
+				isCurrentMonth: date.getMonth() === month,
+			})
+
+			current.setDate(current.getDate() + 1)
+		}
+
+		weeks.push(row)
+
+		// Stop if we've passed the current month entirely
+		if (current.getMonth() > month && current.getFullYear() >= year) {
+			// Keep at least 5 weeks, break after 6
+			if (weeks.length >= 5) break
+		}
+	}
+
+	return weeks
+}
