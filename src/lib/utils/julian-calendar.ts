@@ -4,7 +4,7 @@
  * Julian dates are 13 days behind Gregorian (2000-2099)
  */
 
-import { FIXED_FEASTS, MOVEABLE_FEASTS, PASCHAL_WEEKS } from "./julian-calendar-data"
+import { FIXED_FEASTS, LENT_WEEKS, MOVEABLE_FEASTS, PASCHAL_WEEKS } from "./julian-calendar-data"
 
 // Julian to Gregorian offset (valid 2000-2099)
 const JULIAN_OFFSET = 13
@@ -223,7 +223,7 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 	const currentPascha = calculatePascha(year)
 	const pascha = new Date(
 		currentPascha.gregorian.year,
-		currentPascha.gregorian.month - 1, // Date months are 0-indexed
+		currentPascha.gregorian.month - 1,
 		currentPascha.gregorian.day
 	)
 
@@ -234,69 +234,37 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 		prevPaschaData.gregorian.day
 	)
 
-	// Use the most recent Pascha as reference
-	const referencePascha = today >= pascha ? pascha : prevPascha
+	// ✅ FIX: Calculate diff from UPCOMING Pascha (this year)
+	// and diff from PREVIOUS Pascha (last year)
+	const daysUntilPascha = Math.floor((pascha.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
+	const daysSincePrevPascha = Math.floor((today.getTime() - prevPascha.getTime()) / (1000 * 60 * 60 * 24))
 
+	// If we're before this year's Pascha and within ~70 days (Triodion range),
+	// use upcoming Pascha for pre-Paschal calculations
+	const isPrePaschal = daysUntilPascha > 0 && daysUntilPascha <= 70
+
+	// Determine which Pascha to reference for post-Paschal weeks
+	const referencePascha = today >= pascha ? pascha : prevPascha
 	const diffMs = today.getTime() - referencePascha.getTime()
 	const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
 	const weeksSincePascha = Math.floor(diffDays / 7)
 
 	const tone = ((weeksSincePascha % 8) + 8) % 8 || 8
+	const dayOfWeek = today.getDay()
 
-	// ── Fasting helper ──
-	const dayOfWeek = today.getDay() // 0=Sun, 3=Wed, 5=Fri
-
-	if (diffDays < 0) {
-		const weeksBeforePascha = Math.ceil(Math.abs(diffDays) / 7)
+	// ── Pre-Paschal periods (use upcoming Pascha) ──
+	if (isPrePaschal) {
+		const weeksBeforePascha = Math.ceil(daysUntilPascha / 7)
 
 		if (weeksBeforePascha <= 6) {
-			const lentWeeks: { name: string; nameEl: string; nameId: string; desc: string }[] = [
-				{
-					name: "Holy Week",
-					nameEl: "Μεγάλη Εβδομάδα",
-					nameId: "Pekan Suci",
-					desc: "The week of Christ's Passion, Crucifixion, and Burial.",
-				},
-				{
-					name: "6th Week of Great Lent (Palm Week)",
-					nameEl: "ΣΤ' Εβδομάδα Νηστειών",
-					nameId: "Minggu ke-6 Prapaskah (Minggu Palma)",
-					desc: "Preparation for the Entry into Jerusalem.",
-				},
-				{
-					name: "5th Week of Great Lent",
-					nameEl: "Ε' Εβδομάδα Νηστειών",
-					nameId: "Minggu ke-5 Prapaskah",
-					desc: "Commemoration of St. Mary of Egypt.",
-				},
-				{
-					name: "4th Week of Great Lent",
-					nameEl: "Δ' Εβδομάδα Νηστειών",
-					nameId: "Minggu ke-4 Prapaskah",
-					desc: "Veneration of the Holy Cross.",
-				},
-				{
-					name: "3rd Week of Great Lent",
-					nameEl: "Γ' Εβδομάδα Νηστειών",
-					nameId: "Minggu ke-3 Prapaskah",
-					desc: "Week of the Cross.",
-				},
-				{
-					name: "2nd Week of Great Lent",
-					nameEl: "Β' Εβδομάδα Νηστειών",
-					nameId: "Minggu ke-2 Prapaskah",
-					desc: "Commemoration of St. Gregory Palamas.",
-				},
-			]
-
 			const idx = weeksBeforePascha - 1
 			return {
-				name: lentWeeks[idx].name,
-				nameEl: lentWeeks[idx].nameEl,
-				nameId: lentWeeks[idx].nameId,
+				name: LENT_WEEKS[idx].name,
+				nameEl: LENT_WEEKS[idx].nameEl,
+				nameId: LENT_WEEKS[idx].nameId,
 				tone,
-				fasting: true, // All of Great Lent is fasting
-				description: lentWeeks[idx].desc,
+				fasting: true,
+				description: LENT_WEEKS[idx].desc,
 			}
 		}
 
@@ -306,7 +274,7 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 				nameEl: "Α' Εβδομάδα Νηστειών (Καθαρά Εβδομάδα)",
 				nameId: "Minggu ke-1 Prapaskah (Pekan Bersih)",
 				tone,
-				fasting: true, // Strictest fasting week
+				fasting: true,
 				description: "The beginning of the Great Fast. Strict fasting and repentance.",
 			}
 		}
@@ -317,7 +285,7 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 				nameEl: "Κυριακή Συγχωρήσεως / Τυρινή",
 				nameId: "Minggu Pengampunan / Pekan Keju",
 				tone,
-				fasting: true, // No meat, dairy allowed
+				fasting: true,
 				description: "Last week before Great Lent. Forgiveness Vespers. No meat, dairy permitted.",
 			}
 		}
@@ -328,7 +296,7 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 				nameEl: "Εβδομάδα Απόκρεω",
 				nameId: "Pekan Pantang Daging",
 				tone,
-				fasting: dayOfWeek === 3 || dayOfWeek === 5, // Wed & Fri only
+				fasting: dayOfWeek === 3 || dayOfWeek === 5,
 				description: "Last week of meat consumption before Pascha.",
 			}
 		}
@@ -350,13 +318,13 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 				nameEl: "Εβδομάδα Τελώνου και Φαρισαίου",
 				nameId: "Pekan Pemungut Cukai dan Farisi",
 				tone,
-				fasting: false, // Fast-free week
+				fasting: false,
 				description: "Beginning of the Triodion. Fast-free week.",
 			}
 		}
 	}
 
-	// ── Post-Pascha periods ──
+	// ── Post-Pascha periods (use previous/current Pascha) ──
 
 	if (weeksSincePascha === 0) {
 		return {
@@ -364,7 +332,7 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 			nameEl: "Διακαινήσιμος Εβδομάδα",
 			nameId: "Pekan Terang (Pekan Paskah)",
 			tone: 1,
-			fasting: false, // Fast-free
+			fasting: false,
 			description: "The radiant celebration of Christ's Resurrection. Fast-free week.",
 		}
 	}
@@ -376,7 +344,7 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 			nameEl: PASCHAL_WEEKS[idx].nameEl,
 			nameId: PASCHAL_WEEKS[idx].nameId,
 			tone,
-			fasting: dayOfWeek === 3 || dayOfWeek === 5, // Wed & Fri
+			fasting: dayOfWeek === 3 || dayOfWeek === 5,
 			description: PASCHAL_WEEKS[idx].desc,
 		}
 	}
@@ -387,40 +355,34 @@ export function getCurrentLiturgicalWeek(): LiturgicalWeek {
 			nameEl: "Εβδομάδα Πεντηκοστής",
 			nameId: "Pekan Pentakosta",
 			tone: 8,
-			fasting: false, // Fast-free week
+			fasting: false,
 			description: "Descent of the Holy Spirit. Birthday of the Church. Fast-free week.",
 		}
 	}
 
-	// ── After Pentecost — check for Apostles' Fast ──
+	// ── After Pentecost ──
 	const weekAfterPentecost = weeksSincePascha - 7
 
-	// Apostles' Fast: Monday after All Saints (1st Sun after Pentecost) until June 28 (Julian) / July 11 (Gregorian)
 	const allSaintsMonday = new Date(referencePascha)
-	allSaintsMonday.setDate(allSaintsMonday.getDate() + 57) // 8 weeks + 1 day
-	const apostlesFastEnd = new Date(today.getFullYear(), 6, 11) // July 11 Gregorian = June 28 Julian
-
+	allSaintsMonday.setDate(allSaintsMonday.getDate() + 57)
+	const apostlesFastEnd = new Date(today.getFullYear(), 6, 11)
 	const isApostlesFast = today >= allSaintsMonday && today <= apostlesFastEnd
 
-	// Dormition Fast: August 1-14 (Julian) = August 14-27 (Gregorian)
-	const dormitionFastStart = new Date(today.getFullYear(), 7, 14) // Aug 14
-	const dormitionFastEnd = new Date(today.getFullYear(), 7, 27) // Aug 27
+	const dormitionFastStart = new Date(today.getFullYear(), 7, 14)
+	const dormitionFastEnd = new Date(today.getFullYear(), 7, 27)
 	const isDormitionFast = today >= dormitionFastStart && today <= dormitionFastEnd
 
-	// Nativity Fast: November 15 (Julian) = November 28 (Gregorian) to December 24 (Julian) = January 6 (Gregorian)
-	const nativityFastStart = new Date(today.getFullYear(), 10, 28) // Nov 28
+	const nativityFastStart = new Date(today.getFullYear(), 10, 28)
 	const nativityFastEnd = new Date(
 		today.getMonth() === 0 ? today.getFullYear() : today.getFullYear() + 1,
-		0, 6 // Jan 6
+		0, 6
 	)
 	const isNativityFast = today >= nativityFastStart && today <= nativityFastEnd
 
-	// Determine fasting
 	const isSpecialFast = isApostlesFast || isDormitionFast || isNativityFast
-	const isRegularFastDay = dayOfWeek === 3 || dayOfWeek === 5 // Wed & Fri
+	const isRegularFastDay = dayOfWeek === 3 || dayOfWeek === 5
 	const fasting = isSpecialFast || isRegularFastDay
 
-	// Build description
 	let fastNote = ""
 	if (isApostlesFast) fastNote = " Apostles' Fast period."
 	else if (isDormitionFast) fastNote = " Dormition Fast period."
