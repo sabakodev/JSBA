@@ -41,7 +41,7 @@ export default function LiturgicalCalendar({ locale }: { locale: string }) {
 	}, [locale])
 
 	return (
-		<div className="w-full max-w-7xl mx-auto">
+		<div className="w-full mx-auto overflow-hidden">
 			{/* ── Header ── */}
 			<p className="text-xs font-body font-bold block text-center mb-4 md:hidden">
 				{litWeek.name}
@@ -111,64 +111,61 @@ export default function LiturgicalCalendar({ locale }: { locale: string }) {
 			</div>
 
 			{/* ── Calendar Grid ── */}
-			<div className="border-l border-primary border-t">
-				{weeks.map((week, wi) => (
-					<div key={wi} className="grid grid-cols-7">
-						{week.map((cell, di) => (
-							<div
-								key={di}
-								className={cn(
-									"border-r border-primary border-b min-h-25 sm:min-h-30 p-1.5 transition-colors",
-									"hover:bg-accent/30",
-									!cell.isCurrentMonth && "bg-muted/30 opacity-50",
-									cell.isToday && "bg-primary/5 ring-1 ring-inset ring-primary/20",
-									cell.fasting.active && cell.isCurrentMonth && "bg-linear-to-b from-transparent to-purple-100/50"
-								)}
-							>
-								{/* ── Day number row ── */}
-								<div className="flex items-start justify-between gap-1">
-									<div className="md:flex items-baseline gap-1">
-										{/* Gregorian date */}
-										<div
-											className={cn(
-												"text-sm font-medium leading-none",
-												cell.isToday &&
-												"bg-primary text-primary-foreground w-6 h-6 rounded-sm flex items-center justify-center text-xs",
-												!cell.isCurrentMonth && "text-muted-foreground"
-											)}
-										>
-											{cell.gregorian.day}
-										</div>
-
-										{/* Julian date */}
-										<div className="text-xs text-muted-foreground/70 leading-none">
-											{JULIAN_MONTHS[cell.julian.month - 1]} {cell.julian.day}
-										</div>
-									</div>
-
-									{/* Fasting indicator */}
-									{cell.fasting.active && cell.isCurrentMonth && (
-										<FastingIndicator type={cell.fasting.type} />
+			<div className="w-full overflow-x-auto">
+				<div className="min-w-175 border-l border-primary border-t">
+					{weeks.map((week, wi) => (
+						<div key={wi} className="grid grid-cols-7 *:min-w-25">
+							{week.map((cell, di) => (
+								<div
+									key={di}
+									className={cn(
+										"border-r border-primary border-b min-w-25 min-h-25 sm:min-h-30 p-1.5 transition-colors",
+										"hover:bg-accent/30",
+										!cell.isCurrentMonth && "bg-muted/30 opacity-50",
+										cell.isToday && "bg-primary/5 ring-1 ring-inset ring-primary/20",
+										cell.fasting.active && cell.isCurrentMonth && "bg-linear-to-b from-transparent to-purple-100/50"
 									)}
-								</div>
-
-								{/* ── Feast chips ── */}
-								{cell.isCurrentMonth && cell.feasts.length > 0 && (
-									<div className="mt-1 space-y-0.5">
-										{cell.feasts.slice(0, 3).map((feast, fi) => (
-											<FeastChip key={fi} feast={feast} locale={locale} />
-										))}
-										{cell.feasts.length > 3 && (
-											<p className="text-[9px] text-muted-foreground pl-1">
-												+{cell.feasts.length - 3} more
-											</p>
+								>
+									{/* ── Day number row ── */}
+									<div className="flex items-start justify-between gap-1">
+										<div className="md:flex items-baseline gap-1">
+											<div
+												className={cn(
+													"text-sm font-medium leading-none",
+													cell.isToday &&
+													"bg-primary text-primary-foreground w-6 h-6 rounded-sm flex items-center justify-center text-xs",
+													!cell.isCurrentMonth && "text-muted-foreground"
+												)}
+											>
+												{cell.gregorian.day}
+											</div>
+											<div className="text-xs text-muted-foreground/70 leading-none">
+												{JULIAN_MONTHS[cell.julian.month - 1]} {cell.julian.day}
+											</div>
+										</div>
+										{cell.fasting.active && cell.isCurrentMonth && (
+											<FastingIndicator type={cell.fasting.type} />
 										)}
 									</div>
-								)}
-							</div>
-						))}
-					</div>
-				))}
+
+									{/* ── Feast chips ── */}
+									{cell.isCurrentMonth && cell.feasts.length > 0 && (
+										<div className="mt-1 space-y-0.5">
+											{cell.feasts.slice(0, 3).map((feast, fi) => (
+												<FeastChip key={fi} feast={feast} locale={locale} />
+											))}
+											{cell.feasts.length > 3 && (
+												<p className="text-[9px] text-muted-foreground pl-1">
+													+{cell.feasts.length - 3} more
+												</p>
+											)}
+										</div>
+									)}
+								</div>
+							))}
+						</div>
+					))}
+				</div>
 			</div>
 
 			{/* ── Legend ── */}

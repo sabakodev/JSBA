@@ -1,5 +1,5 @@
 import { Fish, Droplets, Milk, Wine, Wheat, Cross } from "lucide-react"
-import { ResolvedFeast, LiturgicalWeek, getAllFeasts, gregorianToJulian, getCurrentLiturgicalWeek } from "./julian-calendar"
+import { ResolvedFeast, LiturgicalWeek, getAllFeasts, gregorianToJulian, getCurrentLiturgicalWeek, resolveSaintSynaxarion } from "./julian-calendar"
 
 interface DayCell {
 	date: Date
@@ -37,6 +37,7 @@ export const FEAST_TYPE_CONFIG = {
 	major: { label: "Major Feast", color: "bg-amber-500 text-white", border: "border-l-amber-500" },
 	minor: { label: "Minor Feast", color: "bg-sky-500 text-white", border: "border-l-sky-500" },
 	fast: { label: "Fast Day", color: "bg-purple-600 text-white", border: "border-l-purple-600" },
+	saint: { label: "Saint Commemoration", color: "bg-gray-600 text-white", border: "border-l-gray-400" },
 }
 
 export const JULIAN_MONTHS = [
@@ -53,6 +54,9 @@ export function buildMonthGrid(year: number, month: number): DayCell[][] {
 		...getAllFeasts(year - 1),
 		...getAllFeasts(year),
 		...getAllFeasts(year + 1),
+		...resolveSaintSynaxarion(year - 1),
+		...resolveSaintSynaxarion(year),
+		...resolveSaintSynaxarion(year + 1),
 	]
 
 	const firstDay = new Date(year, month, 1)
