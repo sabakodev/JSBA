@@ -1,3 +1,4 @@
+import { Link } from "@/i18n/nav"
 import { useTranslations } from "next-intl"
 import Image from "next/image"
 
@@ -20,14 +21,16 @@ export default function Component() {
 						{t('description')}
 					</p>
 					<div className="flex items-center space-x-6">
-						<button
+						<Link
+							href="/contact"
 							className="bg-primary text-primary-foreground px-8 py-4 rounded-sm text-sm font-label tracking-widest uppercase hover:opacity-90 transition-opacity">
 							{t('cta.primary')}
-						</button>
-						<button
+						</Link>
+						<Link
+							href="https://www.instagram.com/orthodoxdepok/"
 							className="text-primary border-b border-outline-variant pb-1 font-label text-sm tracking-widest uppercase hover:text-primary-container transition-colors">
 							{t('cta.secondary')}
-						</button>
+						</Link>
 					</div>
 				</div>
 				<div className="md:col-span-5 relative">
