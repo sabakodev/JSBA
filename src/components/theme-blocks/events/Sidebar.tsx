@@ -9,11 +9,19 @@ import {
 	CalendarFeast,
 } from "@/lib/utils"
 
-export default function Component() {
+export default function Component({ locale }: { locale: string }) {
 	const t = useTranslations("eventPage.sidebar")
 
-	const upcomingFeasts = getUpcomingFeasts(4)
+	const upcomingFeasts = getUpcomingFeasts(10)
 	const currentWeek = getCurrentLiturgicalWeek()
+
+	const localizedCurrentName: Record<string, string> = {
+		default: currentWeek.name,
+		id: currentWeek.nameId,
+		el: currentWeek.nameEl,
+	}
+
+	const currentWeekName = localizedCurrentName[locale] ?? localizedCurrentName.default
 
 	return (
 		<aside className="lg:col-span-4 space-y-12">
@@ -29,10 +37,10 @@ export default function Component() {
 				{/* Current Liturgical Week */}
 				<div className="mb-8 py-3 px-4 bg-primary/5 border border-primary/10 rounded-sm text-center">
 					<p className="text-[10px] uppercase tracking-[0.3em] text-secondary/60 mb-1">
-						Current Week
+						{t('feast.weekLabel')}
 					</p>
 					<p className="text-sm font-body font-bold text-on-surface">
-						{currentWeek.name}
+						{currentWeekName}
 					</p>
 					{currentWeek.tone && (
 						<p className="text-xs text-secondary/60 mt-1">
@@ -51,6 +59,7 @@ export default function Component() {
 					{upcomingFeasts.map((feast, index) => (
 						<FeastCard
 							key={`${feast.julianDate?.month}-${feast.julianDate?.day}-${index}`}
+							locale={locale}
 							feast={feast}
 							index={index}
 						/>
@@ -122,10 +131,13 @@ export default function Component() {
 
 interface FeastCardProps {
 	feast: CalendarFeast
+	locale: string
 	index: number
 }
 
-export function FeastCard({ feast, index }: FeastCardProps) {
+export function FeastCard({ feast, locale, index }: FeastCardProps) {
+	const t = useTranslations("eventPage.sidebar.feast")
+
 	const monthNames = [
 		"January", "February", "March", "April", "May", "June",
 		"July", "August", "September", "October", "November", "December",
@@ -133,16 +145,19 @@ export function FeastCard({ feast, index }: FeastCardProps) {
 
 	if (!feast.julianDate) return
 
-	const gregorianDate = julianToGregorian(
-		new Date().getFullYear(),
-		feast.julianDate?.month,
-		feast.julianDate?.day
-	)
 	const day = feast.gregorianDate.day
 	const month = monthNames[feast.gregorianDate.month - 1]
 	const julianDay = feast.julianDate.day
 	const julianMonth = monthNames[feast.julianDate.month - 1]
 	const isNextUp = index === 0
+
+	const localizedName: Record<string, string> = {
+		default: feast.name,
+		id: feast.nameId,
+		el: feast.nameEl,
+	}
+
+	const name = localizedName[locale] ?? localizedName.default
 
 	return (
 		<div
@@ -159,19 +174,19 @@ export function FeastCard({ feast, index }: FeastCardProps) {
 			</div>
 			<div>
 				<h4 className="font-body font-bold text-sm">
-					{feast.name}
+					{name}
 				</h4>
 				<p className="text-xs text-secondary/60 uppercase tracking-widest mt-1">
 					{month} {day} <span className="text-secondary/40">({julianMonth} {julianDay})</span>
 				</p>
 				{isNextUp && (
 					<span className="inline-block mt-2 text-[10px] uppercase tracking-widest text-primary bg-primary/5 px-2 py-0.5 rounded-full">
-						Next Feast
+						{t('next')}
 					</span>
 				)}
 				{feast.fasting && (
 					<span className="inline-block mt-2 ml-2 text-[10px] uppercase tracking-widest text-secondary/40 bg-secondary/5 px-2 py-0.5 rounded-full">
-						Fast Day
+						{t('fastDay')}
 					</span>
 				)}
 			</div>
