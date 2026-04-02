@@ -275,3 +275,49 @@ export const PASCHAL_WEEKS: PaschalWeek[] = [
 		desc: "The Ascension of our Lord into Heaven.",
 	},
 ]
+
+interface LentWeek {
+	name: string
+	nameEl: string
+	nameId: string
+	desc: string
+}
+
+export const LENT_WEEKS: LentWeek[] = [
+	{
+		name: "Holy Week",
+		nameEl: "Μεγάλη Εβδομάδα",
+		nameId: "Pekan Suci",
+		desc: "The week of Christ's Passion, Crucifixion, and Burial.",
+	},
+	{
+		name: "6th Week of Great Lent (Palm Week)",
+		nameEl: "ΣΤ' Εβδομάδα Νηστειών",
+		nameId: "Minggu ke-6 Prapaskah (Minggu Palma)",
+		desc: "Preparation for the Entry into Jerusalem.",
+	},
+	{
+		name: "5th Week of Great Lent",
+		nameEl: "Ε' Εβδομάδα Νηστειών",
+		nameId: "Minggu ke-5 Prapaskah",
+		desc: "Commemoration of St. Mary of Egypt.",
+	},
+	{
+		name: "4th Week of Great Lent",
+		nameEl: "Δ' Εβδομάδα Νηστειών",
+		nameId: "Minggu ke-4 Prapaskah",
+		desc: "Veneration of the Holy Cross.",
+	},
+	{
+		name: "3rd Week of Great Lent",
+		nameEl: "Γ' Εβδομάδα Νηστειών",
+		nameId: "Minggu ke-3 Prapaskah",
+		desc: "Week of the Cross.",
+	},
+	{
+		name: "2nd Week of Great Lent",
+		nameEl: "Β' Εβδομάδα Νηστειών",
+		nameId: "Minggu ke-2 Prapaskah",
+		desc: "Commemoration of St. Gregory Palamas.",
+	},
+]
