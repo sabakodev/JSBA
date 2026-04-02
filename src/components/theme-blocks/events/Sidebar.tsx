@@ -11,16 +11,10 @@ import FeastCard from "./FeastCard"
 export default function Component({ locale }: { locale: string }) {
 	const t = useTranslations("eventPage.sidebar")
 
-	const upcomingFeasts = getUpcomingFeasts(10)
+	const upcomingFeasts = getUpcomingFeasts(3, new Date(), ['great', 'major'])
 	const currentWeek = getCurrentLiturgicalWeek()
 
-	const localizedCurrentName: Record<string, string> = {
-		default: currentWeek.name,
-		id: currentWeek.nameId,
-		el: currentWeek.nameEl,
-	}
-
-	const currentWeekName = localizedCurrentName[locale] ?? localizedCurrentName.default
+	const currentWeekName = ({ default: currentWeek.name, id: currentWeek.nameId, el: currentWeek.nameEl })[locale] ?? currentWeek.name
 
 	return (
 		<aside className="lg:col-span-4 space-y-12">
@@ -65,13 +59,13 @@ export default function Component({ locale }: { locale: string }) {
 					))}
 				</div>
 
-				<div className="mt-12 pt-8 border-t border-border/20">
+				<div className="mt-12 pt-8 border-t border-border/20 group">
 					<Link
-						href="#"
-						className="w-full font-label text-xs uppercase tracking-[0.2em] text-on-surface hover:text-primary transition-colors flex items-center justify-center gap-2"
+						href="/event/calendar"
+						className="w-full font-label text-xs uppercase tracking-[0.2em] group-hover:text-primary transition-colors flex items-center justify-center gap-2"
 					>
 						{t("feast.major.cta")}
-						<ArrowRight size={12} />
+						<ArrowRight size={12} className="group-hover:translate-x-2 transition-transform duration-200" />
 					</Link>
 				</div>
 			</div>
@@ -115,7 +109,7 @@ export default function Component({ locale }: { locale: string }) {
 				</p>
 				<div className="space-y-4">
 					<input
-						className="px-2 w-full bg-white/10 border-b border-white/30 text-white placeholder:text-white/50 py-2 text-sm focus:outline-none focus:border-white transition-colors"
+						className="px-2 w-full bg-white/10 border-b border-white/30 text-white placeholder:text-white/50 py-2 text-sm focus:outline-none focus:border-white transition-colors duration-300"
 						placeholder={t("cta.placeholder")}
 						type="email"
 					/>
