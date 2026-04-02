@@ -22,7 +22,8 @@ export function julianToGregorian(year: number, month: number, day: number) {
 }
 
 export function gregorianToJulian(year: number, month: number, day: number) {
-	const date = new Date(year, month - 1, day - JULIAN_OFFSET)
+	const date = new Date(year, month - 1, day)
+	date.setDate(date.getDate() - JULIAN_OFFSET)
 	return {
 		year: date.getFullYear(),
 		month: date.getMonth() + 1,
@@ -45,6 +46,34 @@ export interface LiturgicalDate {
 	dayOfWeek: number
 	// Whether we've crossed sunset
 	isAfterSunset: boolean
+}
+
+export function getLiturgicalNow() {
+	const now = new Date()
+
+	// If after 18:00, liturgically we are in the NEXT day
+	const civilDate = new Date(now)
+	if (now.getHours() >= 18) {
+		civilDate.setDate(civilDate.getDate() + 1)
+	}
+
+	const gregorian = {
+		year: civilDate.getFullYear(),
+		month: civilDate.getMonth() + 1,
+		day: civilDate.getDate(),
+	}
+
+	const julian = gregorianToJulian(gregorian.year, gregorian.month, gregorian.day)
+
+	// Day of week of the LITURGICAL day (not civil)
+	const dayOfWeek = civilDate.getDay()
+
+	return {
+		gregorian,
+		julian,
+		dayOfWeek,
+		civilNow: now,
+	}
 }
 
 export function getLiturgicalDate(now: Date = new Date()): LiturgicalDate {
