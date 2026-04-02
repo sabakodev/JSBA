@@ -67,6 +67,9 @@
     "taxDisclaimer": "ALL DONATIONS ARE TAX DEDUCTIBLE"
   },
   "Metadata": {
+    "donate": {
+      "title": "St. Basil the Great - Donate"
+    },
     "home": {
       "title": "St. Basil the Great - Homepage"
     },

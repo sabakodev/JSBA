@@ -67,6 +67,9 @@
 		"taxDisclaimer": "SEMUA DONASI AKAN DIKURANGI PAJAK"
 	},
 	"Metadata": {
+		"donate": {
+			"title": "Js. Basilius Agung - Persembahan"
+		},
 		"home": {
 			"title": "Js. Basilius Agung - Homepage"
 		},
