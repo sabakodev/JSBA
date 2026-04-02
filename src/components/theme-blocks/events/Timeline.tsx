@@ -1,4 +1,5 @@
 import { Link } from "@/i18n/nav"
+import { calculatePascha } from "@/lib/utils"
 import { ArrowRight, CalendarPlus, Clock4, MapPin } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Image from "next/image"
