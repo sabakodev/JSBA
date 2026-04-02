@@ -5,6 +5,7 @@
  */
 
 import { FIXED_FEASTS, LENT_WEEKS, MOVEABLE_FEASTS, PASCHAL_WEEKS } from "./julian-calendar-data"
+import { VENERATED_SAINTS } from "./synaxarion/saints"
 
 // ──────────────────────────────────────
 // Core: Calendar Conversion
@@ -130,6 +131,35 @@ export function calculatePascha(year: number) {
 	return { julian: julianDate, gregorian: gregorianDate, year }
 }
 
+type NameKey = "name" | "nameEl" | "nameId"
+
+/**
+ * Combines multiple saint names into a single string.
+ *
+ * 1 saint  → "Holy Martyr Sozon"
+ * 2 saints → "Holy Martyr Sozon and Venerable Pelagia"
+ * 3+ saints → "Holy Martyr Sozon, Venerable Pelagia, and Holy Apostle Thomas"
+ */
+function combineSaintNames(
+	saints: { name: string; nameEl: string; nameId: string }[],
+	key: NameKey,
+): string {
+	const names = saints.map((s) => s[key])
+
+	if (names.length === 1) {
+		return names[0]
+	}
+
+	if (names.length === 2) {
+		return `${names[0]} & ${names[1]}`
+	}
+
+	const allButLast = names.slice(0, -1).join("; ")
+	const last = names[names.length - 1]
+	return `${allButLast}; & ${last}`
+}
+
+
 // ──────────────────────────────────────
 // Helper: Date arithmetic
 // ──────────────────────────────────────
@@ -159,13 +189,18 @@ export interface ResolvedFeast {
 	name: string
 	nameEl: string
 	nameId: string
-	type: "great" | "major" | "minor" | "fast"
+	type: "great" | "major" | "minor" | "fast" | "saint"
 	julianDate: { year: number, month: number; day: number }
 	gregorianDate: { year: number; month: number; day: number }
 	// The civil evening when the feast BEGINS (vespers)
 	civilVespersStart: { year: number; month: number; day: number; hour: 18 }
 	fasting?: boolean
 	source: "fixed" | "moveable"
+	saints: {
+		name: string
+		nameEl: string
+		nameId: string
+	}[]
 }
 
 /**
@@ -196,6 +231,7 @@ export function resolveMovableFeasts(year: number): ResolvedFeast[] {
 				day: vespersDate.getDate(),
 				hour: 18,
 			},
+			saints: [],
 			source: "moveable" as const,
 		}
 	})
@@ -226,8 +262,75 @@ export function resolveFixedFeasts(year: number): ResolvedFeast[] {
 				hour: 18,
 			},
 			fasting: feast.fasting,
+			saints: [],
 			source: "fixed" as const,
 		}
+	})
+}
+
+/**
+ * Groups saints by Julian date and produces one ResolvedFeast per date
+ * with a combined name and an array of individual saints.
+ */
+export function resolveSaintSynaxarion(year: number): ResolvedFeast[] {
+	// ── Step 1: Group by Julian month + day ──────────────
+	const grouped = new Map<string, typeof VENERATED_SAINTS>()
+
+	for (const feast of VENERATED_SAINTS) {
+		const key = `${feast.julianMonth}-${feast.julianDay}`
+		if (!grouped.has(key)) {
+			grouped.set(key, [])
+		}
+		grouped.get(key)!.push(feast)
+	}
+
+	// ── Step 2: Resolve each group ───────────────────────
+	const results: ResolvedFeast[] = []
+
+	for (const [, saints] of grouped) {
+		const first = saints[0]
+		const greg = julianToGregorian(year, first.julianMonth, first.julianDay)
+
+		const vespersDate = new Date(greg.year, greg.month - 1, greg.day)
+		vespersDate.setDate(vespersDate.getDate() - 1)
+
+		// ── Combine names ────────────────────────────────
+		const combinedName = combineSaintNames(saints, "name")
+		const combinedNameEl = combineSaintNames(saints, "nameEl")
+		const combinedNameId = combineSaintNames(saints, "nameId")
+
+		results.push({
+			name: combinedName,
+			nameEl: combinedNameEl,
+			nameId: combinedNameId,
+			type: "saint",
+			julianDate: {
+				year,
+				month: first.julianMonth,
+				day: first.julianDay,
+			},
+			gregorianDate: greg,
+			civilVespersStart: {
+				year: vespersDate.getFullYear(),
+				month: vespersDate.getMonth() + 1,
+				day: vespersDate.getDate(),
+				hour: 18,
+			},
+			source: "fixed" as const,
+			saints: saints.map((s) => ({
+				name: s.name,
+				nameEl: s.nameEl,
+				nameId: s.nameId,
+			})),
+		})
+	}
+
+	// ── Step 3: Sort by Julian date ──────────────────────
+	return results.sort((a, b) => {
+		if (a.julianDate.month !== b.julianDate.month) {
+			return a.julianDate.month - b.julianDate.month
+		}
+		return a.julianDate.day - b.julianDate.day
 	})
 }
 
