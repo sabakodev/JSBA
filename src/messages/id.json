@@ -108,9 +108,27 @@
 			"why": "Mengapa Ortodoks"
 		},
 		"generic": {
-			"top": "ATAS",
+			"top": "UP",
 			"contact": "Kontak",
 			"search": "Cari sumber daya..."
+		},
+		"form": {
+			"fullName": "Nama Lengkap",
+			"fullNamePlaceholder": "Budi Setiawan",
+			"email": "Alamat Email",
+			"inquiry": {
+				"label": "Keperluan",
+				"option": {
+					"general": "Umum",
+					"beginner": "Menjadi Orthodox (Katekumen)",
+					"sacrament": "Sakramen Baptisan atau Pernikahan",
+					"confession": "Pengakuan Dosa / Bimbingan Rohani",
+					"manager": "Pengurus Paroki"
+				}
+			},
+			"message": "Pesan Anda",
+			"messagePlaceholder": "Apa yang bisa dibantu?",
+			"ctaSend": "Kirim Pertanyaan"
 		}
 	},
 	"aboutPage": {

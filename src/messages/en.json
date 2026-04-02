@@ -111,6 +111,24 @@
       "top": "TOP",
       "contact": "Contact",
       "search": "Search resources..."
+    },
+    "form": {
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "John Dalton",
+      "email": "Email Address",
+      "inquiry": {
+        "label": "Inquiry Type",
+        "option": {
+          "general": "General Inquiry",
+          "beginner": "Becoming Orthodox (Catechumenate)",
+          "sacrament": "Baptism or Wedding Inquiries",
+          "confession": "Confession / Spiritual Guidance",
+          "manager": "Parish Council"
+        }
+      },
+      "message": "Your Message",
+      "messagePlaceholder": "How may we serve you?",
+      "ctaSend": "Enter In"
     }
   },
   "aboutPage": {
