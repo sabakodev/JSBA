@@ -10,7 +10,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 	}
 }
 
-export default function Page() {
+export default async function Page({
+	params,
+}: Readonly<{
+	params: Promise<{ locale: string }>
+}>) {
+	const { locale } = await params
+
 	return (
 		<>
 			<Hero />
@@ -18,7 +24,7 @@ export default function Page() {
 				<FilterBar />
 				<div className="grid grid-cols-1 lg:grid-cols-12 gap-24">
 					<Timeline />
-					<Sidebar />
+					<Sidebar locale={locale} />
 				</div>
 			</main>
 		</>
