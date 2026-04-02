@@ -1,3 +1,4 @@
+import { Link } from "@/i18n/nav"
 import { Mail, MapPin } from "lucide-react"
 import { useTranslations } from "next-intl"
 
@@ -14,7 +15,7 @@ export default function Component() {
 					<MapPin className="mt-1 text-primary" size={14} />
 					<div>
 						<p className="font-label uppercase tracking-widest text-xs text-secondary mb-1">{t('location.label')}</p>
-						<p className="text-on-surface">1200 Byzantine Way,<br />Eastern Ridge, CA 90210</p>
+						<p className="text-on-surface">Jl. Flamboyan Gg. Nias,<br />Kec. Pancoran Mas,<br />Depok 16431, Jawa Barat</p>
 					</div>
 				</div>
 				{/* <!-- Communication --> */}
@@ -24,8 +25,8 @@ export default function Component() {
 						<p className="font-label uppercase tracking-widest text-xs text-secondary mb-1">
 							{t('contact.label')}
 						</p>
-						<p className="text-on-surface">office@basiliusagung.org</p>
-						<p className="text-on-surface">(555) 234-8900</p>
+						<Link href="https://wa.me/6289621271645" className="text-on-surface">+62 896-2127-1645</Link>
+						<p className="text-on-surface">(Rm. Dkn. Tim)</p>
 					</div>
 				</div>
 				{/* <!-- Schedule --> */}
