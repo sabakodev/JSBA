@@ -6,20 +6,22 @@ import { getCategories, getFeaturedPost, getPosts, getPostsByCategory } from "@/
 import Pagination from "@/components/ui/pagination"
 import { Link } from "@/i18n/nav"
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
-	const { locale } = await params
-	const t = await getTranslations({ locale, namespace: 'Metadata' })
-
-	return {
-		title: t('blog.title')
-	}
-}
-
 interface Props {
+	locale: string
 	searchParams: Promise<{
 		page?: string
 		category?: string
 	}>
+}
+
+export async function generateMetadata({ params }: { params: Promise<Props> }) {
+	const { locale } = await params
+	const t = await getTranslations({ locale, namespace: 'Metadata' })
+
+	return {
+		title: t('blog.title'),
+		canonical: '/id/blog'
+	}
 }
 
 export default async function Page({ searchParams }: Props) {
@@ -77,7 +79,7 @@ export default async function Page({ searchParams }: Props) {
 					<Link
 						href="/contact"
 						className="bg-primary/10 text-primary px-6 py-2 rounded-sm text-xs uppercase tracking-widest hover:bg-primary/20 transition-colors">
-						Join our Newsletter
+						Mail Exchange
 					</Link>
 				</div>
 			</div>
