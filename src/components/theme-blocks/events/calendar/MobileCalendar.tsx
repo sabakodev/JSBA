@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo } from "react"
-import { ChevronLeft, ChevronRight, Church, Leaf, Star } from "lucide-react"
+import { ChevronLeft, ChevronRight, Leaf, Star } from "lucide-react"
 import { cn } from "@/lib/utils"
 import {
 	buildMonthGrid,
@@ -12,9 +12,8 @@ import {
 import { getCurrentLiturgicalWeek } from "@/lib/utils/julian-calendar"
 import { Link } from "@/i18n/nav"
 
-// ──────────────────────────────────────
-// Flatten grid into day list
-// ──────────────────────────────────────
+import FeastChip from "./FeastChip"
+import type { ResolvedFeast } from "@/lib/utils/julian-calendar"
 
 interface CalendarDay {
 	gregorianDate: { year: number; month: number; day: number }
@@ -22,10 +21,7 @@ interface CalendarDay {
 	dayOfWeek: number
 	isToday: boolean
 	isCurrentMonth: boolean
-	feasts: {
-		name: string
-		type: "great" | "major" | "minor" | "fast" | "saint"
-	}[]
+	feasts: ResolvedFeast[]           // ← raw feast objects now
 	fasting: {
 		active: boolean
 		type: "strict" | "xerophagy" | "oil-wine" | "fish" | "dairy" | "regular" | "none"
@@ -40,20 +36,15 @@ interface CalendarDay {
  * filtered to only include days in the target month.
  */
 function buildMonthDays(year: number, month: number, locale: string): CalendarDay[] {
-	// month is 1-based here, buildMonthGrid expects 0-based month index
 	const weeks = buildMonthGrid(year, month)
-
 	const days: CalendarDay[] = []
 
 	for (const week of weeks) {
 		for (const cell of week) {
-			// Only include days that belong to the current month
 			if (!cell.isCurrentMonth) continue
 
 			const date = cell.date
 			const dow = date.getDay()
-
-			// Get liturgical week info for tone & week name
 			const litWeek = getCurrentLiturgicalWeek(date)
 
 			days.push({
@@ -62,19 +53,16 @@ function buildMonthDays(year: number, month: number, locale: string): CalendarDa
 				dayOfWeek: dow,
 				isToday: cell.isToday,
 				isCurrentMonth: cell.isCurrentMonth,
-				feasts: cell.feasts.map((f) => ({
-					name: f.name,
-					type: f.type,
-				})),
+				feasts: cell.feasts,               // ← pass raw ResolvedFeast[]
 				fasting: {
 					active: cell.fasting.active,
 					type: cell.fasting.type,
 					label: cell.fasting.label,
 				},
-				// Tone shows on Sundays
 				tone: dow === 0 ? litWeek.tone : undefined,
-				// Week name shows on Sundays
-				weekName: dow === 0 ? ({ default: litWeek.name, id: litWeek.nameId, el: litWeek.nameEl })[locale] : undefined,
+				weekName: dow === 0
+					? ({ en: litWeek.name, id: litWeek.nameId, el: litWeek.nameEl } as Record<string, string>)[locale] ?? litWeek.name
+					: undefined,
 			})
 		}
 	}
@@ -85,14 +73,6 @@ function buildMonthDays(year: number, month: number, locale: string): CalendarDa
 // ──────────────────────────────────────
 // Config
 // ──────────────────────────────────────
-
-const FEAST_COLOR: Record<string, { color: string; bg: string }> = {
-	great: { color: "text-red-600", bg: "bg-red-50" },
-	major: { color: "text-amber-600", bg: "bg-amber-50" },
-	minor: { color: "text-blue-500", bg: "bg-blue-50" },
-	fast: { color: "text-orange-600", bg: "bg-orange-50" },
-	saint: { color: "text-emerald-600", bg: "bg-emerald-50" },
-}
 
 const DOW_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 
@@ -105,7 +85,7 @@ const MONTH_NAMES = [
 // Day Row Component
 // ──────────────────────────────────────
 
-function DayRow({ day }: { day: CalendarDay }) {
+function DayRow({ day, locale }: { day: CalendarDay; locale: string }) {
 	const isSunday = day.dayOfWeek === 0
 	const isSaturday = day.dayOfWeek === 6
 	const fastConfig = day.fasting.active ? FASTING_CONFIG[day.fasting.type] : null
@@ -157,41 +137,13 @@ function DayRow({ day }: { day: CalendarDay }) {
 					</p>
 				)}
 
-				{/* Feasts */}
+				{/* Feasts — now using FeastChip */}
 				{day.feasts.length > 0 ? (
-					day.feasts.map((feast, i) => {
-						const config = FEAST_COLOR[feast.type]
-						return (
-							<div
-								key={i}
-								className={cn(
-									"flex items-center gap-2 text-sm rounded-sm px-2 py-1 -mx-2",
-									config.bg,
-								)}
-							>
-								{feast.type === "great" ? (
-									<Star size={12} className={cn(config.color, "shrink-0 fill-current")} />
-								) : feast.type === "saint" ? (
-									<Church size={12} className={cn(config.color, "shrink-0")} />
-								) : (
-									<Star size={12} className={cn(config.color, "shrink-0")} />
-								)}
-								<span className={cn("line-clamp-3", config.color)}>
-									{
-										feast.type === "saint" ?
-											<ul className="list-disc">
-												{
-													feast.name.split(';').map((s => (
-														<li key={s}>{s}</li>
-													)))
-												}
-											</ul> :
-											feast.name
-									}
-								</span>
-							</div>
-						)
-					})
+					<div className="space-y-0.5">
+						{day.feasts.map((feast, i) => (
+							<FeastChip key={i} feast={feast} locale={locale} />
+						))}
+					</div>
 				) : (
 					<p className="text-sm text-muted-foreground/40 italic">
 						No feasts
@@ -304,6 +256,7 @@ export default function MobileCalendar({ locale, year, month }: Props) {
 					<DayRow
 						key={`${day.gregorianDate.year}-${day.gregorianDate.month}-${day.gregorianDate.day}`}
 						day={day}
+						locale={locale}
 					/>
 				))}
 			</div>
