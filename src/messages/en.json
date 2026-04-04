@@ -134,7 +134,9 @@
       "ctaSend": "Enter In",
       "ctaSending": "Sending...",
       "successMessage": "Your message has been sent. We will respond shortly.",
-      "errorMessage": "Something went wrong. Please try again."
+      "errorMessage": "Something went wrong. Please try again.",
+      "phone": "Phone Number",
+      "successTitle": "Inquiry Form"
     }
   },
   "aboutPage": {

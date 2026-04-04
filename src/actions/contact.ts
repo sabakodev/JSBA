@@ -9,6 +9,14 @@ import { z } from "zod"
 const contactSchema = z.object({
 	fullName: z.string().min(2, "Name is required").max(100),
 	email: z.email("Invalid email address"),
+	phone: z
+		.string()
+		.min(8, "Phone number is too short")
+		.max(20, "Phone number is too long")
+		.regex(
+			/^[+]?[\d\s\-().]+$/,
+			"Phone number can only contain digits, spaces, dashes, and parentheses"
+		),
 	inquiry: z.string().min(1, "Please select an inquiry type"),
 	message: z.string().min(10, "Message must be at least 10 characters").max(2000),
 })
@@ -41,6 +49,7 @@ async function sendToTelegram(data: z.infer<typeof contactSchema>) {
 		``,
 		`*Name:* ${escape(data.fullName)}`,
 		`*Email:* ${escape(data.email)}`,
+		`*Phone:* ${escape(data.phone)}`,
 		`*Inquiry:* ${escape(data.inquiry)}`,
 		``,
 		`*Message:*`,
@@ -82,7 +91,7 @@ async function sendToDiscord(data: z.infer<typeof contactSchema>) {
 
 	const embed = {
 		title: "New Contact Form Submission",
-		color: 0xd4a056, // Gold accent
+		color: 0xd4a056,
 		fields: [
 			{
 				name: "Full Name",
@@ -92,6 +101,11 @@ async function sendToDiscord(data: z.infer<typeof contactSchema>) {
 			{
 				name: "Email",
 				value: data.email,
+				inline: true,
+			},
+			{
+				name: "Phone",
+				value: data.phone,
 				inline: true,
 			},
 			{
@@ -139,6 +153,7 @@ export async function submitContactForm(
 	const raw = {
 		fullName: formData.get("fullName") as string,
 		email: formData.get("email") as string,
+		phone: formData.get("phone") as string,
 		inquiry: formData.get("inquiry") as string,
 		message: formData.get("message") as string,
 	}

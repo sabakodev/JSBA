@@ -134,7 +134,9 @@
 			"ctaSend": "Kirim Pertanyaan",
 			"ctaSending": "Mengirim...",
 			"successMessage": "Pesan telah terkirim. Kami akan menjawab segera.",
-			"errorMessage": "Telah terjadi sesuatu, Harap coba lagi."
+			"errorMessage": "Telah terjadi sesuatu, Harap coba lagi.",
+			"phone": "Nomor HP (WhatsApp)",
+			"successTitle": "Formulir Pertanyaan"
 		}
 	},
 	"aboutPage": {
