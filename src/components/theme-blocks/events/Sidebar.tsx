@@ -1,17 +1,18 @@
 import OrthodoxCross from "@/components/orthodox-cross"
 import { Link } from "@/i18n/nav"
 import { ArrowRight } from "lucide-react"
-import { useTranslations } from "next-intl"
 import {
 	getUpcomingFeasts,
 	getCurrentLiturgicalWeek,
 } from "@/lib/utils"
 import FeastCard from "./FeastCard"
+import { getTimeZone, getTranslations } from "next-intl/server"
 
-export default function Component({ locale }: { locale: string }) {
-	const t = useTranslations("eventPage.sidebar")
+export default async function Component({ locale }: { locale: string }) {
+	const t = await getTranslations("eventPage.sidebar")
 
-	const now = new Date()
+	const timezone = await getTimeZone()
+	const now = new Date(new Date().toLocaleString("en-US", { timeZone: timezone }))
 	const today = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1)
 
 	const upcomingFeasts = getUpcomingFeasts(
