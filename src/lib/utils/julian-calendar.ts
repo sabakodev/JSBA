@@ -14,7 +14,7 @@ import { VENERATED_SAINTS } from "./synaxarion/saints"
 const JULIAN_OFFSET = 13 // Valid 2000–2099
 
 export function convertToDate(date: { year: number, month: number, day: number }) {
-	return new Date(date.year, date.month, date.day)
+	return new Date(date.year, date.month - 1, date.day)
 }
 
 export function julianToGregorian(year: number, month: number, day: number) {
@@ -34,6 +34,74 @@ export function gregorianToJulian(year: number, month: number, day: number) {
 		month: date.getMonth() + 1,
 		day: date.getDate(),
 	}
+}
+
+// ──────────────────────────────────────
+// Fast-Free Periods
+// ──────────────────────────────────────
+
+interface FastFreePeriod {
+	name: string
+	nameEl: string
+	nameId: string
+	// Julian start/end (month, day)
+	julianStart: { month: number; day: number }
+	julianEnd: { month: number; day: number }
+}
+
+const FAST_FREE_PERIODS: FastFreePeriod[] = [
+	{
+		name: "Sviatki (Christmas to Theophany Eve)",
+		nameEl: "Δωδεκαήμερο (Χριστούγεννα — Παραμονή Θεοφανείων)",
+		nameId: "Sviatki (Natal — Malam Teofani)",
+		julianStart: { month: 12, day: 25 },
+		julianEnd: { month: 1, day: 4 },
+	},
+	{
+		name: "Afterfeast of Theophany",
+		nameEl: "Μεθέορτα Θεοφανείων",
+		nameId: "Sesudah Pesta Teofani",
+		julianStart: { month: 1, day: 5 },
+		julianEnd: { month: 1, day: 17 },
+	},
+	// Moveable ones are handled separately:
+	// - Week of Publican & Pharisee (already in your code)
+	// - Bright Week (already in your code)
+	// - Pentecost Week (already in your code)
+]
+
+/**
+ * Check if a Julian date falls within a fast-free period.
+ * Handles year boundary (e.g., Dec 25 → Jan 4).
+ */
+function isInFastFreePeriod(
+	julianMonth: number,
+	julianDay: number
+): { isFastFree: boolean; period: FastFreePeriod | null } {
+	for (const period of FAST_FREE_PERIODS) {
+		const start = period.julianStart
+		const end = period.julianEnd
+
+		// Convert to day-of-year for comparison
+		const toNum = (m: number, d: number) => m * 100 + d
+		const current = toNum(julianMonth, julianDay)
+		const startNum = toNum(start.month, start.day)
+		const endNum = toNum(end.month, end.day)
+
+		if (startNum <= endNum) {
+			// Normal range (e.g., Jan 5 — Jan 17)
+			if (current >= startNum && current <= endNum) {
+				return { isFastFree: true, period }
+			}
+		} else {
+			// Wraps around year boundary (e.g., Dec 25 — Jan 4)
+			if (current >= startNum || current <= endNum) {
+				return { isFastFree: true, period }
+			}
+		}
+	}
+
+	return { isFastFree: false, period: null }
 }
 
 // ──────────────────────────────────────
@@ -438,6 +506,19 @@ export function isFastingDay(now?: Date): {
 	reasons: string[]
 } {
 	const litDate = getLiturgicalDate(now)
+
+	// ═══════════════════════════════════════════
+	// Fast-free periods override everything
+	// ═══════════════════════════════════════════
+	const { isFastFree } = isInFastFreePeriod(
+		litDate.julian.month,
+		litDate.julian.day
+	)
+
+	if (isFastFree) {
+		return { fasting: false, fastingType: "none", reasons: [] }
+	}
+
 	const dayOfWeek = litDate.dayOfWeek
 	const reasons: string[] = []
 
@@ -522,6 +603,43 @@ export function getCurrentLiturgicalWeek(now?: Date): LiturgicalWeek {
 
 	const year = litDate.gregorian.year
 
+	// ═══════════════════════════════════════════
+	// CHECK FAST-FREE PERIODS FIRST
+	// ═══════════════════════════════════════════
+	const { isFastFree, period } = isInFastFreePeriod(
+		litDate.julian.month,
+		litDate.julian.day
+	)
+
+	if (isFastFree && period) {
+		// Still need tone calculation
+		const prevPaschaData = calculatePascha(year - 1)
+		const prevPascha = new Date(
+			prevPaschaData.gregorian.year,
+			prevPaschaData.gregorian.month - 1,
+			prevPaschaData.gregorian.day
+		)
+		const litToday = new Date(
+			litDate.gregorian.year,
+			litDate.gregorian.month - 1,
+			litDate.gregorian.day
+		)
+		const diffMs = litToday.getTime() - prevPascha.getTime()
+		const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
+		const weeksSincePascha = Math.floor(diffDays / 7)
+		const tone = ((weeksSincePascha % 8) + 8) % 8 || 8
+
+		return {
+			name: period.name,
+			nameEl: period.nameEl,
+			nameId: period.nameId,
+			tone,
+			fasting: false,
+			fastingType: "none",
+			description: `Fast-free period. ${period.name}. No fasting, even on Wednesday and Friday.`,
+		}
+	}
+
 	const currentPascha = calculatePascha(year)
 	const pascha = new Date(
 		currentPascha.gregorian.year,
@@ -559,15 +677,15 @@ export function getCurrentLiturgicalWeek(now?: Date): LiturgicalWeek {
 	function getLentFastingType(weeksBeforePascha: number): LiturgicalWeek["fastingType"] {
 		if (weeksBeforePascha === 1) {
 			// Holy Week — strict throughout
-			if (dayOfWeek === 6) return "strict"
+			if (dayOfWeek === 6) return "oil-wine"
 			if (dayOfWeek === 5) return "strict"
-			if (dayOfWeek === 4) return "strict"
-			return "strict"
+			return "xerophagy"
 		}
 
 		if (weeksBeforePascha === 7) {
 			// Clean Week
 			if (dayOfWeek === 0 || dayOfWeek === 6) return "oil-wine"
+			if (dayOfWeek === 3 || dayOfWeek === 5) return "xerophagy"
 			return "strict"
 		}
 
@@ -575,7 +693,6 @@ export function getCurrentLiturgicalWeek(now?: Date): LiturgicalWeek {
 		if (weeksBeforePascha === 2) {
 			if (dayOfWeek === 6) return "fish"    // Lazarus Saturday
 			if (dayOfWeek === 0) return "fish"    // Palm Sunday
-			if (dayOfWeek === 0 || dayOfWeek === 6) return "oil-wine"
 			return "xerophagy"                     // ← add explicit fallthrough
 		}
 
@@ -610,7 +727,7 @@ export function getCurrentLiturgicalWeek(now?: Date): LiturgicalWeek {
 			return {
 				name: "1st Week of Great Lent (Clean Week)",
 				nameEl: "Α' Εβδομάδα Νηστειών (Καθαρά Εβδομάδα)",
-				nameId: "Minggu ke-1 Prapaskah (Pekan Bersih)",
+				nameId: "Minggu ke-1 Catur Dasa (Pekan Bersih)",
 				tone,
 				fasting: true,
 				fastingType: getLentFastingType(7),
@@ -753,7 +870,7 @@ export function getCurrentLiturgicalWeek(now?: Date): LiturgicalWeek {
 				return "xerophagy"
 			}
 			if (dayOfWeek === 0 || dayOfWeek === 6) return "fish"
-			if (dayOfWeek === 2 || dayOfWeek === 4) return "fish"
+			if (dayOfWeek === 2 || dayOfWeek === 4) return "oil-wine"
 			return "xerophagy"
 		}
 		return "none"
