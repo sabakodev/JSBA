@@ -11,7 +11,15 @@ import FeastCard from "./FeastCard"
 export default function Component({ locale }: { locale: string }) {
 	const t = useTranslations("eventPage.sidebar")
 
-	const upcomingFeasts = getUpcomingFeasts(3, new Date(), ['great', 'major'])
+	const now = new Date()
+	const today = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1)
+
+	const upcomingFeasts = getUpcomingFeasts(
+		3,
+		today,
+		['great', 'major']
+	)
+
 	const currentWeek = getCurrentLiturgicalWeek()
 
 	const currentWeekName = ({ default: currentWeek.name, id: currentWeek.nameId, el: currentWeek.nameEl })[locale] ?? currentWeek.name
