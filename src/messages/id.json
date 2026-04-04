@@ -94,9 +94,7 @@
 		},
 		"contact": {
 			"title": "Js. Basilius Agung - Hubungi Kami"
-		},
-		"search": "Cari renungan...",
-		"notFound": "Tidak ada tulisan ditemukan."
+		}
 	},
 	"global": {
 		"saintName": "Js. Basilius Agung",
@@ -279,6 +277,16 @@
 		}
 	},
 	"blogPage": {
+		"generic": {
+			"search": "Cari renungan...",
+			"notFound": "Tidak ada tulisan ditemukan.",
+			"cta": {
+				"quote": "Gereja adalah Rumah Sakit, bukan pengadilan.",
+				"saintName": "Js. Yohanes Krisostomos",
+				"description": "Pelajari sejarah dan kehidupan Parokia kami.",
+				"button": "Bertukar Pesan"
+			}
+		},
 		"hero": {
 			"headline": {
 				"primary": "Renungan",

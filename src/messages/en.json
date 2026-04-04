@@ -94,9 +94,7 @@
     },
     "contact": {
       "title": "St. Basil the Great - Contact Us"
-    },
-    "search": "Search reflections...",
-    "notFound": "No posts found."
+    }
   },
   "global": {
     "saintName": "St. Basil the Great",
@@ -279,6 +277,16 @@
     }
   },
   "blogPage": {
+	"generic": {
+		"search": "Search reflections...",
+		"notFound": "No posts found.",
+		"cta": {
+			"quote": "The Church is a hospital, not a courtroom.",
+			"saintName": "St. John Chrysostom",
+			"description": "Dive deeper into our parish life and history.",
+			"button": "Mail Exchange"
+		}
+	},
     "hero": {
       "headline": {
         "primary": "Parish Reflections",
