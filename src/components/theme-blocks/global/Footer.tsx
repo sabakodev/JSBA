@@ -39,7 +39,9 @@ export default function FooterCompoonent() {
 					<h3 className="text-xl">{t('saintName')}</h3>
 					<span className="font-extralight text-xs">
 						{/* eslint-disable-next-line react-hooks/purity */}
-						&copy; 2020 - {(new Date(Date.now())).getFullYear()} {t('saintName')}. {t('legal.copyright')}.
+						&copy; 2020 - {(new Date(Date.now())).getFullYear()} {t('saintName')}.
+						Web designed by <a className="font-semibold text-primary-500 hover:text-primary-300 hover:underline transition" href="https://sabako.id/?utm_source=web_orthodox&utm_medium=footer_copyright&utm_campaign=JSBA">SABAKO</a>.
+						{t('legal.copyright')}.
 					</span>
 				</div>
 				<div className="flex flex-col md:flex-row my-8 md:my-0 space-y-8 md:space-y-0 md:space-x-8">
