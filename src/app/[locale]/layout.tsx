@@ -4,7 +4,9 @@ import "../globals.css"
 import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { routing } from "@/i18n/routing"
 import { notFound } from "next/navigation"
-import { Navbar, Footer } from "@/components/theme-blocks/global"
+import { Footer } from "@/components/theme-blocks/global"
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const instrumentSerif = Instrument_Serif({
 	weight: "400",
@@ -49,6 +51,8 @@ export default async function RootLayout({
 			className={`${geistSans.variable} ${geistMono.variable} ${manropeSans.variable} ${instrumentSerif.variable} h-full antialiased`}
 		>
 			<body className="min-h-full flex flex-col">
+				<Analytics />
+				<SpeedInsights />
 				<NextIntlClientProvider>
 					{children}
 					<Footer />
