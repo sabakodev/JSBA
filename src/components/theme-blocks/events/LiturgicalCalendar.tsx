@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -9,6 +9,7 @@ import {
 } from "@/lib/utils"
 import { FEAST_TYPE_CONFIG, JULIAN_MONTHS, FASTING_CONFIG, buildMonthGrid } from "@/lib/utils/calendar"
 import { FastingIndicator, FeastChip } from "./calendar"
+import { Link } from "@/i18n/nav"
 
 const DOW_HEADERS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 
@@ -17,16 +18,29 @@ const MONTH_NAMES = [
 	"July", "August", "September", "October", "November", "December",
 ]
 
-export default function LiturgicalCalendar({ locale }: { locale: string }) {
-	const [viewDate, setViewDate] = useState(new Date())
-	const year = viewDate.getFullYear()
-	const month = viewDate.getMonth()
+interface Props {
+	year: number
+	month: number
+	locale: string
+}
 
-	const weeks = useMemo(() => buildMonthGrid(year, month), [year, month])
+export default function LiturgicalCalendar({ locale, year, month }: Props) {
+	const weeks = useMemo(() => buildMonthGrid(
+		year,
+		month,
+	), [year, month])
 
-	const prevMonth = () => setViewDate(new Date(year, month - 1, 1))
-	const nextMonth = () => setViewDate(new Date(year, month + 1, 1))
-	const goToday = () => setViewDate(new Date())
+	const targetD = (d: number) => {
+		const targetDate = new Date(year, month + d, 1)
+
+		return `/event/calendar/${targetDate.getFullYear()}/${targetDate.getMonth() + 1}`
+	}
+
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	const prevMonth = useMemo(() => targetD(-1), [])
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	const nextMonth = useMemo(() => targetD(+1), [])
+	const goToday = `/event/calendar`
 
 	// Current liturgical context
 	const litWeek = useMemo(() => {
@@ -83,15 +97,21 @@ export default function LiturgicalCalendar({ locale }: { locale: string }) {
 					)}
 				</div>
 				<div className="flex items-center gap-1">
-					<Button variant="outline" size="sm" onClick={goToday}>
-						Today
-					</Button>
-					<Button variant="ghost" size="icon" onClick={prevMonth}>
-						<ChevronLeft className="w-4 h-4" />
-					</Button>
-					<Button variant="ghost" size="icon" onClick={nextMonth}>
-						<ChevronRight className="w-4 h-4" />
-					</Button>
+					<Link href={goToday}>
+						<Button variant="outline" size="sm">
+							Today
+						</Button>
+					</Link>
+					<Link href={prevMonth}>
+						<Button variant="ghost" size="icon">
+							<ChevronLeft className="w-4 h-4" />
+						</Button>
+					</Link>
+					<Link href={nextMonth}>
+						<Button variant="ghost" size="icon">
+							<ChevronRight className="w-4 h-4" />
+						</Button>
+					</Link>
 				</div>
 			</div>
 
