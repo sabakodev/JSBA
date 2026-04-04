@@ -263,6 +263,10 @@
 			"contact": {
 				"label": "Hubungi Kami"
 			}
+		},
+		"timeline": {
+			"addToCalendar": "Tambahkan di Kalendar",
+			"noUpcoming": "Tidak ada acara mendatang."
 		}
 	},
 	"blogPage": {
