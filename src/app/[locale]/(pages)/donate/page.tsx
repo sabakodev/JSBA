@@ -1,4 +1,5 @@
 
+import { DonationAccounts } from "@/components/theme-blocks/donation/bank"
 import { DonationCard } from "@/components/theme-blocks/home/CTA"
 import { getTranslations } from "next-intl/server"
 
@@ -15,6 +16,7 @@ export default function Page() {
 	return (
 		<main className="max-w-2xl mx-auto mt-17 py-6">
 			<DonationCard />
+			<DonationAccounts />
 		</main>
 	)
 }
