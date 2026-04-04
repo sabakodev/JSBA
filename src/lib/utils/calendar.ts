@@ -27,7 +27,7 @@ export const FASTING_CONFIG: Record<
 	xerophagy: { label: "Dry Eating", icon: Wheat, color: "text-amber-700", bg: "bg-amber-50" },
 	"oil-wine": { label: "Oil & Wine", icon: Wine, color: "text-purple-700", bg: "bg-purple-50" },
 	fish: { label: "Fish Allowed", icon: Fish, color: "text-blue-700", bg: "bg-blue-50" },
-	dairy: { label: "Dairy Allowed", icon: Milk, color: "text-emerald-700", bg: "bg-emerald-50" },
+	dairy: { label: "Cheesefare", icon: Milk, color: "text-emerald-700", bg: "bg-emerald-50" },
 	regular: { label: "Wed/Fri Fast", icon: Droplets, color: "text-slate-600", bg: "bg-slate-50" },
 	none: { label: "", icon: Cross, color: "", bg: "" },
 }
@@ -82,7 +82,7 @@ export function buildMonthGrid(year: number, month: number): DayCell[][] {
 
 			// Find feasts for this day (compare in Julian space)
 			const dayFeasts = feasts.filter((f) => {
-				if (f.source === 'fixed') {
+				if (f.source === 'fixed' && (f.type === 'major' || f.type === 'great')) {
 					return f.civilVespersStart.month === greg.month && f.civilVespersStart.day === greg.day && f.civilVespersStart.year === greg.year
 				}
 
