@@ -1,7 +1,14 @@
 import { FEAST_TYPE_CONFIG, JULIAN_MONTHS, FASTING_CONFIG, buildMonthGrid } from "@/lib/utils/calendar"
 import { FastingIndicator, FeastChip } from "./index"
-import { cn } from "@/lib/utils"
+import { cn, getCurrentLiturgicalWeek } from "@/lib/utils"
 import { useMemo } from "react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import { Link } from "@/i18n/nav"
+import { Button } from "@/components/ui/button"
+const MONTH_NAMES = [
+	"January", "February", "March", "April", "May", "June",
+	"July", "August", "September", "October", "November", "December",
+]
 
 const DOW_HEADERS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 
@@ -17,8 +24,86 @@ export default function GridCalendar({ locale, year, month }: Props) {
 		month,
 	), [year, month])
 
+	const targetD = (d: number) => {
+		const targetDate = new Date(year, month + d, 1)
+
+		return `/event/calendar/${targetDate.getFullYear()}/${targetDate.getMonth() + 1}`
+	}
+
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	const prevMonth = useMemo(() => targetD(-1), [])
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	const nextMonth = useMemo(() => targetD(+1), [])
+	const goToday = `/event/calendar`
+
+	const litWeek = useMemo(() => {
+		const week = getCurrentLiturgicalWeek()
+
+		return {
+			name: ({ default: week.name, id: week.nameId, el: week.nameEl })[locale] ?? week.name,
+			tone: week.tone,
+			fasting: week.fasting,
+			fastingType: week.fastingType,
+		}
+	}, [locale])
+
 	return (
-		<>
+		<div className="hidden md:block">
+			<div className="flex items-center justify-between mb-4 px-2">
+				<div>
+					<h2 className="text-2xl font-bold tracking-tight">
+						{MONTH_NAMES[month]} {year}
+					</h2>
+					<div className="block md:hidden mt-2">
+						<div className="flex space-x-2">
+							{litWeek.tone && (
+								<p className="text-[10px] py-px tracking-widest text-tertiary-950 rounded-sm px-2 bg-tertiary-100">
+									Tone {litWeek.tone}
+								</p>
+							)}
+							{litWeek.fasting && (
+								<p className="text-[10px] py-px uppercase tracking-widest text-primary">
+									{litWeek.fastingType}
+								</p>
+							)}
+						</div>
+					</div>
+				</div>
+
+				<div className="py-3 px-4 bg-primary/5 border border-primary/10 rounded-sm text-center hidden md:block">
+					<p className="text-sm font-body font-bold text-on-surface">
+						{litWeek.name}
+					</p>
+					{litWeek.tone && (
+						<p className="text-xs text-secondary/60 mt-1">
+							Tone {litWeek.tone}
+						</p>
+					)}
+					{litWeek.fasting && (
+						<p className="text-[10px] uppercase tracking-widest text-primary mt-2">
+							{litWeek.fastingType}
+						</p>
+					)}
+				</div>
+				<div className="flex items-center gap-1">
+					<Link href={goToday}>
+						<Button variant="outline" size="sm">
+							Today
+						</Button>
+					</Link>
+					<Link href={prevMonth}>
+						<Button variant="ghost" size="icon">
+							<ChevronLeft className="w-4 h-4" />
+						</Button>
+					</Link>
+					<Link href={nextMonth}>
+						<Button variant="ghost" size="icon">
+							<ChevronRight className="w-4 h-4" />
+						</Button>
+					</Link>
+				</div>
+			</div>
+
 			{/* ── Day-of-week headers ── */}
 			<div className="grid grid-cols-7 border-b">
 				{DOW_HEADERS.map((dow, i) => (
@@ -120,6 +205,6 @@ export default function GridCalendar({ locale, year, month }: Props) {
 					</span>
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }
