@@ -64,7 +64,11 @@
     "label": "Support Our Mission",
     "description": "Your stewardship enables the continuation of the Divine Liturgy, the maintenance of our sacred space, and our charitable works within the local community. Every gift is an offering to God.",
     "actionButton": "Make an Offering",
-    "taxDisclaimer": "ALL DONATIONS ARE TAX DEDUCTIBLE"
+    "taxDisclaimer": "ALL DONATIONS ARE TAX DEDUCTIBLE",
+    "donorNamePlaceholder": "Name (optional)",
+    "donorEmailPlaceholder": "Email (optional)",
+    "customAmountPlaceholder": "Other amount",
+    "processing": "Processing..."
   },
   "Metadata": {
     "donate": {

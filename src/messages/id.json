@@ -64,7 +64,11 @@
 		"label": "Dukung Misi Kami",
 		"description": "Hasil Kebaikan Anda memungkinkan keberlangsungan Pelayanan Ilahi, pemeliharaan bangunan suci kita, dan pemakmuran di komunitas lokal. Setiap pemberian adalah persembahan kepada Tuhan.",
 		"actionButton": "Berikan Persembahan",
-		"taxDisclaimer": "SEMUA DONASI AKAN DIKURANGI PAJAK"
+		"taxDisclaimer": "SEMUA DONASI AKAN DIKURANGI PAJAK",
+		"donorNamePlaceholder": "Nama (tidak wajib)",
+		"donorEmailPlaceholder": "Email (tidak wajib)",
+		"customAmountPlaceholder": "Masukan Jumlah Sendiri",
+		"processing": "Memproses..."
 	},
 	"Metadata": {
 		"donate": {
