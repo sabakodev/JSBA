@@ -49,10 +49,10 @@ export default function Component({ hero = false }: { hero?: boolean }) {
 			label: t('page.blog'),
 			href: "/blog",
 		},
-		{
-			label: t('page.index'),
-			href: "/index",
-		},
+		// {
+		// 	label: t('page.index'),
+		// 	href: "/index",
+		// },
 		{
 			label: t('page.why'),
 			href: "/why",
