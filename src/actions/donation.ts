@@ -1,6 +1,7 @@
 "use server"
 
 import { z } from "zod"
+import { validateAntiSpam } from "@/lib/honeypot"
 
 // ──────────────────────────────────────
 // Validation
@@ -26,6 +27,18 @@ export async function createDonationInvoice(
 	_prevState: DonationState,
 	formData: FormData
 ): Promise<DonationState> {
+	// ── Anti-spam check FIRST ──
+	const spamCheck = validateAntiSpam(formData)
+	if (spamCheck.isBot) {
+		// Return generic error — don't reveal detection method
+		console.warn(`Bot detected: ${spamCheck.reason}`)
+		return {
+			success: false,
+			error: "Unable to process your request. Please try again.",
+			invoiceUrl: null,
+		}
+	}
+
 	const raw = {
 		amount: Number(formData.get("amount")),
 		donorName: (formData.get("donorName") as string) || undefined,
