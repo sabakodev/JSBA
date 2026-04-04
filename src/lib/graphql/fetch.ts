@@ -27,10 +27,9 @@ export async function fetchGraphQL<T>(
 		},
 		body: JSON.stringify({ query, variables }),
 		next: {
-			// revalidate: options?.revalidate ?? 3600,
+			revalidate: options?.revalidate ?? 3600,
 			tags: options?.tags,
 		},
-		cache: "no-store", // Bypass Next.js cache too
 	})
 
 	// Debug: Check what we're actually getting back
