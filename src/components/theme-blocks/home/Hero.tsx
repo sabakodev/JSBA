@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { Link } from "@/i18n/nav"
 import { Mouse } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Image from "next/image"
@@ -23,12 +24,16 @@ export default function Component() {
 							<span className="text-primary-800 text-2xl">{t('subtitle')}</span>
 							<h1 className="my-4 text-6xl sm:text-8xl text-white">{t('heading')}</h1>
 							<div className="flex font-sans justify-center space-x-4">
-								<Button className="px-4 h-12">
-									{t('cta.primary')}
-								</Button>
-								<Button variant="outline" className="px-4 h-12 text-primary-foreground hover:text-primary-foreground/80">
-									{t('cta.learn')}
-								</Button>
+								<Link href="/contact">
+									<Button className="px-4 h-12">
+										{t('cta.primary')}
+									</Button>
+								</Link>
+								<Link href="/why">
+									<Button variant="outline" className="px-4 h-12 text-primary-foreground hover:text-primary-foreground/80">
+										{t('cta.learn')}
+									</Button>
+								</Link>
 							</div>
 						</div>
 					</div>
