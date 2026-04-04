@@ -117,21 +117,24 @@
 		},
 		"form": {
 			"fullName": "Nama Lengkap",
-			"fullNamePlaceholder": "Budi Setiawan",
+			"fullNamePlaceholder": "Budi dari Semarang",
 			"email": "Alamat Email",
 			"inquiry": {
 				"label": "Keperluan",
 				"option": {
 					"general": "Umum",
 					"beginner": "Menjadi Orthodox (Katekumen)",
-					"sacrament": "Sakramen Baptisan atau Pernikahan",
-					"confession": "Pengakuan Dosa / Bimbingan Rohani",
-					"manager": "Pengurus Parokia"
+					"sacrament": "Sakramen Baptisan atau Pernikahan Kudus",
+					"confession": "Pengakuan Dosa & Bimbingan Rohani",
+					"manager": "Administrasi Parokia"
 				}
 			},
 			"message": "Pesan Anda",
 			"messagePlaceholder": "Apa yang bisa dibantu?",
-			"ctaSend": "Kirim Pertanyaan"
+			"ctaSend": "Kirim Pertanyaan",
+			"ctaSending": "Mengirim...",
+			"successMessage": "Pesan telah terkirim. Kami akan menjawab segera.",
+			"errorMessage": "Telah terjadi sesuatu, Harap coba lagi."
 		}
 	},
 	"aboutPage": {

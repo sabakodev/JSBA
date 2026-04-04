@@ -117,8 +117,8 @@
     },
     "form": {
       "fullName": "Full Name",
-      "fullNamePlaceholder": "John Dalton",
-      "email": "Email Address",
+      "fullNamePlaceholder": "John of Damascus",
+      "email": "Email",
       "inquiry": {
         "label": "Inquiry Type",
         "option": {
@@ -126,12 +126,15 @@
           "beginner": "Becoming Orthodox (Catechumenate)",
           "sacrament": "Baptism or Wedding Inquiries",
           "confession": "Confession / Spiritual Guidance",
-          "manager": "Parish Council"
+          "manager": "Parish Administration"
         }
       },
       "message": "Your Message",
       "messagePlaceholder": "How may we serve you?",
-      "ctaSend": "Enter In"
+      "ctaSend": "Enter In",
+      "ctaSending": "Sending...",
+      "successMessage": "Your message has been sent. We will respond shortly.",
+      "errorMessage": "Something went wrong. Please try again."
     }
   },
   "aboutPage": {
