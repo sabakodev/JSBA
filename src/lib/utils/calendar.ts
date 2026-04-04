@@ -46,10 +46,30 @@ export const JULIAN_MONTHS = [
 ]
 
 // ──────────────────────────────────────
+// Get "today" in a specific timezone
+// ──────────────────────────────────────
+
+function getTodayInTimezone(timezone: string): { year: number; month: number; day: number } {
+	const now = new Date()
+	const parts = new Intl.DateTimeFormat("en-CA", {
+		timeZone: timezone,
+		year: "numeric",
+		month: "2-digit",
+		day: "2-digit",
+	}).formatToParts(now)
+
+	const year = parseInt(parts.find((p) => p.type === "year")!.value)
+	const month = parseInt(parts.find((p) => p.type === "month")!.value)
+	const day = parseInt(parts.find((p) => p.type === "day")!.value)
+
+	return { year, month, day }
+}
+
+// ──────────────────────────────────────
 // Build Calendar Grid
 // ──────────────────────────────────────
 
-export function buildMonthGrid(year: number, month: number): DayCell[][] {
+export function buildMonthGrid(year: number, month: number, timezone: string = "Asia/Jakarta"): DayCell[][] {
 	const feasts = [
 		...getAllFeasts(year - 1),
 		...getAllFeasts(year),
@@ -67,6 +87,9 @@ export function buildMonthGrid(year: number, month: number): DayCell[][] {
 
 	const weeks: DayCell[][] = []
 	const current = new Date(gridStart)
+
+	// Compute "today" once, in the user's timezone
+	const today = getTodayInTimezone(timezone)
 
 	for (let week = 0; week < 6; week++) {
 		const row: DayCell[] = []
@@ -97,11 +120,10 @@ export function buildMonthGrid(year: number, month: number): DayCell[][] {
 				dayOfWeek === 3 ||
 				dayOfWeek === 5
 
-			const today = new Date()
 			const isToday =
-				date.getFullYear() === today.getFullYear() &&
-				date.getMonth() === today.getMonth() &&
-				date.getDate() === today.getDate()
+				greg.year === today.year &&
+				greg.month === today.month &&
+				greg.day === today.day
 
 			row.push({
 				date,
