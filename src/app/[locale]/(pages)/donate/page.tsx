@@ -1,6 +1,6 @@
 
 import { DonationAccounts } from "@/components/theme-blocks/donation/bank"
-import { DonationCard } from "@/components/theme-blocks/home/CTA"
+import { DonationCard } from "@/components/theme-blocks/global"
 import { getTranslations } from "next-intl/server"
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
