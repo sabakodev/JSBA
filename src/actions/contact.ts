@@ -96,7 +96,7 @@ async function sendToDiscord(data: z.infer<typeof contactSchema>) {
 			{
 				name: "Full Name",
 				value: data.fullName,
-				inline: true,
+				inline: false,
 			},
 			{
 				name: "Email",
@@ -111,7 +111,7 @@ async function sendToDiscord(data: z.infer<typeof contactSchema>) {
 			{
 				name: "Inquiry",
 				value: data.inquiry,
-				inline: false,
+				inline: true,
 			},
 			{
 				name: "Message",
@@ -123,7 +123,7 @@ async function sendToDiscord(data: z.infer<typeof contactSchema>) {
 		],
 		timestamp: new Date().toISOString(),
 		footer: {
-			text: "SABAKO Contact Form",
+			text: "Evangelist Contact Form",
 		},
 	}
 
@@ -131,7 +131,7 @@ async function sendToDiscord(data: z.infer<typeof contactSchema>) {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify({
-			username: "SABAKO Contact",
+			username: `Evangelion (${data.fullName})`,
 			embeds: [embed],
 		}),
 	})
