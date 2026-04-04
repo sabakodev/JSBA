@@ -1,7 +1,7 @@
 import { CategoryFilter, Featured, FeedCard, Hero } from "@/components/theme-blocks/blog"
 import OrthodoxCross from "@/components/orthodox-cross"
 import { Search } from "lucide-react"
-import { getExtracted, getTranslations } from "next-intl/server"
+import { getTranslations } from "next-intl/server"
 import { getCategories, getFeaturedPost, getPosts, getPostsByCategory } from "@/lib/graphql/services/posts"
 import Pagination from "@/components/ui/pagination"
 import { Link } from "@/i18n/nav"
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<Props> }) {
 }
 
 export default async function Page({ searchParams }: Props) {
-	const t = await getExtracted('blogPage.generic')
+	const t = await getTranslations('blogPage.generic')
 
 	const params = await searchParams
 	const currentPage = Number(params.page) || 1
@@ -71,15 +71,14 @@ export default async function Page({ searchParams }: Props) {
 				<div
 					className="flex flex-col justify-center items-center text-center p-12 bg-secondary-900 rounded-lg space-y-6 border border-border/5">
 					<OrthodoxCross className="text-primary" />
-					<h3 className="text-2xl font-serif italic text-secondary">&quot;The Church is a hospital, not a courtroom.&quot;</h3>
-					<p className="text-sm text-secondary font-body">St. John Chrysostom</p>
+					<h3 className="text-2xl font-serif italic text-secondary">&quot;{t('cta.quote')}&quot;</h3>
+					<p className="text-sm text-secondary font-body">{t('cta.saintName')}</p>
 					<div className="w-12 h-px bg-primary/30"></div>
-					<p className="text-xs uppercase tracking-widest text-secondary-100/70 max-w-50">Dive
-						deeper into our parish life and history.</p>
+					<p className="text-xs uppercase tracking-widest text-secondary-100/70 max-w-50">{t('cta.description')}</p>
 					<Link
 						href="/contact"
 						className="bg-primary/10 text-primary px-6 py-2 rounded-sm text-xs uppercase tracking-widest hover:bg-primary/20 transition-colors">
-						Mail Exchange
+						{t('cta.button')}
 					</Link>
 				</div>
 			</div>
