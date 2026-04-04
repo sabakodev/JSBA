@@ -11,7 +11,7 @@
 		},
 		"title": "Halo dunia!",
 		"about": {
-			"content": "<p>Didirikan dengan berkat Roh Kudus, Js. Basilius Agung lebih dari sekadar paroki; ia adalah rumah rohani tempat tradisi kuno Ritus Bizantin bertemu dengan kerinduan jiwa modern.</p><p>Komunitas kami berakar pada warisan filantropis janasuci pelindung kami, berkomitmen pada keindahan liturgi, pemaknaan teologis, dan pelayanan rendah hati kepada sesama. Di sini, kami berusaha menghidupi Injil secara penuh, melestarikan ajaran para Bapa Gereja sambil mencoba mempraktikan orthopraxia di masa kini.</p>",
+			"content": "<p>Didirikan dengan berkat Roh Kudus, Js. Basilius Agung lebih dari sekadar parokia; ia adalah rumah rohani tempat tradisi kuno Ritus Bizantin bertemu dengan kerinduan jiwa modern.</p><p>Komunitas kami berakar pada warisan filantropis janasuci pelindung kami, berkomitmen pada keindahan liturgi, pemaknaan teologis, dan pelayanan rendah hati kepada sesama. Di sini, kami berusaha menghidupi Injil secara penuh, melestarikan ajaran para Bapa Gereja sambil mencoba mempraktikan orthopraxia di masa kini.</p>",
 			"title": {
 				"top": "Iman dengan Sejarah",
 				"bottom": "Sepanjang Segala Abad"
@@ -52,7 +52,7 @@
 			}
 		},
 		"gallery": {
-			"title": "Kehidupan di Paroki",
+			"title": "Kehidupan di Parokia",
 			"description": "Keindahan ibadah, sukacita komunitas.",
 			"fullLink": "Lihat Galeri Lengkap"
 		},
@@ -102,7 +102,7 @@
 		"page": {
 			"privacy": "Kebijakan Privasi",
 			"calendar": "Kalender Liturgi",
-			"council": "Dewan Paroki",
+			"council": "Dewan Parokia",
 			"donate": "Donasi",
 			"about": "Tentang",
 			"events": "Kegiatan",
@@ -126,7 +126,7 @@
 					"beginner": "Menjadi Orthodox (Katekumen)",
 					"sacrament": "Sakramen Baptisan atau Pernikahan",
 					"confession": "Pengakuan Dosa / Bimbingan Rohani",
-					"manager": "Pengurus Paroki"
+					"manager": "Pengurus Parokia"
 				}
 			},
 			"message": "Pesan Anda",
@@ -197,16 +197,16 @@
 			"title": "Kepemimpinan & Pelayanan",
 			"description": "Mereka yang melayani dan mambangun komunitas kami.",
 			"shepherd": {
-				"name": "Diakon Timothy",
-				"title": "Pelayan Paroki",
-				"description": "Melayani paroki kami dengan fokus pada katekisasi dan pelayanan kaum muda."
+				"name": "Rm. Diakon Timotius Tommy V. Mahulette",
+				"title": "Pelayan Parokia",
+				"description": "Melayani parokia kami dengan fokus pada katekisasi dan pelayanan kaum muda."
 			},
 			"lead": {
-				"description": "Mengawasi operasional paroki dan program penjangkauan komunitas.",
-				"title": "Ketua Dewan Paroki"
+				"description": "Mengawasi operasional parokia dan program penjangkauan komunitas.",
+				"title": "Ketua Dewan Parokia"
 			},
 			"secretary": {
-				"title": "Sekretaris Paroki",
+				"title": "Sekretaris Parokia",
 				"description": "Mengelola komunikasi dan koordinasi liturgi."
 			},
 			"treasurer": {
@@ -223,7 +223,7 @@
 			}
 		},
 		"hero": {
-			"title": "Paroki Kami",
+			"title": "Parokia Kami",
 			"subtitle": "Cahaya Kebenaran untuk <i>Jiwa Modern.</i>"
 		}
 	},
@@ -314,7 +314,7 @@
 				"first": "Perpustakaan Rohani",
 				"secondary": "Sumber Daya"
 			},
-			"description": "\"Membaca Kitab Suci adalah perlindungan besar terhadap dosa; ketidaktahuan akan Kitab Suci adalah jurang dan lubang yang dalam.\" — Janasuci Yohanes Krisostomus. Jelajahi koleksi pilihan kami berupa teks liturgi, tulisan patristik, dan sumber daya paroki.",
+			"description": "\"Membaca Kitab Suci adalah perlindungan besar terhadap dosa; ketidaktahuan akan Kitab Suci adalah jurang dan lubang yang dalam.\" — Janasuci Yohanes Krisostomus. Jelajahi koleksi pilihan kami berupa teks liturgi, tulisan patristik, dan sumber daya parokia.",
 			"cta": {
 				"primary": "Masuk ke Arsip",
 				"secondary": "Ajukan Peminjaman"
@@ -455,7 +455,7 @@
 		},
 		"faq": {
 			"title": "Pertanyaan Umum",
-			"subtitle": "Mempersiapkan kunjungan Anda ke paroki"
+			"subtitle": "Mempersiapkan kunjungan Anda ke parokia"
 		},
 		"sidebar": {
 			"title": "Tempat Kudus Kami",
@@ -470,7 +470,7 @@
 			"title": "Cara menuju kami",
 			"step": {
 				"parking": "Parkir tersedia di samping <b>Js. Basilius Agung</b> untuk semua pengunjung.",
-				"flamboyant": "Belok kiri ke <b>Jalan Flamboyan</b>. Paroki terletak di sisi kanan jalan.",
+				"flamboyant": "Belok kiri ke <b>Jalan Flamboyan</b>. Parokia terletak di sisi kanan jalan.",
 				"margonda": "Dari <b>Jalan Margonda</b>, masuk ke Jalan Dahlia dan menuju arah Tenggara sekitar 1 km."
 			}
 		},
