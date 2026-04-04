@@ -22,6 +22,7 @@ export default function GridCalendar({ locale, year, month }: Props) {
 	const weeks = useMemo(() => buildMonthGrid(
 		year,
 		month,
+		Intl.DateTimeFormat().resolvedOptions().timeZone,
 	), [year, month])
 
 	const targetD = (d: number) => {

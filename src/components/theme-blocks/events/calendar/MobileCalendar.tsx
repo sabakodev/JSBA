@@ -36,7 +36,7 @@ interface CalendarDay {
  * filtered to only include days in the target month.
  */
 function buildMonthDays(year: number, month: number, locale: string): CalendarDay[] {
-	const weeks = buildMonthGrid(year, month)
+	const weeks = buildMonthGrid(year, month, Intl.DateTimeFormat().resolvedOptions().timeZone)
 	const days: CalendarDay[] = []
 
 	for (const week of weeks) {
