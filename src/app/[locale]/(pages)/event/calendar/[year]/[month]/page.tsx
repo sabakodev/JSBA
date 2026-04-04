@@ -13,15 +13,27 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function Page({
 	params,
 }: Readonly<{
-	params: Promise<{ locale: string }>
+	params: Promise<{
+		locale: string
+		year: number
+		month: string
+	}>
 }>) {
-	const { locale } = await params
+	const { locale, year, month } = await params
 
-	const currentDate = new Date()
+	const cMonth = parseInt(month) - 1
+
+	const isValid = (year >= 2000 && year <= 2099) && (cMonth >= 0 && cMonth <= 11)
 
 	return (
 		<main className="max-w-7xl mx-auto px-6 py-24">
-			<LiturgicalCalendar locale={locale} year={currentDate.getFullYear()} month={currentDate.getMonth()} />
+			{
+				isValid ?
+					<LiturgicalCalendar locale={locale} year={year} month={cMonth} /> :
+					<div>
+						Date invalid
+					</div>
+			}
 		</main>
 	)
 }
