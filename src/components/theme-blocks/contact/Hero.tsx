@@ -13,6 +13,7 @@ export default function Component() {
 					height={400}
 					className="w-full h-full object-cover sepia-[0.2]"
 					data-alt="atmospheric interior of an orthodox church with warm candlelight reflecting off wooden cross with dim sunlight scattered peeking through window"
+					loading="eager"
 					src="/assets/photos/scenery/city/IMG_1750.JPEG" />
 				<div className="absolute inset-0 bg-secondary-100/60 backdrop-blur-sm"></div>
 			</div>

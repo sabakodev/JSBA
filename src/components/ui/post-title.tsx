@@ -21,7 +21,7 @@ export default function PostTitle({
 		<Tag className={className}>
 			{main}
 			{subtitle && (
-				<span className={cn("italic block", subtitleClassName)}>
+				<span className={cn("italic", subtitleClassName)}>
 					{subtitle}
 				</span>
 			)}

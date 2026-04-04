@@ -12,7 +12,7 @@ export default function Component() {
 					<h1 className="text-5xl mb-6">{t('title')}</h1>
 					<p className="text-primary-200">{t('description')}</p>
 				</div>
-				<Link href="/gallery" className="group uppercase font-extralight py-8">
+				<Link href="https://www.instagram.com/orthodoxdepok/" className="group uppercase font-extralight py-8">
 					<div className="border-b-2 border-primary-400/30 text-primary-500 group-hover:text-primary-400 group-hover:border-primary-400/50 transition-colors duration-300">
 						{t('fullLink')}
 					</div>

@@ -4,7 +4,14 @@ import { getPostBySlug, getRelatedPosts } from "@/lib/graphql/services/posts"
 import { notFound } from "next/navigation"
 import SidebarShare from "@/components/ui/sidebar-share"
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+interface Props {
+	params: Promise<{
+		locale: string
+		slug: string
+	}>
+}
+
+export async function generateMetadata({ params }: Props) {
 	const { locale, slug } = await params
 	const post = await getPostBySlug(slug)
 
@@ -17,14 +24,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 	return {
 		title: `${post.title} - ${t('saintName')}`,
 		description: post.excerpt?.replace(/<[^>]*>/g, '').substring(0, 160),
+		alternates: {
+			canonical: `/id/blog/${slug}`
+		},
+		openGraph: post.featuredImage && {
+			images: post.featuredImage.node.sourceUrl,
+		},
 	}
-}
-
-interface Props {
-	params: Promise<{
-		locale: string
-		slug: string
-	}>
 }
 
 export default async function Page({ params }: Props) {

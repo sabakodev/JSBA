@@ -33,7 +33,7 @@ export default function Component() {
 					</div>
 					{/* <!-- Council Lead --> */}
 					<div className="bg-secondary-900/90 p-8 rounded-lg hover:bg-secondary-800/60 transition-colors">
-						<h3 className="font-headline text-2xl mb-1">Athanasius Reyffissen</h3>
+						<h3 className="font-headline text-2xl mb-1">Athanasius Reyffissen B. Tuhumury</h3>
 						<p className="font-label text-outline tracking-widest text-[10px] uppercase mb-6">{t('lead.title')}</p>
 						<p className="text-xs text-on-surface-variant">
 							{t('lead.description')}
@@ -41,25 +41,25 @@ export default function Component() {
 					</div>
 					{/* <!-- Secretary --> */}
 					<div className="bg-secondary-900/90 p-8 rounded-lg hover:bg-secondary-800/60 transition-colors">
-						<h3 className="font-headline text-2xl mb-1">Agnes Esther</h3>
+						<h3 className="font-headline text-2xl mb-1">Agnes Ester T. Winowatan</h3>
 						<p className="font-label text-outline tracking-widest text-[10px] uppercase mb-6">{t('secretary.title')}</p>
 						<p className="text-xs text-on-surface-variant">{t('secretary.description')}</p>
 					</div>
 					{/* <!-- Smaller Grid Items --> */}
 					<div className="bg-secondary-900/90 p-8 rounded-lg hover:bg-secondary-800/60 transition-colors">
-						<h3 className="font-headline text-2xl mb-1">Spyridon Yehezkiel</h3>
+						<h3 className="font-headline text-2xl mb-1">Spyridon Yehezkiel M. Manik</h3>
 						<p className="font-label text-outline tracking-widest text-[10px] uppercase">{t('treasurer.title')}</p>
 					</div>
 					<div className="bg-secondary-900/90 p-8 rounded-lg hover:bg-secondary-800/60 transition-colors">
-						<h3 className="font-headline text-2xl mb-1">Antonius Pakpahan</h3>
+						<h3 className="font-headline text-2xl mb-1">Antonius Suhanto Pakpahan</h3>
 						<p className="font-label text-outline tracking-widest text-[10px] uppercase">{t('equpment.title')}</p>
 					</div>
 					<div className="bg-secondary-900/90 p-8 rounded-lg hover:bg-secondary-800/60 transition-colors">
-						<h3 className="font-headline text-2xl mb-1">Musa Andrefico</h3>
+						<h3 className="font-headline text-2xl mb-1">Musa Andrefico Bangun</h3>
 						<p className="font-label text-outline tracking-widest text-[10px] uppercase">{t('choir.title')}</p>
 					</div>
 					<div className="bg-secondary-900/90 p-8 rounded-lg hover:bg-secondary-800/60 transition-colors">
-						<h3 className="font-headline text-2xl mb-1">James & Zakheus</h3>
+						<h3 className="font-headline text-2xl mb-1">Yakobus Hans J. Liem & Zakheus Andy M. Suryawardhana</h3>
 						<p className="font-label text-outline tracking-widest text-[10px] uppercase">{t('education.title')}</p>
 					</div>
 				</div>

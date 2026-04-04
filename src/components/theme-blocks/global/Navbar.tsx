@@ -4,6 +4,7 @@ import { Link, usePathname } from "@/i18n/nav"
 import { cn } from "@/lib/utils"
 import { MenuIcon, SearchIcon, XIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
+import Image from "next/image"
 import { useEffect, useState } from "react"
 
 export default function Component({ hero = false }: { hero?: boolean }) {
@@ -75,11 +76,21 @@ export default function Component({ hero = false }: { hero?: boolean }) {
 				<div className="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
 					<Link
 						className={cn(
-							"text-2xl font-serif italic transition-colors duration-500",
+							"text-2xl font-serif italic transition-colors duration-500 flex items-center",
 							isTransparent ? "text-white" : "text-primary-500"
 						)}
 						href="/"
 					>
+						<Image
+							src="/logo/jsba.png"
+							alt=""
+							width={620}
+							height={620}
+							className={cn(
+								"w-8 h-8 mr-4 transition duration-600",
+								isTransparent ? 'opacity-0' : ''
+							)}
+						/>
 						{t('saintName')}
 					</Link>
 
