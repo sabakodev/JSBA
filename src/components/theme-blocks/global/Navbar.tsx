@@ -1,16 +1,27 @@
 "use client"
 
-import { Link, usePathname } from "@/i18n/nav"
+import { Link, usePathname, useRouter } from "@/i18n/nav"
 import { cn } from "@/lib/utils"
-import { MenuIcon, SearchIcon, XIcon } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { GlobeIcon, MenuIcon, SearchIcon, XIcon } from "lucide-react"
+import { useLocale, useTranslations } from "next-intl"
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+
+const locales = [
+	{ code: "id", label: "ID" },
+	{ code: "en", label: "EN" },
+] as const
 
 export default function Component({ hero = false }: { hero?: boolean }) {
 	const t = useTranslations('global')
+	const locale = useLocale()
+	const router = useRouter()
+	const pathname = usePathname()
+
 	const [scrolled, setScrolled] = useState(false)
 	const [sidebarOpen, setSidebarOpen] = useState(false)
+	const [langOpen, setLangOpen] = useState(false)
+	const langRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -35,6 +46,22 @@ export default function Component({ hero = false }: { hero?: boolean }) {
 		}
 	}, [sidebarOpen])
 
+	// Close lang dropdown on outside click
+	useEffect(() => {
+		const handleClickOutside = (e: MouseEvent) => {
+			if (langRef.current && !langRef.current.contains(e.target as Node)) {
+				setLangOpen(false)
+			}
+		}
+		document.addEventListener("mousedown", handleClickOutside)
+		return () => document.removeEventListener("mousedown", handleClickOutside)
+	}, [])
+
+	const switchLocale = (newLocale: string) => {
+		router.replace(pathname, { locale: newLocale })
+		setLangOpen(false)
+	}
+
 	const isTransparent = hero && !scrolled
 
 	const navlinks = [
@@ -50,10 +77,6 @@ export default function Component({ hero = false }: { hero?: boolean }) {
 			label: t('page.blog'),
 			href: "/blog",
 		},
-		// {
-		// 	label: t('page.index'),
-		// 	href: "/index",
-		// },
 		{
 			label: t('page.why'),
 			href: "/why",
@@ -123,9 +146,50 @@ export default function Component({ hero = false }: { hero?: boolean }) {
 					</div>
 
 					<div className="flex items-center space-x-6">
+						{/* Language Switcher */}
+						<div className="relative" ref={langRef}>
+							<button
+								onClick={() => setLangOpen(!langOpen)}
+								className={cn(
+									"flex items-center gap-1.5 px-2 py-1 text-sm transition-colors duration-500 rounded",
+									isTransparent
+										? "text-white/80 hover:text-white"
+										: "text-primary-100 hover:text-primary-600"
+								)}
+								aria-label="Change language"
+							>
+								<GlobeIcon size={16} />
+								<span className="uppercase font-medium">{locale}</span>
+							</button>
+
+							{/* Dropdown */}
+							<div
+								className={cn(
+									"absolute right-0 top-full mt-2 bg-background border border-border/30 rounded-lg shadow-lg overflow-hidden transition-all duration-200",
+									langOpen
+										? "opacity-100 translate-y-0 pointer-events-auto"
+										: "opacity-0 -translate-y-2 pointer-events-none"
+								)}
+							>
+								{locales.map(({ code, label }) => (
+									<button
+										key={code}
+										onClick={() => switchLocale(code)}
+										className={cn(
+											"block w-full text-left px-4 py-2 text-sm transition-colors hover:bg-primary-500/10",
+											locale === code
+												? "text-primary-600 font-bold bg-primary-500/5"
+												: "text-foreground/70"
+										)}
+									>
+										{label}
+									</button>
+								))}
+							</div>
+						</div>
+
 						<div className={cn(
 							"relative hidden",
-							// "lg:block"
 						)}>
 							<SearchIcon
 								className={cn(
@@ -171,18 +235,16 @@ export default function Component({ hero = false }: { hero?: boolean }) {
 						</button>
 					</div>
 				</div>
-			</nav >
+			</nav>
 
 			{/* Mobile sidebar overlay */}
-			< div
-				className={
-					cn(
-						"fixed inset-0 z-60 bg-black/50 backdrop-blur-sm transition-opacity duration-300",
-						sidebarOpen
-							? "opacity-100 pointer-events-auto"
-							: "opacity-0 pointer-events-none"
-					)
-				}
+			<div
+				className={cn(
+					"fixed inset-0 z-60 bg-black/50 backdrop-blur-sm transition-opacity duration-300",
+					sidebarOpen
+						? "opacity-100 pointer-events-auto"
+						: "opacity-0 pointer-events-none"
+				)}
 				onClick={() => setSidebarOpen(false)}
 			/>
 
@@ -226,6 +288,32 @@ export default function Component({ hero = false }: { hero?: boolean }) {
 									{label}
 								</Link>
 							))}
+						</div>
+
+						{/* Mobile language switcher */}
+						<div className="mt-6 pt-6 border-t border-border/30">
+							<p className="px-4 text-xs uppercase tracking-wider text-foreground/40 mb-2">
+								{t('generic.language') ?? 'Language'}
+							</p>
+							<div className="flex gap-2 px-4">
+								{locales.map(({ code, label }) => (
+									<button
+										key={code}
+										onClick={() => {
+											switchLocale(code)
+											setSidebarOpen(false)
+										}}
+										className={cn(
+											"px-4 py-2 text-sm rounded-lg transition-colors",
+											locale === code
+												? "bg-primary-500 text-primary-foreground font-bold"
+												: "bg-primary-500/10 text-foreground/70 hover:bg-primary-500/20"
+										)}
+									>
+										{label}
+									</button>
+								))}
+							</div>
 						</div>
 					</nav>
 
