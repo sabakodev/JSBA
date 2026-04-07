@@ -69,21 +69,24 @@ function generateICSUrl(event: EventNode) {
 // ── Component ────────────────────────────────
 
 export default async function EventTimeline({
-	count = 20,
+	events,
+	categorySlug,
 }: {
-	count?: number
+	events: EventNode[]
+	categorySlug?: string
 }) {
 	const t = await getTranslations('eventPage.timeline')
 
 	const now = new Date()
-	const lastWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7)
 
-	const events = await getEvents({
-		first: count,
-		afterDate: lastWeek
-	})
 
-	if (!events.length) {
+	// const events = await getEvents({
+	// 	first: count,
+	// 	afterDate: yesterday,
+	// 	categorySlug: categorySlug,
+	// })
+
+	if (events && !events.length) {
 		return (
 			<section className="lg:col-span-8 text-center py-24 text-secondary">
 				{t('noUpcoming')}
