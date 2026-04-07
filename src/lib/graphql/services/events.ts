@@ -5,32 +5,22 @@ import {
 	GET_EVENTS,
 	GET_EVENTS_FILTERED,
 	GET_EVENTS_BY_SLUG,
+	GET_CATEGORIES,
+	CategoriesResponse,
 } from "../queries/events"
 
 interface GetEventsOptions {
 	first?: number
 	after?: string
-	/** Filter events after this date. Defaults to 7 days ago. */
+	/** Filter events after this date. Defaults to yesterday. */
 	afterDate?: Date
 	/** Filter by event category slug */
 	categorySlug?: string
 }
 
-function getLastWeekDate(): string {
-	const date = new Date()
-	date.setDate(date.getDate() - 7)
-	return date.toISOString().split("T")[0] // "2026-03-28"
-}
-
-function buildDateQuery(afterDate?: Date) {
-	const d = afterDate ?? new Date(getLastWeekDate())
-	return {
-		after: {
-			year: d.getFullYear(),
-			month: d.getMonth() + 1,
-			day: d.getDate(),
-		},
-	}
+export async function getCategories() {
+	const data = await fetchGraphQL<CategoriesResponse>(GET_CATEGORIES)
+	return data.eventTypes.nodes
 }
 
 export async function getEvents(options: GetEventsOptions = {}): Promise<EventNode[]> {
@@ -41,7 +31,8 @@ export async function getEvents(options: GetEventsOptions = {}): Promise<EventNo
 		categorySlug,
 	} = options
 
-	const dateQuery = buildDateQuery(afterDate)
+	// const dateQuery = buildDateQuery(afterDate)
+	const startAt = new Date(afterDate ?? 0).toISOString()
 
 	// Use category-filtered query or plain date-filtered query
 	if (categorySlug) {
@@ -50,7 +41,7 @@ export async function getEvents(options: GetEventsOptions = {}): Promise<EventNo
 			{
 				first,
 				after,
-				dateQuery,
+				startAt,
 				categorySlug,
 			},
 			{ tags: ["events"] }
@@ -63,7 +54,7 @@ export async function getEvents(options: GetEventsOptions = {}): Promise<EventNo
 		{
 			first,
 			after,
-			dateQuery,
+			startAt,
 		},
 		{ tags: ["events"] }
 	)
