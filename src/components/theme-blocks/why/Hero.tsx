@@ -47,7 +47,7 @@ export default function Component() {
 					<div
 						className="absolute -bottom-8 -left-8 p-8 bg-white rounded-lg shadow-sm max-w-xs -rotate-2">
 						<p className="font-serif italic text-primary text-xl leading-snug">
-							&quot;Come and see. The Kingdom of Heaven is in your midst.&quot;
+							&quot;{t('quote')}&quot;
 						</p>
 					</div>
 				</div>
