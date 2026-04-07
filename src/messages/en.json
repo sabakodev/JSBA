@@ -115,7 +115,8 @@
     "generic": {
       "top": "TOP",
       "contact": "Contact",
-      "search": "Search resources..."
+      "search": "Search resources...",
+      "language": "Language"
     },
     "form": {
       "fullName": "Full Name",
@@ -277,16 +278,16 @@
     }
   },
   "blogPage": {
-	"generic": {
-		"search": "Search reflections...",
-		"notFound": "No posts found.",
-		"cta": {
-			"quote": "The Church is a hospital, not a courtroom.",
-			"saintName": "St. John Chrysostom",
-			"description": "Dive deeper into our parish life and history.",
-			"button": "Mail Exchange"
-		}
-	},
+    "generic": {
+      "search": "Search reflections...",
+      "notFound": "No posts found.",
+      "cta": {
+        "quote": "The Church is a hospital, not a courtroom.",
+        "saintName": "St. John Chrysostom",
+        "description": "Dive deeper into our parish life and history.",
+        "button": "Mail Exchange"
+      }
+    },
     "hero": {
       "headline": {
         "primary": "Parish Reflections",
@@ -386,7 +387,8 @@
       "cta": {
         "primary": "Enter In",
         "secondary": "Watch the Liturgy"
-      }
+      },
+      "quote": "Come and see. The Kingdom of Heaven is in your midst."
     },
     "scripture": {
       "notSola": {

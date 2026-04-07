@@ -97,7 +97,7 @@
 		}
 	},
 	"global": {
-		"saintName": "Js. Basilius Agung",
+		"saintName": "GOI Parokia Js. Basilius Agung",
 		"legal": {
 			"copyright": "Hak Cipta Dilindungi."
 		},
@@ -115,7 +115,8 @@
 		"generic": {
 			"top": "UP",
 			"contact": "Kontak",
-			"search": "Cari sumber daya..."
+			"search": "Cari sumber daya...",
+			"language": "Bahasa"
 		},
 		"form": {
 			"fullName": "Nama Lengkap",
@@ -350,7 +351,7 @@
 	},
 	"whyPage": {
 		"pastor": {
-			"dressCode": "Ada aturan berpakaian yang perlu diperhatikan: diharapkan pria mengenakan celana panjang dan wanita dianjurkan berkerudung dan mengenakan rok. Yang terpenting, bawalah hati yang terbuka.",
+			"dressCode": "Ada aturan berpakaian yang perlu diperhatikan: diharapkan pria mengenakan celana panjang dan wanita dianjurkan berkerudung dan mengenakan rok panjang. Yang terpenting, bawalah hati yang terbuka.",
 			"potluck": {
 				"description": "Setelah Liturgi Ilahi, kami berkumpul biasanya kita mengadakan potluck. Ini adalah waktu terbaik untuk bertemu dengan imam kami dan ajukan pertanyaan apa pun.",
 				"title": "Makan Bersama & Komunitas"
@@ -386,7 +387,8 @@
 			"cta": {
 				"primary": "Masuklah",
 				"secondary": "Tonton Liturgi"
-			}
+			},
+			"quote": "Datang dan Lihatlah. Kerajaan Allah ada di antara kamu."
 		},
 		"scripture": {
 			"notSola": {
@@ -445,7 +447,7 @@
 			},
 			"dresscode": {
 				"question": "Apa yang harus saya kenakan ke ibadah Ortodoks?",
-				"answer": "Ada aturan berpakaian yang perlu diperhatikan: diharapkan pria mengenakan celana panjang dan wanita dianjurkan berkerudung dan mengenakan rok. Yang terpenting, bawalah hati yang terbuka."
+				"answer": "Ada aturan berpakaian yang perlu diperhatikan: diharapkan pria mengenakan celana panjang dan wanita dianjurkan berkerudung dan mengenakan rok panjang. Yang terpenting, bawalah hati yang terbuka."
 			},
 			"canonical": {
 				"question": "Apakah gereja Anda kanonik?",
