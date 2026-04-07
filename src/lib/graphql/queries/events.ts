@@ -14,7 +14,7 @@ export interface EventNode {
 			}
 		} | null
 	}
-	categories: {
+	eventTypes: {
 		nodes: {
 			slug: string
 			name: string
@@ -28,60 +28,77 @@ export interface GetEventsResponse {
 	}
 }
 
+export const GET_CATEGORIES = `
+	query GetEventCategories {
+		eventTypes(first: 20, where: { hideEmpty: true }) {
+			nodes {
+				id
+				name
+				slug
+				count
+			}
+		}
+	}
+`
+
+export interface EventType {
+	id: string
+	name: string
+	slug: string
+	count: number
+}
+
+export interface CategoriesResponse {
+	eventTypes: {
+		nodes: EventType[]
+	}
+}
+
 export const GET_EVENTS = `
 	query GetEvents(
 		$first: Int = 10
 		$after: String
-		$dateQuery: DateQueryInput
+		$startAt: String
 		$categorySlug: String
 	) {
-		events(
-			first: $first
-			after: $after
-			where: {
-				orderby: { field: DATE, order: ASC }
-				dateQuery: $dateQuery
-				taxQuery: {
-					taxArray: [
-						{
-							taxonomy: EVENTCATEGORY
-							field: SLUG
-							terms: [$categorySlug]
-							operator: IN
-						}
-					]
-				}
-			}
-		) {
-			nodes {
-				id
-				title
-				slug
-				excerpt
-				eventSchedule {
-					startAt
-					endAt
-					location
-					featuredImage {
-						node {
-							sourceUrl
-							altText
-						}
-					}
-				}
-				categories {
-					nodes {
-						slug
-						name
+	events(
+		first: $first
+		after: $after
+		where: {
+			orderByStartAt: ASC,
+			startAtAfter: $startAt,
+			eventTypeSlug: $categorySlug
+		}
+	) {
+		nodes {
+			id
+			title
+			slug
+			excerpt
+			eventSchedule {
+				startAt
+				endAt
+				location
+				featuredImage {
+					node {
+						sourceUrl
+						altText
 					}
 				}
 			}
-			pageInfo {
-				hasNextPage
-				endCursor
+			eventTypes {
+				nodes {
+					slug
+					name
+				}
 			}
 		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
 	}
+}
 `
 
 // When no category filter needed, use this variant
@@ -90,14 +107,14 @@ export const GET_EVENTS_FILTERED = `
 	query GetEventsFiltered(
 		$first: Int = 10
 		$after: String
-		$dateQuery: DateQueryInput
+		$startAt: String
 	) {
 		events(
 			first: $first
 			after: $after
 			where: {
-				orderby: { field: DATE, order: ASC }
-				dateQuery: $dateQuery
+				orderByStartAt: ASC
+				startAtAfter: $startAt
 			}
 		) {
 			nodes {
@@ -116,7 +133,7 @@ export const GET_EVENTS_FILTERED = `
 						}
 					}
 				}
-				categories {
+				eventTypes {
 					nodes {
 						slug
 						name
@@ -149,7 +166,7 @@ export const GET_EVENTS_BY_SLUG = `
 					}
 				}
 			}
-			categories {
+			eventTypes {
 				nodes {
 					slug
 					name
