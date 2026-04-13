@@ -14,6 +14,7 @@ import { Link } from "@/i18n/nav"
 
 import FeastChip from "./FeastChip"
 import type { ResolvedFeast } from "@/lib/utils/julian-calendar"
+import { useTranslations } from "next-intl"
 
 interface CalendarDay {
 	gregorianDate: { year: number; month: number; day: number }
@@ -177,6 +178,8 @@ interface Props {
 }
 
 export default function MobileCalendar({ locale, year, month }: Props) {
+	const t = useTranslations('eventPage.schedule')
+
 	const today = new Date()
 
 	// Memoize to avoid recomputing on every render
@@ -264,14 +267,14 @@ export default function MobileCalendar({ locale, year, month }: Props) {
 			{/* ── Legend ── */}
 			<div className="px-4 py-8 space-y-4 border-t border-border/20">
 				<h3 className="text-sm uppercase tracking-widest text-muted-foreground">
-					Legend
+					{t(`legend`)}
 				</h3>
 
 				<div className="grid grid-cols-2 gap-2">
 					{Object.entries(FEAST_TYPE_CONFIG).map(([key, val]) => (
 						<span key={key} className="flex items-center gap-2 text-xs">
 							<span className={cn("w-2 h-2 rounded-sm", val.color)} />
-							<span className="text-muted-foreground capitalize">{val.label}</span>
+							<span className="text-muted-foreground capitalize">{t(`feast.${key}`)}</span>
 						</span>
 					))}
 				</div>
@@ -282,7 +285,7 @@ export default function MobileCalendar({ locale, year, month }: Props) {
 						.map(([type, config]) => (
 							<div key={type} className="flex items-center gap-2 text-xs">
 								<config.icon size={10} className={config.color} />
-								<span className="text-muted-foreground">{config.label}</span>
+								<span className="text-muted-foreground">{t(`fast.${type}`)}</span>
 							</div>
 						))}
 				</div>

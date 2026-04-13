@@ -5,6 +5,7 @@ import { useMemo } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Link } from "@/i18n/nav"
 import { Button } from "@/components/ui/button"
+import { useTranslations } from "next-intl"
 const MONTH_NAMES = [
 	"January", "February", "March", "April", "May", "June",
 	"July", "August", "September", "October", "November", "December",
@@ -19,6 +20,8 @@ interface Props {
 }
 
 export default function GridCalendar({ locale, year, month }: Props) {
+	const t = useTranslations('eventPage.schedule')
+
 	const weeks = useMemo(() => buildMonthGrid(
 		year,
 		month,
@@ -180,13 +183,13 @@ export default function GridCalendar({ locale, year, month }: Props) {
 
 			{/* ── Legend ── */}
 			<div className="mt-4 px-2 text-[10px]">
-				<span className="font-medium text-foreground pb-2">Legend:</span>
+				<span className="font-medium text-foreground pb-2 text-base uppercase font-serif font-uppercase">{t('legend')}</span>
 				<div className="flex flex-col sm:flex-row justify-between text-muted-foreground gap-4 mt-2">
 					<span className="flex gap-3">
 						{Object.entries(FEAST_TYPE_CONFIG).map(([key, val]) => (
 							<span key={key} className="flex items-center gap-1">
 								<span className={cn("w-2 h-2 rounded-sm", val.color)} />
-								{val.label}
+								{t(`feast.${key}`)}
 							</span>
 						))}
 					</span>
@@ -199,7 +202,7 @@ export default function GridCalendar({ locale, year, month }: Props) {
 								return (
 									<span key={key} className={cn("flex items-center gap-1", val.color)}>
 										<Icon className="w-2.5 h-2.5" />
-										{val.label}
+										{t(`fast.${key}`)}
 									</span>
 								)
 							})}
