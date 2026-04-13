@@ -47,7 +47,7 @@ export default function Component() {
 						</li>
 						<li className="flex justify-between">
 							<span className="text-secondary">{schedule('sun')}</span>
-							<span className="font-medium">10:00 WIB</span>
+							<span className="font-medium">09:00 WIB</span>
 						</li>
 					</ul>
 				</div>
