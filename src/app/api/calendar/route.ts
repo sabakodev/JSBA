@@ -26,17 +26,13 @@ export function GET() {
 			days: {
 				path: '/api/calendar/days',
 				method: 'GET',
-				description: 'Daily feast and fasting data for a date range',
+				description: 'Daily feast, fasting, and commemoration data for selected month',
 				params: {
-					start: {
+					month: {
 						type: 'string',
-						format: 'YYYY-MM-DD',
-						required: true,
-					},
-					end: {
-						type: 'string',
-						format: 'YYYY-MM-DD',
-						required: true,
+						format: 'YYYY-MM',
+						required: false,
+						default: 'this month',
 					},
 				},
 			},
