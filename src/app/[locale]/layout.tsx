@@ -42,6 +42,7 @@ export default async function RootLayout({
 	params: Promise<{ locale: string }>
 }>) {
 	const { locale } = await params
+
 	if (!hasLocale(routing.locales, locale)) {
 		notFound()
 	}
@@ -49,6 +50,7 @@ export default async function RootLayout({
 	return (
 		<html
 			className={`${geistSans.variable} ${geistMono.variable} ${manropeSans.variable} ${instrumentSerif.variable} h-full antialiased`}
+			lang={locale}
 		>
 			<body className="min-h-full flex flex-col">
 				<Analytics />

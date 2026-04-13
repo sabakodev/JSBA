@@ -174,7 +174,7 @@
 			},
 			"when": {
 				"label": "Kapan harus tiba",
-				"description": "Typika dimulai pukul 10:00 pada hari Minggu."
+				"description": "Typika dimulai pukul 09:00 pada hari Minggu."
 			},
 			"what": {
 				"label": "Apa yang dikenakan",
@@ -242,6 +242,55 @@
 		},
 		"filter": {
 			"sortLabel": "Urutkan"
+		},
+		"schedule": {
+			"fast": {
+				"strict": "Ketat",
+				"xerophagy": "Pantang",
+				"oil-wine": "Minyak & Anggur",
+				"fish": "Ikan",
+				"dairy": "Cheesefare",
+				"regular": "Rabu/Jumat",
+				"none": ""
+			},
+			"feast": {
+				"great": "Perayaan Agung",
+				"major": "Perayaan Besar",
+				"minor": "Perayaan Kecil",
+				"fast": "Hari Puasa",
+				"saint": "Peringatan Janasuci"
+			},
+			"legend": "Legenda",
+			"fastFull": {
+				"strict": {
+					"label": "Puasa Ketat",
+					"description": "Tidak makan & minum"
+				},
+				"xerophagy": {
+					"label": "Puasa Pantang",
+					"description": "Simple food: bread, fruits, nuts, vegetables"
+				},
+				"oil-wine": {
+					"label": "Minyak & Anggur",
+					"description": "Makanan dengan minyak zaitun dan anggur diperbolehkan"
+				},
+				"fish": {
+					"label": "Ikan Diperbolehkan",
+					"description": "Ikan, minyak, dan anggur diperbolehkan"
+				},
+				"dairy": {
+					"label": "Cheesefare",
+					"description": "Tidak ada daging, namun produk olahan susu dan turunan beserta telur diperbolehkan"
+				},
+				"regular": {
+					"label": "Puasa Rabu/Jumat",
+					"description": "Tidak ada daging, produk olahan susu dan turunannya, dan juga ikan"
+				},
+				"none": {
+					"label": "",
+					"description": ""
+				}
+			}
 		},
 		"sidebar": {
 			"feast": {

@@ -130,7 +130,7 @@ export default function SidebarShare({ title, url }: SidebarShareProps) {
 					href={social.href}
 					target="_blank"
 					rel="noopener noreferrer"
-					className="text-secondary-500 hover:text-primary transition-colors"
+					className="w-4 text-secondary-500 hover:text-primary transition-colors"
 					aria-label={`Share via ${social.label}`}
 					title={social.label}
 				>

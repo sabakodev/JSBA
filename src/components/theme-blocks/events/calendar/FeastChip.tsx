@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 import { FEAST_TYPE_CONFIG, JULIAN_MONTHS } from "@/lib/utils/calendar"
 import { CalendarCheck, CalendarClock, X } from "lucide-react"
 import type { ResolvedFeast } from "@/lib/utils/julian-calendar"
+import { useTranslations } from "next-intl"
 
 // ──────────────────────────────────────
 // Source icon
@@ -25,6 +26,8 @@ function SourceIcon({ source }: { source: "fixed" | "moveable" }) {
 // ──────────────────────────────────────
 
 function FeastDetail({ feast }: { feast: ResolvedFeast }) {
+	const t = useTranslations('eventPage.schedule.feast')
+
 	const config = FEAST_TYPE_CONFIG[feast.type]
 
 	return (
@@ -32,7 +35,7 @@ function FeastDetail({ feast }: { feast: ResolvedFeast }) {
 			{/* ── Header ── */}
 			<div className="flex items-center gap-2 flex-wrap px-3 pt-2.5 pb-2">
 				<Badge className={cn("text-[10px]", config.color)}>
-					{config.label}
+					{t(feast.type)}
 				</Badge>
 				<Badge variant="outline" className="text-[10px] text-primary">
 					<SourceIcon source={feast.source} />

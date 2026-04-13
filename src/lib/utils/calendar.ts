@@ -1,7 +1,7 @@
 import { Fish, Droplets, Milk, Wine, Wheat, Cross } from "lucide-react"
 import { ResolvedFeast, LiturgicalWeek, getAllFeasts, gregorianToJulian, getCurrentLiturgicalWeek, resolveSaintSynaxarion } from "./julian-calendar"
 
-interface DayCell {
+export interface DayCell {
 	date: Date
 	gregorian: { year: number; month: number; day: number }
 	julian: { year: number; month: number; day: number }

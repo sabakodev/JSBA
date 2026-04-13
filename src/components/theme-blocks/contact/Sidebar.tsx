@@ -39,7 +39,7 @@ export default function Component() {
 						</li>
 						<li className="flex justify-between border-b border-outline-variant/10 pb-2">
 							<span className="text-secondary">{schedule('fri')}</span>
-							<span className="font-medium">19:00 WIB</span>
+							<span className="font-medium">18:00 WIB</span>
 						</li>
 						<li className="flex justify-between border-b border-outline-variant/10 pb-2">
 							<span className="text-secondary">{schedule('sat')}</span>
@@ -47,7 +47,7 @@ export default function Component() {
 						</li>
 						<li className="flex justify-between">
 							<span className="text-secondary">{schedule('sun')}</span>
-							<span className="font-medium">10:00 WIB</span>
+							<span className="font-medium">09:00 WIB</span>
 						</li>
 					</ul>
 				</div>

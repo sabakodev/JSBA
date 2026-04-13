@@ -107,6 +107,7 @@ export default function Component({ hero = false }: { hero?: boolean }) {
 						<Image
 							src="/logo/jsba.png"
 							alt=""
+							loading="eager"
 							width={620}
 							height={620}
 							className={cn(
@@ -147,7 +148,7 @@ export default function Component({ hero = false }: { hero?: boolean }) {
 
 					<div className="flex items-center space-x-6">
 						{/* Language Switcher */}
-						<div className="relative" ref={langRef}>
+						<div className="hidden md:block relative" ref={langRef}>
 							<button
 								onClick={() => setLangOpen(!langOpen)}
 								className={cn(

@@ -791,7 +791,7 @@ export function getCurrentLiturgicalWeek(now?: Date): LiturgicalWeek {
 		return {
 			name: "Bright Week (Pascha Week)",
 			nameEl: "Διακαινήσιμος Εβδομάδα",
-			nameId: "Pekan Terang (Pekan Paskah)",
+			nameId: "Pekan Gemilang (Pekan Paskah)",
 			tone: 1,
 			fasting: false,
 			fastingType: "none",
