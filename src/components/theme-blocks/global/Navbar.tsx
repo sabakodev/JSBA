@@ -107,6 +107,7 @@ export default function Component({ hero = false }: { hero?: boolean }) {
 						<Image
 							src="/logo/jsba.png"
 							alt=""
+							loading="eager"
 							width={620}
 							height={620}
 							className={cn(
