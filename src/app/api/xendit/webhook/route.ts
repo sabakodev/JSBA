@@ -17,6 +17,7 @@ export async function POST(req: NextRequest) {
 			status,
 			amount,
 			paid_amount,
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			payment_method,
 			payment_channel,
 			paid_at,
