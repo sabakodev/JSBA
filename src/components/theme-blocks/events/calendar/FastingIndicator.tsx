@@ -1,3 +1,5 @@
+'use client'
+
 import { TooltipProvider, TooltipTrigger, TooltipContent, Tooltip } from "@/components/ui/tooltip"
 import { LiturgicalWeek, cn } from "@/lib/utils"
 import { FASTING_CONFIG } from "@/lib/utils/calendar"

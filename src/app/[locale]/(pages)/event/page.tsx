@@ -1,5 +1,5 @@
-import { FilterBar, Hero, Sidebar, Timeline } from "@/components/theme-blocks/events"
-import { getCategories, getEvents } from "@/lib/graphql/services/events"
+import { Hero, Sidebar, Timeline } from "@/components/theme-blocks/events"
+import { getEvents } from "@/lib/graphql/services/events"
 import { getTranslations } from "next-intl/server"
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -31,8 +31,8 @@ export default async function Page({
 	const now = new Date()
 	const yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1)
 
-	const [categories, eventsData] = await Promise.all([
-		getCategories(),
+	const [eventsData] = await Promise.all([
+		// getCategories(),
 		getEvents({
 			first: 20,
 			afterDate: yesterday,
@@ -44,10 +44,10 @@ export default async function Page({
 		<>
 			<Hero />
 			<main className="max-w-7xl mx-auto px-6 py-24">
-				<FilterBar
+				{/* <FilterBar
 					categories={categories}
 					category={activeCategory}
-				/>
+				/> */}
 				<div className="grid grid-cols-1 lg:grid-cols-12 gap-24">
 					<Timeline events={eventsData} />
 					<Sidebar locale={locale} />
