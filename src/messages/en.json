@@ -243,6 +243,25 @@
     "filter": {
       "sortLabel": "Sort By"
     },
+    "schedule": {
+      "fast": {
+        "strict": "Strict Fast",
+        "xerophagy": "Dry Eating",
+        "oil-wine": "Oil & Wine",
+        "fish": "Fish Allowed",
+        "dairy": "Cheesefare",
+        "regular": "Wed/Fri Fast",
+        "none": ""
+      },
+      "feast": {
+        "great": "Great Feast",
+        "major": "Major Feast",
+        "minor": "Minor Feast",
+        "fast": "Fast Day",
+        "saint": "Saint Commemoration"
+      },
+      "legend": "Legend"
+    },
     "sidebar": {
       "feast": {
         "major": {

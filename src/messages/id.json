@@ -174,7 +174,7 @@
 			},
 			"when": {
 				"label": "Kapan harus tiba",
-				"description": "Typika dimulai pukul 10:00 pada hari Minggu."
+				"description": "Typika dimulai pukul 09:00 pada hari Minggu."
 			},
 			"what": {
 				"label": "Apa yang dikenakan",
@@ -242,6 +242,25 @@
 		},
 		"filter": {
 			"sortLabel": "Urutkan"
+		},
+		"schedule": {
+			"fast": {
+				"strict": "Ketat",
+				"xerophagy": "Pantang",
+				"oil-wine": "Minyak & Anggur",
+				"fish": "Ikan",
+				"dairy": "Cheesefare",
+				"regular": "Rabu/Jumat",
+				"none": ""
+			},
+			"feast": {
+				"great": "Perayaan Agung",
+				"major": "Perayaan Besar",
+				"minor": "Perayaan Kecil",
+				"fast": "Hari Puasa",
+				"saint": "Peringatan Janasuci"
+			},
+			"legend": "Legenda"
 		},
 		"sidebar": {
 			"feast": {
