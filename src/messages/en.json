@@ -260,7 +260,37 @@
         "fast": "Fast Day",
         "saint": "Saint Commemoration"
       },
-      "legend": "Legend"
+      "legend": "Legend",
+      "fastFull": {
+		"strict": {
+			"label": "Strict Fast",
+			"description": "No food, or bread & water only"
+		},
+		"xerophagy": {
+			"label": "Dry Eating",
+			"description": "Simple food: bread, fruits, nuts, vegetables"
+		},
+		"oil-wine": {
+			"label": "Oil & Wine",
+			"description": "Cooked food with olive oil and wine permitted"
+		},
+		"fish": {
+			"label": "Fish Allowed",
+			"description": "Fish, oil, and wine permitted"
+		},
+		"dairy": {
+			"label": "Cheesefare",
+			"description": "No meat, but dairy and eggs permitted"
+		},
+		"regular": {
+			"label": "Wed/Fri Fast",
+			"description": "No meat, dairy, or fish"
+		},
+		"none": {
+			"label": "",
+			"description": ""
+		}
+      }
     },
     "sidebar": {
       "feast": {
