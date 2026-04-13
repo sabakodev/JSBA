@@ -3,7 +3,6 @@ import { buildMonthGrid, DayCell } from "@/lib/utils/calendar"
 import { NextRequest, NextResponse } from "next/server"
 
 interface DayResponse {
-	gregorianDateUTC: Date
 	gregorianDate: string
 	julian: DayCell['julian']
 	feast: DayCell['feasts']
@@ -51,8 +50,7 @@ export async function GET(req: NextRequest) {
 			for (const day of week) {
 				if (day.date.getMonth() === month) {
 					days.push({
-						gregorianDateUTC: day.date,
-						gregorianDate: day.date.toISOString().split('T')[0],
+						gregorianDate: `${day.date.getFullYear()}-${String(day.date.getMonth() + 1).padStart(2, '0')}-${String(day.date.getDate()).padStart(2, '0')}`,
 						julian: day.julian,
 						feast: day.feasts,
 						fasting: day.fasting,
