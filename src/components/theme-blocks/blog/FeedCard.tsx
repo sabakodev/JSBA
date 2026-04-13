@@ -1,3 +1,5 @@
+'use client'
+
 import { Link } from "@/i18n/nav"
 import { Post } from "@/lib/graphql/queries/posts"
 import { useTranslations } from "next-intl"
