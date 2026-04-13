@@ -48,6 +48,7 @@ export default function GridCalendar({ locale, year, month }: Props) {
 			tone: week.tone,
 			fasting: week.fasting,
 			fastingType: week.fastingType,
+			description: week.description,
 		}
 	}, [locale])
 
@@ -77,6 +78,9 @@ export default function GridCalendar({ locale, year, month }: Props) {
 				<div className="py-3 px-4 bg-primary/5 border border-primary/10 rounded-sm text-center hidden md:block">
 					<p className="text-sm font-body font-bold text-on-surface">
 						{litWeek.name}
+					</p>
+					<p className="text-[10px] text-secondary mt-2">
+						{litWeek.description}
 					</p>
 					{litWeek.tone && (
 						<p className="text-xs text-secondary/60 mt-1">

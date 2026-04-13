@@ -18,7 +18,7 @@ export default function LiturgicalCalendar({ locale, year, month }: Props) {
 	return (
 		<div className="w-full mx-auto overflow-hidden">
 			{/* ── Header ── */}
-			<p className="text-xs font-body font-bold block text-center mb-4 md:hidden">
+			<p className="text-xs font-body font-bold block text-center md:hidden">
 				{
 					(
 						{
@@ -26,6 +26,11 @@ export default function LiturgicalCalendar({ locale, year, month }: Props) {
 							id: week.nameId,
 							el: week.nameEl
 						})[locale] ?? week.name
+				}
+			</p>
+			<p className="text-[10px] font-body block text-center mb-4 md:hidden">
+				{
+					week.description
 				}
 			</p>
 
