@@ -43,6 +43,8 @@ export async function GET(req: NextRequest) {
 
 		const days: DayRows[] = []
 
+		let age = 60 * 60
+
 		weeks.map((week) => week.map(day => {
 			if (currentDate.getUTCMonth() === day.date.getUTCMonth()) {
 				days.push({
@@ -52,13 +54,13 @@ export async function GET(req: NextRequest) {
 					fasting: day.fasting,
 				})
 			}
-		}))
 
-		const age = 60 * 60 * 24 * 30
+			age = 60 * 60 * 24 * 30
+		}))
 
 		return NextResponse.json({
 			litWeek,
-			days,
+			days: age > 3600 ? days : [],
 			legend: {
 				feast: FEAST_TYPE_CONFIG,
 				fast: FASTING_CONFIG
