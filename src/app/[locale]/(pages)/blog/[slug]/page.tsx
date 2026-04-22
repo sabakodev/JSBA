@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server"
 import { getPostBySlug, getRelatedPosts } from "@/lib/graphql/services/posts"
 import { notFound } from "next/navigation"
 import SidebarShare from "@/components/ui/sidebar-share"
+import { cn, getReadingTime } from "@/lib/utils"
 
 interface Props {
 	params: Promise<{
@@ -30,6 +31,9 @@ export async function generateMetadata({ params }: Props) {
 		openGraph: post.featuredImage && {
 			images: post.featuredImage.node.sourceUrl,
 		},
+		publisher: `Gereja Orthodox Indonesia Parokia ${t('saintName')}`,
+		author: post.author.node.name,
+		datePublished: post.date
 	}
 }
 
@@ -70,6 +74,7 @@ export default async function Page({ params }: Props) {
 				date={post.date}
 				author={post.author.node.name}
 				avatarUrl={post.author.node.avatar?.url}
+				readingTime={getReadingTime(post.content)}
 			/>
 			<FeaturedImage
 				src={post.featuredImage?.node.sourceUrl}
@@ -85,7 +90,10 @@ export default async function Page({ params }: Props) {
 
 				{/* Main Content */}
 				<article
-					className="lg:col-span-7 prose prose-lg prose-stone max-w-none"
+					className={cn(
+						"lg:col-span-7 prose prose-lg prose-stone max-w-none",
+						"[&_iframe]:max-w-full [& _iframe]:w-full [&_iframe]:aspect-video [&_iframe]:h-auto [&_iframe]:rounded-sm"
+					)}
 					dangerouslySetInnerHTML={{ __html: post.content }}
 				/>
 
