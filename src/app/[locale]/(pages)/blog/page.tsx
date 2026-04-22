@@ -54,7 +54,7 @@ export default async function Page({ searchParams }: Props) {
 						placeholder={t('search')} type="text" />
 				</div>
 			</div>
-			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20 mb-24">
 				{
 					postsData.posts.length > 0 ?
 						postsData.posts.map((post, index) => (
