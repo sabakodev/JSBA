@@ -6,7 +6,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 	const t = await getTranslations({ locale, namespace: 'Metadata' })
 
 	return {
-		title: t('event.title')
+		title: t('event.title'),
+		alternates: {
+			canonical: 'https://www.basilius.or.id/id/event/calendar',
+			languages: {
+				id: 'https://www.basilius.or.id/id/event/calendar',
+				en: 'https://www.basilius.or.id/en/event/calendar',
+			},
+		}
 	}
 }
 
