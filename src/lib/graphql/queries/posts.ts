@@ -1,3 +1,14 @@
+export const GET_POST_SLUGS = `
+	query GetPostsPaginated($first: Int!, $after: String) {
+		posts(first: $first) {
+			nodes {
+				slug
+				modifiedGmt
+			}
+		}
+	}
+`
+
 export const GET_POSTS_PAGINATED = `
 	query GetPostsPaginated($first: Int!, $after: String) {
 		posts(first: $first, after: $after) {
@@ -78,6 +89,15 @@ export interface Post {
 				url: string
 			}
 		}
+	}
+}
+
+export interface PostsSlugResponse {
+	posts: {
+		nodes: {
+			slug: string,
+			modifiedGmt: string
+		}[]
 	}
 }
 

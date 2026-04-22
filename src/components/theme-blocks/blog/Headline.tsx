@@ -1,5 +1,6 @@
 import PostActions from "@/components/ui/post-action"
 import PostTitle from "@/components/ui/post-title"
+import { ReadingTime } from "@/lib/utils"
 import { useTranslations } from "next-intl"
 import Image from "next/image"
 
@@ -9,9 +10,10 @@ interface HeadlineProps {
 	date: string
 	author: string
 	avatarUrl?: string
+	readingTime: ReadingTime
 }
 
-export default function Component({ title, category, date, author, avatarUrl }: HeadlineProps) {
+export default function Component({ title, category, date, author, avatarUrl, readingTime }: HeadlineProps) {
 	const t = useTranslations('blogPage.headline')
 
 	const formattedDate = new Date(date).toLocaleDateString('en-US', {
@@ -27,7 +29,7 @@ export default function Component({ title, category, date, author, avatarUrl }: 
 					<span className="text-primary text-xs uppercase tracking-[0.2em] font-bold">{category}</span>
 				)}
 				<div className="h-px w-12 bg-border/30"></div>
-				<span className="text-secondary text-xs uppercase tracking-widest opacity-60">8 Min Read</span>
+				<span className="text-secondary text-xs uppercase tracking-widest opacity-60">{readingTime.text}</span>
 			</div>
 			<PostTitle
 				title={title}

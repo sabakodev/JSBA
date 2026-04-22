@@ -6,10 +6,12 @@ import {
 	GET_POSTS_BY_CATEGORY,
 	GET_POSTS_PAGINATED,
 	GET_POST_BY_SLUG,
+	GET_POST_SLUGS,
 	GET_RELATED_POSTS,
 	POSTS_PER_PAGE,
 	Post,
 	PostsPaginatedResponse,
+	PostsSlugResponse,
 	RelatedPostsResponse,
 	SinglePost,
 	SinglePostResponse,
@@ -78,6 +80,17 @@ async function getTotalPosts(categorySlug?: string): Promise<number> {
 	}>(query, variables)
 
 	return data.posts.nodes.length
+}
+
+export async function getPostSlugs(first: number = 100) {
+	const data = await fetchGraphQL<PostsSlugResponse>(
+		GET_POST_SLUGS,
+		{
+			first,
+		}
+	)
+
+	return data.posts.nodes
 }
 
 export async function getPosts(page: number = 1) {

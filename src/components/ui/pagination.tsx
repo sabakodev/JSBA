@@ -45,7 +45,7 @@ export default function Pagination({ currentPage, totalPages, category }: Pagina
 	}
 
 	return (
-		<nav className="my-24 flex justify-center items-center space-x-4">
+		<nav className="mb-24 flex justify-center items-center space-x-4">
 			<button
 				onClick={() => goToPage(currentPage - 1)}
 				disabled={currentPage <= 1}

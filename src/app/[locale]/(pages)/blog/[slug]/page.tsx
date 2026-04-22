@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server"
 import { getPostBySlug, getRelatedPosts } from "@/lib/graphql/services/posts"
 import { notFound } from "next/navigation"
 import SidebarShare from "@/components/ui/sidebar-share"
+import { getReadingTime } from "@/lib/utils"
 
 interface Props {
 	params: Promise<{
@@ -70,6 +71,7 @@ export default async function Page({ params }: Props) {
 				date={post.date}
 				author={post.author.node.name}
 				avatarUrl={post.author.node.avatar?.url}
+				readingTime={getReadingTime(post.content)}
 			/>
 			<FeaturedImage
 				src={post.featuredImage?.node.sourceUrl}
