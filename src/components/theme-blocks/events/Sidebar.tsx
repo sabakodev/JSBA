@@ -93,7 +93,7 @@ export default async function Component({ locale }: { locale: string }) {
 						<span className="font-label uppercase tracking-widest text-secondary">
 							{t("services.fri")}
 						</span>
-						<span className="text-on-surface">19:00</span>
+						<span className="text-on-surface">18:00</span>
 					</li>
 					<li className="flex justify-between items-center border-b border-border/10 pb-4">
 						<span className="font-label uppercase tracking-widest text-secondary">
@@ -105,7 +105,7 @@ export default async function Component({ locale }: { locale: string }) {
 						<span className="font-label uppercase tracking-widest text-secondary">
 							{t("services.sun")}
 						</span>
-						<span className="text-on-surface">10:00</span>
+						<span className="text-on-surface">09:00</span>
 					</li>
 				</ul>
 			</div>
