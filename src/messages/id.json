@@ -546,5 +546,9 @@
 			"title": "Kirim Pesan",
 			"subtitle": "Baik Anda seorang pencari, perantau, atau tetangga, kami menyambut pertanyaan Anda."
 		}
+	},
+	"NotFoundPage": {
+		"title": "404: Laman Tidak Ditemukan",
+		"description": "Halaman ini sepertinya tidak ada, mungkin terhilang dalam angan-angan, mari kita semua berdoa kepada Js. Phanourios untuk mencarikan bagian yang hilang dalam hidup kita."
 	}
 }
