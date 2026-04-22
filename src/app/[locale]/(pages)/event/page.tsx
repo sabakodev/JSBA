@@ -1,13 +1,21 @@
 import { Hero, Sidebar, Timeline } from "@/components/theme-blocks/events"
 import { getEvents } from "@/lib/graphql/services/events"
+import { Metadata } from "next"
 import { getTranslations } from "next-intl/server"
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
 	const { locale } = await params
 	const t = await getTranslations({ locale, namespace: 'Metadata' })
 
 	return {
-		title: t('event.title')
+		title: t('event.title'),
+		alternates: {
+			canonical: 'https://www.basilius.or.id/id/event',
+			languages: {
+				id: 'https://www.basilius.or.id/id/event',
+				en: 'https://www.basilius.or.id/en/event',
+			},
+		}
 	}
 }
 

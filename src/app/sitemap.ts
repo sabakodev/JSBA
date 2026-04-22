@@ -9,40 +9,32 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		'',
 		'/about',
 		'/event',
+		'/event/calendar',
 		'/blog',
 		'/why',
 		'/contact',
 	]
 
-	const staticEntries = staticPages.flatMap((path) =>
-		locales.map((locale) => ({
-			url: `${BASE_URL}/${locale}${path}`,
-			lastModified: new Date(),
-			changeFrequency: 'weekly' as const,
-			priority: path === '' ? 1.0 : 0.8,
-			alternates: {
-				languages: Object.fromEntries(
-					locales.map((l) => [l, `${BASE_URL}/${l}${path}`])
-				),
-			},
-		}))
-	)
+	const staticEntries: MetadataRoute.Sitemap = staticPages.flatMap((path) => ({
+		url: `${BASE_URL}/${path}`,
+		lastModified: new Date(),
+		changeFrequency: 'weekly' as const,
+		priority: path === '' ? 1.0 : 0.8,
+		alternates: {
+			languages: Object.fromEntries(
+				locales.map((l) => [l, `${BASE_URL}/${l}${path}`])
+			),
+		},
+	}))
 
 	// Dynamic blog posts
 	const posts = await getPostSlugs()
-	const blogEntries = posts.flatMap((post: { slug: string; modifiedGmt: string }) =>
-		locales.map((locale) => ({
-			url: `${BASE_URL}/${locale}/blog/${post.slug}`,
-			lastModified: new Date(post.modifiedGmt),
-			changeFrequency: 'monthly' as const,
-			priority: 0.6,
-			alternates: {
-				languages: Object.fromEntries(
-					locales.map((l) => [l, `${BASE_URL}/${l}/blog/${post.slug}`])
-				),
-			},
-		}))
-	)
+	const blogEntries: MetadataRoute.Sitemap = posts.flatMap((post: { slug: string; modifiedGmt: string }) => ({
+		url: `${BASE_URL}/id/blog/${post.slug}`,
+		lastModified: new Date(post.modifiedGmt),
+		changeFrequency: 'monthly' as const,
+		priority: 0.6,
+	}))
 
 	return [...staticEntries, ...blogEntries]
 }

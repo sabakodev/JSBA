@@ -20,7 +20,13 @@ export async function generateMetadata({ params }: { params: Promise<Props> }) {
 
 	return {
 		title: t('blog.title'),
-		canonical: '/id/blog'
+		alternates: {
+			canonical: 'https://www.basilius.or.id/id/blog',
+			languages: {
+				id: 'https://www.basilius.or.id/id/blog',
+				en: 'https://www.basilius.or.id/en/blog',
+			},
+		}
 	}
 }
 

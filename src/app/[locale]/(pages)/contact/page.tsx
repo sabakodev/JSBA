@@ -9,7 +9,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 	const t = await getTranslations({ locale, namespace: 'Metadata' })
 
 	return {
-		title: t('contact.title')
+		title: t('contact.title'),
+		alternates: {
+			canonical: 'https://www.basilius.or.id/id/contact',
+			languages: {
+				id: 'https://www.basilius.or.id/id/contact',
+				en: 'https://www.basilius.or.id/en/contact',
+			},
+		}
 	}
 }
 
