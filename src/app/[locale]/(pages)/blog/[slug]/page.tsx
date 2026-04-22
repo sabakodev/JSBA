@@ -4,6 +4,7 @@ import { getPostBySlug, getRelatedPosts } from "@/lib/graphql/services/posts"
 import { notFound } from "next/navigation"
 import SidebarShare from "@/components/ui/sidebar-share"
 import { cn, getReadingTime } from "@/lib/utils"
+import { Metadata } from "next"
 
 interface Props {
 	params: Promise<{
@@ -12,7 +13,7 @@ interface Props {
 	}>
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const { locale, slug } = await params
 	const post = await getPostBySlug(slug)
 
@@ -32,8 +33,9 @@ export async function generateMetadata({ params }: Props) {
 			images: post.featuredImage.node.sourceUrl,
 		},
 		publisher: `Gereja Orthodox Indonesia Parokia ${t('saintName')}`,
-		author: post.author.node.name,
-		datePublished: post.date
+		authors: [{
+			name: post.author.node.name
+		}],
 	}
 }
 
