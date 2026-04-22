@@ -62,11 +62,11 @@ export default function Component({ post }: Props) {
 							dangerouslySetInnerHTML={{ __html: cleanExcerpt }}
 						/>
 
-						<div className="flex items-center space-x-4 pt-4">
+						<div className="flex flex-col space-y-2 sm:space-y-0 sm:flex-row sm:items-center space-x-4 pt-4">
 							<span className="text-xs uppercase tracking-widest text-outline">
 								{formatPostDate(post.date)}
 							</span>
-							<div className="h-px w-8 bg-border/30" />
+							<div className="h-px w-0 sm:w-8 bg-border/30" />
 							<button className="text-primary text-sm uppercase tracking-widest inline-flex items-center group">
 								{t('ctaLabel')}
 								<ArrowRight
