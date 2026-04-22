@@ -1,5 +1,5 @@
 export const GET_POST_SLUGS = `
-	query GetPostsPaginated($first: Int!, $after: String) {
+	query GetPostsPaginated($first: Int!) {
 		posts(first: $first) {
 			nodes {
 				slug
